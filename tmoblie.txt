@@ -1,0 +1,56 @@
+Denial of service (DoS) and distributed denial of service (DDoS) attacks are an ever present threat to online businesses that can lead to downed websites, lost traffic and damaged client relationships.
+
+DDoS scripts, the software that enables the execution of DDoS attacks, greatly vary in severity, ease of use and potential impact. Python, Perl and PHP are the most common programming languages used to write these scripts.
+
+While some are used for personal rivalries and vandalism, others have been known to cause significant damage to online businesses.
+
+DDoS scripts can be classified into several different types, based on why they were written and what they program computers to do.
+
+Not all DDoS scripts are developed to be malicious. In fact, some are written by white hat hackers as proof of concept (POC) for a newly discovered vulnerability—proving its existence to promote better security practices. However, such scripts are often repurposed for malicious reasons.
+
+Additionally, some DDoS scripts are used as load testing tools in order to identify limitations of a website before it is launched. An example is the ApacheBench tool, which sends a random number of HTTP requests to a server to test the amount of traffic it’s able to handle. These are also known to be repurposed for DoS attacks.
+
+By and large, however, the term “DDoS scripts” refers to malicious software written by black hat hackers. These include DoS scripts executed from a single device, and DDoS toolkits—software packages that infect multiple connected devices, which are then collectively used as a botnet in DDoS attacks.
+
+“I am giving away free DDoS Perl Scripts PM me on Skype…”
+– Conversation thread on hacker forum.
+
+Main differences between DDoS attack scripts and DDoS toolkits
+DDoS attack scripts and DDoS toolkits greatly differ, from the audience for which they are written, to how they are used to perpetrate an attack.
+
+Broadly speaking, these differences are outlined by the following distinctions:
+
+DDoS Attack Scripts	DDoS Toolkits
+Used for	DoS/DDoS attacks	Building a botnet infrastructure for DDoS attacks
+Typical authors	White hats/Black hats	Black hats
+Typical users	Hobby hackers and script kiddies	Professional hackers
+Ease of use	Relatively simple to execute	Typically requires knowledge, time and resources
+Attack method	Often from a single source (DoS attack)	Always from multiple sources (DDoS attack)
+Typical attack type	Application layer	Network layer
+Attacker motivation	Vandalism, hacktivism, personal rivalries	Creation of stresser services and/or DDoS extortion attacks
+Threat to organizations	Medium	High
+As the chart above shows, toolkits have the potential to inflict significantly more damage than typical DDoS scripts. This is mainly because toolkits are designed to utilize multiple sources to launch a large-scale DDoS attack.
+
+This is not to say that DDoS scripts are harmless–far from it. Their ease of use and widespread availability means that they can be utilized to launch potentially severe attacks.
+
+Common DDoS attack scripts
+As previously stated, attack scripts vary based on how they work and what they are capable of doing. Here, we’ll cover some of the most popular scripts and how they are used.
+
+Low Orbit Ion Cannon (LOIC) – This is a DoS script that disrupts a target server by sending a large number of TCP requests or through a UDP flood. It is very user friendly and doesn’t require extensive knowledge. LOIC has been used in a number of notable attacks, including those targeting the Church of Scientology and the Recording Industry Association of America.
+High Orbit Ion Cannon (HOIC) – Created as a LOIC replacement, this script was designed to launch a DDoS attack using a minimal amount of perpetrators. It works by executing a HTTP flood against a target server until it crashes.
+The HOIC (High Orbit Ion Cannon) script launches a DDoS attack with a minimal amount of perpetrators
+The HOIC (High Orbit Ion Cannon) script launches a DDoS attack with a minimal amount of perpetrators
+
+Slowloris – This is an attack script designed as a simple way for a single computer to take down a server. It works by continuously sending partial HTTP GET requests to its target. The server opens more and more connections in anticipation of receiving the completed requests, which never occur.
+Torshammer – This is a slow-rate, application layer DoS attack script that uses the TOR network to mask its origin. TOR is a network of servers that routes user traffic through a series of tunnels instead of establishing direct connections. It’s used to increase online privacy.
+R-U-Dead-Yet (RUDY)– Similar to Slowloris, R-U-Dead-Yet is a slow-rate, layer-7 attack script. Named after the Finnish death metal band Children of Bodom, the script directs the attack computer to slowly open several connections on the targeted server and to keep them open as long as possible.
+The HOIC (High Orbit Ion Cannon) script launches a DDoS attack with a minimal amount of perpetrators
+The HOIC (High Orbit Ion Cannon) script launches a DDoS attack with a minimal amount of perpetrators
+
+HTTP Unbearable Load King (HULK) – This script was originally developed as a proof-of-concept to illustrate how easy it is to take down a web server. It works by opening a flood of HTTP GET requests to overwhelm its target. The HULK script is unique in that every request has a random header and URL parameter value in order to bypass a server’s caching engine.
+Script kiddies
+One of the most significant dangers associated with DoS attack scripts is their ease of use, including by those having little or no knowledge of launching attacks.
+
+An amateur hacker, also known as a “script kiddie,” can easily download DoS attack tools, or copy and paste attack scripts written by experienced peers, so as to attack targets of their choice. Because of their lack of knowledge, script kiddies are often looked down upon by the more experienced hacker community.
+
+While their attacks are often nothing more than attempts to gain attention from their peers, they’re still capable of taking down a mid-sized website. Broadly speaking, most websites aren’t equipped to handle more than 50 – 100 additional requests per second. Run from a single computer, a common DoS tool such as LOIC can generate dozens of request every second with relative ease.

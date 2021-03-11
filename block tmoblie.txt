@@ -1,0 +1,20 @@
+server = smtplib.SMTP_SSL('smtp.email.org', 465)
+server.login(EMAIL, PASS)
+server.sendmail(EMAIL, phone_number +"@"+ carrier_address tmoblie, msg)
+server.quit()You can install all the requirements to run Bughound code using the following command:
+
+pip3 install -r requirements.txt
+
+That will make sure all the requirements are installed for the code.
+
+Also, you need to install Docker in order to run the Bughound image, more regarding this in the next section!
+
+If you want to use your own Elasticsearch and Kibana instances, skip the docker installation stepYou can install all the requirements to run Bughound code using the following command:
+
+pip3 install -r requirements.txt
+
+That will make sure all the requirements are installed for the code.
+
+Also, you need to install Docker in order to run the Bughound image, more regarding this in the next section!
+
+If you want to use your own Elasticsearch and Kibana instances, skip the docker installation step

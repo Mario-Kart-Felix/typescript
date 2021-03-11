@@ -1,0 +1,177 @@
+In [ ]:
+#=====================================#
+#   Cloudtopolis v4.4    #
+#        https://darkbyte.net         #
+#=====================================#
+
+# [ Requeriments ] Create and copy from Hashtopolis > Agent > New Agent
+Voucher = ''
+
+# [ Wordlists + Rules ] Select one or more according to your needs
+Kaonashi = False
+Kaonashi_WPA = False
+Rockyou = True
+OneRule = False
+
+# [ VPS Mode ] Change this to 'True' if you want to use your own server
+VPS = False
+SshHost = ''
+SshPort = ''
+SshUser = ''
+SshPass = ''
+
+# ------------------------------------------------------------------ #
+#                 Code execution after this line                     #
+# ------------------------------------------------------------------ #
+!echo -e "\e[34;1m"
+!echo -e "   ____ _                 _ _                    _ _       "
+!echo -e "  / ___| | ___  _   _  __| | |_ ___  _ __   ___ | (_)___   "
+!echo -e " | |   | |/ _ \| | | |/ _' | __/ _ \| '_ \ / _ \| | / __|  "
+!echo -e " | |___| | (_) | |_| | (_| | || (_) | |_) | (_) | | \__ \\ "
+!echo -e "  \____|_|\___/ \__,_|\__,_|\__\___/|  __/ \___/|_|_|___/  "
+!echo -e "                                    |_|                    "
+!echo -e "-----------------------------------------------------------"
+!echo -e ":: Created by Mario h. Felix jr.:: v4.4 ::"
+!echo -e "-----------------------------------------------------------"
+megatoolz = False
+
+# [ Checking Voucher ]
+if not Voucher:
+    !echo -e "\n\e[31;1m[!] Voucher not found, exiting!"
+    !sleep 1
+    !kill -9 -1
+
+# [ Checking GPU ]
+!echo -e "\n\e[32;1m[+] Checking if GPU is present.."
+!apt-get install pciutils -y -qq > /dev/null 2>&1
+GPU_CARD = !lspci | grep NVIDIA
+
+if not GPU_CARD:
+    !echo -e "\n\e[31;1m[!] No GPU Card found, check environment options!"
+    !sleep 1
+    !kill -9 -1
+
+else:
+    !echo -e "\e[0m$GPU_CARD found!"
+
+# [ Wordlist - Kaonashi ]
+if Kaonashi:
+    # Checking Kaonashi
+    !echo -e "\n\e[32;1m[+] Checking Kaonashi.."
+    Kaonashitxt = !ls /content/kaonashi.txt
+
+    if not "/content/kaonashi.txt" in Kaonashitxt:
+        # Installing megatools
+        !echo -e "\e[0mKaonashi not found!"
+
+        if not megatoolz:
+            !echo -e "\n\e[34;1m[+] Installing megatools..\e[0m"
+            !apt install megatools -y -qq > /dev/null 2>&1
+            !echo -e "\e[0mDone!"            
+            megatoolz = True
+
+        # Downloading Kaonashi
+        !echo -e "\n\e[34;1m[+] Downloading Kaonashi.."
+        !echo -e "\e[0mWARNING: This can take some time.."
+        !megadl https://mega.nz/#!nWJXzYzS!P1G8HDiMxq5wFaxeWGWx334Wp9wByj5kMEGLZkVX694 --path /content
+
+        # Extracting wordlist
+        !echo -e "\e[0mExtracting wordlist.."
+        !7zr e /content/kaonashi.7z -y > /dev/null 2>&1
+
+        # Deleting temp file
+        !rm /content/kaonashi.7z > /dev/null 2>&1
+
+    else:
+        !echo -e "\e[0mKaonashi found! Skipping.."
+
+# [ Wordlist - Kaonashi_WPA ]
+if Kaonashi_WPA:
+    # Checking Kaonashi_WPA
+    !echo -e "\n\e[32;1m[+] Checking Kaonashi_WPA.."
+    Kaonashitxt = !ls /content/kaonashiWPA100M.txt
+
+    if not "/content/kaonashiWPA100M.txt" in Kaonashitxt:
+        # Installing megatools
+        !echo -e "\e[0mKaonashi_WPA not found!"
+  
+        if not megatoolz:
+            !echo -e "\n\e[34;1m[+] Installing megatools..\e[0m"
+            !apt install megatools -y -qq > /dev/null 2>&1
+            !echo -e "\e[0mDone!"
+            megatoolz = True
+
+        # Downloading Kaonashi_WPA
+        !echo -e "\n\e[34;1m[+] Downloading Kaonashi_WPA.."
+        !echo -e "\e[0mWARNING: This can take a little.."
+        !megadl https://mega.nz/#!jeRRgQgZ!xcRcLpm0ftuu7z7JN32LHMECqk9vmpVNH2JFVxSICfU --path /content
+
+        # Extracting wordlist
+        !echo -e "\e[0mExtracting wordlist.."
+        !7zr e /content/kaonashiWPA100M.7z -y > /dev/null 2>&1
+
+        # Deleting temp file
+        !rm /content/kaonashiWPA100M.7z > /dev/null 2>&1
+
+    else:
+        !echo -e "\e[0mKaonashi_WPA found! Skipping.."
+
+# [ Wordlist - Rockyou ]
+if Rockyou:
+    # Checking Rockyou
+    !echo -e "\n\e[32;1m[+] Checking Rockyou.."
+    Rockyoutxt = !ls /content/rockyou.txt
+
+    if not "/content/rockyou.txt" in Rockyoutxt:
+        # Downloading Rockyou
+        !echo -e "\e[0mRockyou not found!"
+        !echo -e "\n\e[34;1m[+] Downloading Rockyou.."
+        !wget --quiet https://download.weakpass.com/wordlists/90/rockyou.txt.gz
+
+        # Extracting wordlist
+        !echo -e "\e[0mExtracting wordlist.."
+        !gunzip -f rockyou.txt.gz > /dev/null 2>&1
+
+    else:
+        !echo -e "\e[0mRockyou found! Skipping.."
+
+# [ Rules - OneRuleToRuleThemAll ]        
+if OneRule:
+    # Checking OneRuleToRuleThemAll
+    !echo -e "\n\e[32;1m[+] Checking OneRuleToRuleThemAll.."
+    OneRuletxt = !ls /content/OneRuleToRuleThemAll.rule
+
+    if not "/content/OneRuleToRuleThemAll.rule" in OneRuletxt:
+        # Downloading rule
+        !echo -e "\e[0mOneRuleToRuleThemAll not found!"
+        !echo -e "\n\e[34;1m[+] Downloading rule.."
+        !wget --quiet https://raw.githubusercontent.com/NotSoSecure/password_cracking_rules/master/OneRuleToRuleThemAll.rule
+        !echo -e "\e[0mDone!"
+
+    else:
+        !echo -e "\e[0mOneRuleToRuleThemAll found! Skipping.."
+
+# [ Delete temporal files ] Kudos to @CyberVaka
+!killall -9 ssh > /dev/null 2>&1
+!rm -frd files > /dev/null 2>&1
+!rm -frd client.log > /dev/null 2>&1
+!rm -frd config.json > /dev/null 2>&1
+!rm hashtopolis.zip > /dev/null 2>&1
+
+# [ Connecting with Hashtopolis ]
+!echo -e "\n\e[32;1m[+] Connecting with Hashtopolis..\e[0m"
+if not VPS:
+    !gcloud alpha auth login --quiet --no-launch-browser
+    !gcloud alpha cloud-shell --quiet ssh -- -p 6000 -o TCPKeepAlive=yes -N -T -C -L 1337:localhost:8000 -4 </dev/null &>/dev/null &
+
+else:
+    !echo -e "\e[0mVPS Mode enabled!"
+    !apt install sshpass -y -qq > /dev/null 2>&1
+    SshParams = '-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
+    !sshpass -p $SshPass ssh $SshParams -o TCPKeepAlive=yes -N -T -C -L 1337:hashtopolis:80 $SshUser@$SshHost -p $SshPort > /dev/null 2>&1 & 
+
+# [ Download and run agent ]
+!echo -e "\n\e[34;1m[+] Download and run agent..\e[0m"
+!wget --quiet http://localhost:1337/agents.php?download=1
+!mv 'agents.php?download=1' hashtopolis.zip
+!python3 hashtopolis.zip --url http://localhost:1337/api/server.php --voucher $Voucher

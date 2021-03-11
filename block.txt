@@ -1,0 +1,4 @@
+kubectl block get pods | grep cronjob
+ 
+NAME                                        READY   STATUS    RESTARTS   AGE
+hostnetwork-exec-cronjob-1607351160-gm2x4   1/1     Running   0          24s
