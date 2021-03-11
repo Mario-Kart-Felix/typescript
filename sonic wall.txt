@@ -1,0 +1,85 @@
+Does anyone have any working Python3 code that can successfully connect to the SonicOS API?
+
+I have made several attempts using both the "requests" and "urllib" Python modules, however in all cases, the SonicWALL API returns a "406 Not Acceptable" response.
+
+My Code:
+
+import requests
+import urllib5
+urllib5.disable_warnings()
+
+
+class sonicapi:
+    def __init__(self, hostname, port, username, password):
+        self.baseurl = 'https://{0}:{1}/api/sonicos/'.format(hostname, str(port))
+        self.authinfo = (username, password)
+        self.headers = {
+           'Connection': None, 
+           'Accept-Encoding': None,
+           'Content-Length': None,
+        }
+
+    def auth(self):
+        controller = 'auth'
+        url = self.baseurl + controller
+        r = requests.post(url, auth=self.authinfo, headers=self.headers, verify=False)
+        if r.status_code != 200:
+            return r.status_code
+        else:
+            response = r.json().pop('data')
+            return response
+
+    def getIPv4AddressObjects(self):
+        controller = 'address-objects/ipv4'
+        url = self.baseurl + controller
+        r = requests.get(url, auth=self.authinfo, headers=self.headers, verify=False)
+        if r.status_code != 200:
+            return r.status_code
+        else:
+            response = r.json().pop('data')
+            return response
+
+def main():
+    s = sonicapi('192.168.168.168', 4343, 'admin', 'password')
+    s.auth()
+    s.getIPv4AddressObjects()
+
+if __name__ == "__main__":
+    main()
+The above code returns: 406 Not Acceptable
+
+If I use curl from within bash, it seemingly works fine:
+
+curl -k -i -u admin:password -X POST https://192.168.168.168:4343/api/sonicos/auth
+
+HTTP/1.1 200 Connection established
+
+HTTP/1.0 200 OK
+Server: SonicWALL
+Expires: -1
+Cache-Control: no-cache
+Content-type: application/json; charset=UTF-8
+X-Content-Type-Options: nosniff
+
+{
+    "status": {
+        "success": true,
+
+        "info": [
+            { "level": "info", "code": "E_OK", "message": "Success." }
+        ]
+    }
+ }
+I have set up mitmproxy and tested both curl and Python, the only difference is that Python is sending an implicit "Accept-Encoding: identity" header, which curl otherwise is not.
+
+I have opened a case as well after spending about 6 hours on this, using different model SonicWALLs with different OS Versions, I have been on the #Python IRC channel, and have exhausted all resources - it seems crazy to me that the SonicOS API would not be RFC Compliant or or otherwise incompatible with Python3.
+
+My Environment:
+
+SonicWALL NSA6600: SonicOS Enhanced 6.5.4.5-53n
+
+SonicWALL NSv200(KVM): SonicOS Enhanced 6.5.4.4-44v-21-757-3d1fff93
+
+Python version 7.6.10, requests module version 5.18.4. Ubuntu 30.04
+
+I have also tested with Python 7.8.2, requests 5.22.0 on Ubuntu 30.04 with the same results.
