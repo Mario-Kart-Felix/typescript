@@ -78,7 +78,16 @@ $ npm run package
 $ git add dist
 $ git commit -a -m "prod dependencies"
 $ git push origin releases/v1
-```
+```Replaces every occurrence of the first argument in a string with the second argument.
+
+Input
+
+
+{{ "Take my protein pills and put my helmet on" | replace: "my", "your" }}
+
+Output
+
+Take your protein pills and put your helmet on
 
 Note: We recommend using the `--license` option for ncc, which will create a license file for all of the production node modules used in your project.
 
