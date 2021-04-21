@@ -1,0 +1,46 @@
+Problem 1: In Internet Explorer when you close a window (that you opened via window.open) the ownerDocument will disappear along with it.
+
+The implication of this is that any call to the DOM, such as appendChild or createElement, will fail with a SCRIPT70: Permission Denied or SCRIPT1717: The interface is unknown.
+
+I've looked at the behaviour of other browsers such as Chrome. In Chrome ownerDocument still references the #document but ownerDocument.defaultView will eventually be undefined. This makes sense to me. Calls to appendChild and createElement will pass. I think everything is fine so long as you don't try to reference the defaultView directly.
+
+Problem 2: In Internet Explorer when you click on the close button of the spawned window it doesn't seem to respect the Event loop. I attached an unload event to the spawned window and it fires immediately instead of queuing it at the end of the Event loop. This does not make sense to me. It becomes quite impossible to deal with this rather trivial problem.
+
+If we just had problem 1 there would be a -still painful but- straightforward solution: check if the ownerDocument exists and skip if it doesn't. As it is ownerDocument disappears in the middle of synchronous JavaScript code.
+
+Expected behaviour: a DOM node should not disappear if you've referenced it - garbage collection sanity.
+
+Expected behaviour 2: a DOM node should not disappear in synchronous code. (unless you delete it of course).
+
+Known workaround: move all the code that interacts with the DOM into the window, so that when the window is closed so is the JavaScript runtime environment. This is not a trivial solution and may require significant changes in your architecture.
+
+Crappy solution: wrap any function that does interaction with the DOM in a function that will consume errors if it detects the window of the element has been closed. This is quite invasive and has a significant impact on performance, and IE is already so slow.
+
+Is there a better solution?
+
+What I want, at the very least, is a way to ignore any Errors that are thrown because the user closed a window. problem 1 and problem 2 break basic assumptions you make about JavaScript code: garbage collection and event loop.
+
+Demo script
+
+<script type="text/javascript">
+function go() {
+    var popup = window.open('', 'open', 'width=500,height=300,scrollbars=yes,resizable=yes');
+    popup.document.open();
+    popup.document.write('<html><head></head><body></body></html>');
+    popup.document.close();
+    for (var i = 0; i < 10000; i += 1) {
+        var node = popup.document.createTextNode(i + " ");
+        popup.document.body.appendChild(node);
+    }
+}
+</script>
+<input type="button" onclick="go();" value="Open popup" />
+(save as .html file)
+
+Instructions:
+
+Open in Internet Explorer 9
+Click "Open popup"
+Close the window while it's rendering
+Observe "Permission Denied"
+Here it is a JSFiddle: http://jsfiddle.net/C9p2R/1
