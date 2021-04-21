@@ -1,0 +1,53 @@
+need to update screen to show how button is moving. Here is my code:
+
+void mouseReleaseEvent(QMouseEvent *event){
+    double b=(button->x()*event->y())/(button->x()-1);u
+    double k=(button->y()-b)/button->x();
+    int time=0;
+    fnl=false;
+    if(event->button()==Qt::LeftButton)
+    {
+        while(!fnl)
+        {
+            int mX=button->x()-1;
+            int mY=k*(button->x()-1)+b;
+            button->setText(QString::number(b));
+            button->move(mX,mY);
+            QThread::sleep(1);
+            //here I need to update screen and show button
+        }
+
+    }
+}
+But it does not update GUI. It simply plays inside the loop
+Never use QThread::sleep() in the GUI thread, It will block the GUI thread from doing anything. Instead, You can use QTimer to schedule something to run at a later point in time. Also, Your slots/functions should be as short and optimized as possible in order to return control to the event loop and be able to handle other events that may happen.
+
+You may want to have a look at this question for a similar problem. The same technique can be applied here to solve the problem by replacing your while loop with a slot and a QTimer whose interval is set to 0. But Qt can do all that job using the animation framework, Here is an example of a button that gets moved when clicked:
+
+#include <QtWidgets>
+
+int main(int argc, char* argv[]){
+    QApplication a(argc, argv);
+    //create and show button
+    QPushButton button("Animated Button");
+    button.move(QPoint(100, 100));
+    button.show();
+    //create property animator object that works on the position of the button
+    QPropertyAnimation animation(&button, "pos");
+    //set duration for the animation process to 500ms
+    animation.setDuration(500);
+
+    //when the button is clicked. . .
+    QObject::connect(&button, &QPushButton::clicked, [&]{
+        //set the starting point of the animation to the current position
+        animation.setStartValue(button.pos());
+        //set the ending point to (250, 250)
+        animation.setEndValue(QPoint(250, 250));
+        //start animation
+        animation.start();
+    });
+
+    return a.exec();
+}
+
+Qt also provides many examples for using the animation framework. . .
