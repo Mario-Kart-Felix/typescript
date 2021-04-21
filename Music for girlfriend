@@ -1,0 +1,182 @@
+For this challenge we will investigate how we can use Python code to create our own background music and sound effects to be used in a retro arcade game.
+
+Most music editing software (e.g. GarageBand, Cubase, FL Studio, Logic Pro etc.), are Digital Audio Workstations (DAW) and let you create your own music by adding audio clips, virtual instruments and effects to a multi-track timeline. Editing and mixing your music is done through a Graphical User Interface.
+
+On occasions, you may try a different approach to control the DAW through code. Websites such as EarSketch let you create your code online using either Python or JavaScript and import it to a DAW to visualise your timeline and play it.
+
+Digitial Audio Workstation
+Digitial Audio Workstation
+
+In the example below, we are using Python code with basic audio clips from the “Eigthbit” library to recreate some retro arcade game music to be used on a game intro / splash screen.
+
+It demonstrates some of the key basic features of EarSketch:
+
+Set the tempo
+Import audio clips (on different tracks and at specified times)
+Add audio clips to the timeline
+Add effects (including fade in, fade out and delay effects)
+Use a loop to repeat a clip
+Python Code
+#		python code
+#		script_name: Game_Intro.py
+#
+#		author: 101Computing
+#		description: Background music for intro 
+#
+
+from earsketch import *
+
+init()
+setTempo(120)
+
+clip1 = EIGHT_BIT_ATARI_SFX_004
+clip2 = EIGHT_BIT_ATARI_LEAD_011
+clip3 = EIGHT_BIT_ATARI_LEAD_010
+
+pointA = 1.75
+repeat = 3
+pointD = pointA + repeat 
+
+#fitMedia(Clip,Track,StartMeasure,EndMeasure)
+fitMedia(clip1,1,1,2)
+for i in range(0,repeat):
+  fitMedia(clip2,2,pointA + i,pointA + i + 1)
+
+fitMedia(clip3,3,pointA,pointD + 1)
+
+#setEffect(Track,effect,parmeter,value)
+setEffect(3, VOLUME, GAIN, -10)
+
+#setEffect(Track,effect,parmeter,value,start measure,value,end measure)
+#Fade in
+setEffect(1, VOLUME, GAIN, -40, 1, 0, 1.75)
+#Delay Effect
+setEffect(1, DELAY, DELAY_TIME, 250)
+setEffect(2, DELAY, DELAY_TIME, 250)
+#Fade Out
+setEffect(3, VOLUME, GAIN, -10, pointD, -60, pointD+1)
+
+finish()
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+#		python code
+#		script_name: Game_Intro.py
+#
+#		author: 101Computing
+#		description: Background music for intro 
+#
+ 
+from earsketch import *
+ 
+init()
+setTempo(120)
+ 
+clip1 = EIGHT_BIT_ATARI_SFX_004
+clip2 = EIGHT_BIT_ATARI_LEAD_011
+clip3 = EIGHT_BIT_ATARI_LEAD_010
+ 
+pointA = 1.75
+repeat = 3
+pointD = pointA + repeat 
+ 
+#fitMedia(Clip,Track,StartMeasure,EndMeasure)
+fitMedia(clip1,1,1,2)
+for i in range(0,repeat):
+  fitMedia(clip2,2,pointA + i,pointA + i + 1)
+ 
+fitMedia(clip3,3,pointA,pointD + 1)
+ 
+#setEffect(Track,effect,parmeter,value)
+setEffect(3, VOLUME, GAIN, -10)
+ 
+#setEffect(Track,effect,parmeter,value,start measure,value,end measure)
+#Fade in
+setEffect(1, VOLUME, GAIN, -40, 1, 0, 1.75)
+#Delay Effect
+setEffect(1, DELAY, DELAY_TIME, 250)
+setEffect(2, DELAY, DELAY_TIME, 250)
+#Fade Out
+setEffect(3, VOLUME, GAIN, -10, pointD, -60, pointD+1)
+ 
+finish()
+00:0000:09
+Test this code on EarSketch
+
+You can test this code on EarSketch.
+
+Digitial Audio Workstation
+Test this script on EarSketch
+
+Adding Background Music with PyGame
+
+To add a background soundtrack, download a wav file or mp3 file into a folder called “Sounds”.
+At the start of your code (main.py), after importing the pygame library, add the following lines of code:
+pygame.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=4096)
+pygame.mixer.music.load('Sounds/soundtrack.mp3')
+pygame.mixer.music.play(-1) #-1 means loops for ever, 0 means play just once)
+1
+2
+3
+pygame.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=4096)
+pygame.mixer.music.load('Sounds/soundtrack.mp3')
+pygame.mixer.music.play(-1) #-1 means loops for ever, 0 means play just once)
+Note that you can stop the music at any time using the following instruction:
+pygame.mixer.music.stop()
+1
+pygame.mixer.music.stop()
+You may prefer to pause the music:
+pygame.mixer.music.pause()
+1
+pygame.mixer.music.pause()
+… or unpause the music:
+pygame.mixer.music.unpause()
+1
+pygame.mixer.music.unpause()
+Adding Sound Effects using PyGame
+
+To add sound effects, download some wav or mp3 files into a folder called “Sounds” and add the following code when you want to play the sound effect:
+Python
+effect = pygame.mixer.Sound('Sounds/beep.wav')
+effect.play()
+1
+2
+effect = pygame.mixer.Sound('Sounds/beep.wav')
+effect.play()
