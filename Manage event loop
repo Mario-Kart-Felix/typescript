@@ -1,0 +1,24 @@
+Unless anyone has a better solution, I'll go with the crappy solution. Here is my code:
+
+function apply_window_close_fix(dom_element, wrapped_element) {
+    var ignore_errors = false;
+    dom_element.ownerDocument.defaultView.addEventListener("unload", function () {
+        ignore_errors = true;
+    });
+    return map(wrapped_element, function (key, func) {
+        return function () {
+            try {
+                return func.apply(this, arguments);
+            } catch (e) {
+                if (ignore_errors === false) {
+                    throw e;
+                }
+            }
+        };
+    });
+}
+wrapped_element is the API that I return for modifying the DOM. I've wrapped all functions in a try-catch that will ignore errors if it sees the window has been closed. I call this function only for browsers that behave like Internet Explorer does.
+
+There seems to be only a very minor performance hit. Of course this depends on how intensively you call this API.
+
+One minor downside is that currently rethrowing some Errors is broken in some browsers. Rethrowing a DOMException resets the stack in Internet Explorer and Chrome (and possibly others). I've also found no way to fetch a filename and linenumber from a DOMException in Internet Explorer. Once again, a gross oversight that just ends up wasting time for everybody.
