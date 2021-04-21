@@ -1,0 +1,280 @@
+This code sample is supported in Python 3.5 demonstrates how the response output is shown for the specified endpoint for API,
+which gives result when the valid public and private keys are provided and triggered on valid host server.
+
+Code:
+        # -*- coding: utf-8 -*-
+        import hashlib
+        import hmac
+        import email
+        import time
+        import json
+        import requests
+
+        class APIRequestHandler(object):
+
+            def __init__(self):
+                self.URL = 'https://api.isightpartners.com'
+                self.public_key = '<PUBLIC_KEY>'
+                self.private_key = '<PRIVATE_KEY>'
+                self.accept_version = '2.5'
+
+            def run(self):
+                time_stamp = email.utils.formatdate(localtime=True)
+                ENDPOINT = '/report/16-00038875'
+                accept_header = 'application/json'
+                new_data = ENDPOINT + self.accept_version + accept_header + time_stamp
+                print(new_data)
+
+                key = bytearray()
+                key.extend(map(ord, self.private_key))
+                hashed = hmac.new(key, new_data.encode('utf-8'), hashlib.sha256)
+
+                headers = {
+                    'Accept': accept_header,
+                    'Accept-Version': self.accept_version,
+                    'X-Auth': self.public_key,
+                    'X-Auth-Hash': hashed.hexdigest(),
+                    'Date': time_stamp,
+                    }
+
+                r = requests.get(self.URL + ENDPOINT, headers=headers)
+                status_code = r.status_code
+                print('status_code = ' + str(status_code))
+
+                if status_code == 200:
+                    print(r.text)
+                    f = open('response.txt', 'w')
+                    f.write(r.text)
+                    f.close()
+
+                else:
+                    print(r.content)
+
+
+        if __name__ == '__main__':
+            request_handler = APIRequestHandler()
+            request_handler.run()
+
+       
+Python API-2.5
+   This code sample in python language demonstrates how the response output is shown for the basic search endpoint for API,
+which gives result when the valid public and private keys are provided and triggered on valid host server.
+
+Code:
+
+        #!/usr/bin/python
+        import hashlib
+        import hmac
+        import httplib
+        import email
+        import urllib
+        import time
+
+        ACCEPT_VERSION = '2.5'
+
+
+        def get_headers(prv, pub, query):
+            time_stamp = email.Utils.formatdate(localtime=True)
+            new_data = query + ACCEPT_VERSION + 'application/json' + time_stamp
+            hashed = hmac.new(prv, new_data, hashlib.sha256)
+            headers = {
+                'Accept': 'application/json',
+                'Accept-Version': ACCEPT_VERSION,
+                'X-Auth': pub,
+                'X-Auth-Hash': hashed.hexdigest(),
+                'Date': time_stamp
+            }
+            return headers
+
+
+        def data(url, query, pub, prv):
+            headers = get_headers(prv, pub, query)
+            load_data(url, query, headers)
+
+
+        def load_data(url, query, headers):
+            con = httplib.HTTPSConnection(url)
+            con.request('GET', query, '', headers)
+            resp = con.getresponse()
+
+            chunk = ""
+            response=""
+            while True:
+                chunk=resp.read(50000)
+                if chunk:
+                    response+=chunk
+                else:
+                    break
+
+            status = resp.status
+            if status == 204:
+                print ("Status:204 SearchResultNotFound")
+            else:
+                print (response)
+
+
+        def data_ioc(url,public_key, private_key):
+            print ("iocs Response:")
+            #30 days back start date
+            startDate = int(time.time()) - 2592000
+            endDate = int(time.time())
+            ioc_query = '/view/iocs?'+'startDate='+str(startDate)+'&endDate='+str(endDate)
+            return data(url, ioc_query,  public_key, private_key)
+
+
+        def data_text_search_simple(url, public_key, private_key):
+            print ("text_search_simple Response:")
+            # simple text search
+            params = {
+                'text': 'Stack-Based Buffer Overflow Vulnerability',
+                'limit': '10',
+                'offset': '0'
+            }
+            text_search_query = '/search/text?' + urllib.urlencode(params)
+            data(url, text_search_query,  public_key, private_key)
+
+
+        def data_text_search_filter(url, public_key, private_key):
+            print ("text_search_filter Response:")
+            # filter text search
+            params = {
+                'text': 'malware',
+                'filter': 'threatScape:cyberEspionage,cyberCrime&riskRating:HIGH,LOW&language:english',
+                'sortBy': 'title:asc,reportId:desc',
+                'limit': '10',
+                'offset': '5'
+            }
+            text_search_query = '/search/text?' + urllib.urlencode(params)
+            print 'text_search_query', text_search_query
+            data(url, text_search_query,  public_key, private_key)
+
+            params = {
+                'text': 'malware',
+                'filter': 'cveId:~\'CVE\''
+
+            }
+            text_search_query = '/search/text?' + urllib.urlencode(params)
+            data(url, text_search_query,  public_key, private_key)
+
+
+        def data_text_search_title(url, public_key, private_key):
+            print ("text_search_title Response:")
+            # title phrase search
+            params = {
+                'text': 'title:"Software Stack 3.1.2"'
+            }
+            text_search_query = '/search/text?' + urllib.urlencode(params)
+            data(url, text_search_query,  public_key, private_key)
+
+
+        def data_text_search_wildcard(url, public_key, private_key):
+            print ("text_search_wildcard Response:")
+            # wild card text search
+            params = {
+                'text': 'zero-day*',
+                'limit': '10',
+                'offset': '0'
+            }
+            text_search_query = '/search/text?' + urllib.urlencode(params)
+            data(url, text_search_query,  public_key, private_key)
+
+
+        def data_text_search_sensitive_reports(url, public_key, private_key):
+            print ("text_search_sensitive_reports Response:")
+            params = {
+                'text': 'title:"Latin American"',
+                'customerIntelOnly': True
+            }
+            text_search_query = '/search/text?' + urllib.urlencode(params)
+            data(url, text_search_query,  public_key, private_key)
+
+
+        def data_advanced_search_filter_indicators(url, public_key, private_key):
+            print ("advanced_search_filter_indicators Response:")
+            # Indicator field md5
+            advanced_search_query = '/search/advanced?query=md5=~8512835a95d0fabfb&fileIdentifier=[Victim;Attacker]'
+            data(url, advanced_search_query,  public_key, private_key)
+
+
+        def data_basic_search(url, public_key, private_key):
+            print ("basic_search Response:")
+            #Query for search
+            basic_search_query = '/search/basic?ip=66.34.253.56'
+            data(url, basic_search_query,  public_key, private_key)
+
+
+        if __name__ == '__main__':
+            #API-Host
+            url = 'api.isightpartners.com'
+
+            #User keys
+            public_key = 'PUBLIC_KEY'
+            private_key = 'PRIVATE_KEY'
+
+            data_basic_search(url, public_key, private_key)
+            data_ioc(url, public_key, private_key)
+            data_text_search_simple(url, public_key, private_key)
+            data_text_search_filter(url, public_key, private_key)
+            data_text_search_title(url, public_key, private_key)
+            data_text_search_wildcard(url, public_key, private_key)
+            data_text_search_sensitive_reports(url, public_key, private_key )
+            data_advanced_search_filter_indicators(url, public_key, private_key)
+
+
+                        
+Python Sample for File Upload in list search
+   This code shows how the output will be displayed when the file is uploaded.  To demonstrate List search endpoint we require
+valid keys and a file which is to be uploaded.  When everything goes well an exec-id is generated for the uploaded file.
+
+Code:
+
+        import requests
+        import hmac
+        import hashlib
+        import email
+        import json
+
+        #API-Host
+        URL = 'https://api.isightpartners.com'
+
+        ENDPOINT = '/search/list'
+        
+        #filename to be uploaded
+        FILE = 'filename.txt'
+
+
+        timestamp=email.Utils.formatdate(localtime=True)
+        accept = 'application/json'
+        version = '2.5'
+
+        #User keys
+        public_key = 'PUBLIC_KEY'
+        private_key = 'PRIVATE_KEY'
+
+        new_data = ENDPOINT + version + accept + timestamp
+
+        hashed = hmac.new(private_key, new_data, hashlib.sha256)
+
+        headers = {
+            'X-Auth' : public_key,
+            'X-Auth-Hash' : hashed.hexdigest(),
+            'Accept' : accept,
+            'Accept-Version' : version,
+            'Date' : timestamp
+        }
+        try:
+            files = {'file' : (FILE, open(FILE, 'r'))}
+            r = requests.post(URL + ENDPOINT, files=files, headers=headers, verify=False)
+            print "Response:"
+            resp = json.loads(r.text)
+
+            data =resp[u'message']
+            if data[u'exec-id']:
+                print "File Uploaded"
+                print "The exec-id generated:", data[u'exec-id']
+            else:
+                 print "Unable to upload file."
+
+        except:
+            print "File not found"
+                                
