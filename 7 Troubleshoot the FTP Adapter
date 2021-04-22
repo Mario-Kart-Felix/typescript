@@ -1,0 +1,32 @@
+
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+7 Troubleshoot the FTP Adapter
+Review the following topics to learn about troubleshooting issues with the FTP Adapter.
+
+Topics:
+
+Low Entropy in System Causes FTP Adapter Timeouts When Using the Connectivity Agent
+Creation and Release of an FTP Adapter Connection Can Cause Conflict for FTP Servers with Less Connections
+Troubleshoot Connectivity Agent Issues with the FTP Adapter
+Generate SSH Keys in PEM Format to Connect to a Public or On-Premises sFTP Server
+
+Two Integrations Processing Files from the Same Folder is Not Supported
+
+FTP Adapter Cannot Connect to FTP/SFTP Server in Oracle Cloud
+
+Use of FTP Adapter Connections Created Before Release 16.3.3 in Integrations Created in Release 16.3.3 or Later
+
+Read Multiple File Operation of FTP Adapter Not Available in 17.2.5
+
+Connect to an On-Premises FTP Server
+Was this page helpful?  
+About Oracle
+Contact Us
+Products A-Z
+Terms of Use & Privacy
+Cookie Preferences
+Ad Choices
+© Oracle
