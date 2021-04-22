@@ -1,0 +1,20 @@
+
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+Creation and Release of an FTP Adapter Connection Can Cause Conflict for FTP Servers with Less Connections
+The FTP Adapter creates a fresh connection every time and releases it as soon as work is done. This approach creates issues for some FTP servers in which the maximum number of FTP connections are less.
+
+Some FTP servers take a minimum of one minute to flush the connection that is closed before making it available again. Check whether there is a need for multiple flows or multiple instances to read or write to the FTP server at the same time. If so, the FTP server administrator must adjust the number of connections.
+
+You can encounter this issue if you call the FTP Adapter inside a loop. It is recommended that you use the write file operation of a stage file action to append the data and transfer the whole file at once. You can make flush time very less in your server or use a wait action inside a for each loop for these cases.
+
+Was this page helpful?  
+About Oracle
+Contact Us
+Products A-Z
+Terms of Use & Privacy
+Cookie Preferences
+Ad Choices
+© Oracle
