@@ -1,0 +1,21 @@
+
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+Create a Sample Schedule
+Create a schedule for your integration to pick up files from the FTP server at a date, time, and frequency of your choosing.
+
+On the Integrations page, find your integration and click its Actions menu Actions icon.
+Select Add Schedule.
+The page for defining the schedule execution details is displayed.
+
+For this example, let's create a basic schedule, so leave the Simple radio button selected under the Define recurrence section.
+In the Frequency field, select Hours and Minutes, and change the hours field to 6.
+You've now created a schedule that runs the integration every six hours. Similarly, you can create a schedule that runs on particular days or weeks.
+
+Additionally, you can specify the start and end dates for this schedule. In the This schedule is effective: section, click the From field and select Modify start date to specify a date and time from when this schedule should run. Similarly, specify an expiry date and time in the Until field. In addition, you can also specify your preferred timezone.
+Description of sample-schedule.png follows
+Description of the illustration sample-schedule.png
+
+Click Save and then click Back Back icon twice to return to the Integrations page. To create advanced schedules, see Create Scheduled Integrations.
