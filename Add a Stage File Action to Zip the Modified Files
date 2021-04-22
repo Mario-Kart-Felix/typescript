@@ -1,0 +1,41 @@
+
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+Add a Stage File Action to Zip the Modified Files
+Let's add a stage file action to combine all the individual files, which have been transformed, into a new zip file that will be sent back to your FTP server.
+
+On the right side of the canvas, click Actions Actions icon and drag and drop the Stage File action outside both the for-each loops.
+The Configure Stage File Action dialog is displayed.
+
+On the Basic Info page, enter a name for the action (Create_Zip). Click Next.
+On the Configure Operation page, enter the following details.
+Field	Information to Enter
+Choose Stage File Operation	
+Select Zip Files.
+
+Specify the File Name	
+Click Edit Edit icon to build an expression to specify a name for the new zip file.
+
+Type the following expression into the Expression field: 'test-data-modified.zip'.
+
+Click Save and then Exit Expression Builder.
+
+Specify the Directory to zip	
+Click Edit Edit icon to build an expression to specify the directory to zip.
+
+Type the following expression into the Expression field: '/tmp/zip-test/staged/modified'.
+
+Click Save and then Exit Expression Builder.
+
+Specify the Output Directory	
+Click Edit Edit icon to build an expression to specify the output directory in which to write the new zip file.
+
+Type the following expression into the Expression field: '/tmp/zip-test/staged/modified'.
+
+Click Save and then Exit Expression Builder.
+
+Click Next.
+
+On the Summary page, review the data you've entered and click Done.
