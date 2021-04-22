@@ -1,0 +1,54 @@
+
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+FTP Adapter Capabilities
+The FTP Adapter enables the integration of servers supporting File Transfer Protocol (FTP) and Secure Shell (SSH) File Transfer Protocol (sFTP) into Oracle Integration. The connectivity agent must be used for the latter environment.
+
+The FTP Adapter has the following capabilities:
+Transfers (reads and writes) files to any publicly accessible server in either binary or ASCII format. The FTP Adapter can connect to FTP and sFTP servers that are publicly available on the internet.
+
+Supports using the connectivity agent to read and write files from an FTP server that is not publicly accessible. Encryption and decryption of these files is supported with the connectivity agent. The FTP server may be behind a firewall, but is accessible from the connectivity agent host. See Configure an Agent Group and Invoke Operations Page.
+Supports streaming for transferring large files.
+
+Enables the integration developer to build an orchestration pattern-based integration for retrieving files from remote FTP and sFTP servers and for uploading the files onto remote FTP/sFTP servers. Oracle Integration provides the capability for scheduling the time and frequency at which to run these integrations.
+
+See Scheduling Integration Runs.
+
+Enables you to create a schema file format to use for the files to transfer. The schema can be created (sampled) from either a comma-separated value (CSV) file or from an existing schema file. Supported delimiters in the file are single spaces, commas, semicolons, or tabs.
+
+Enables you to encrypt a file that is being uploaded to remote FTP/sFTP servers using Pretty Good Privacy (PGP) cryptography. Encryption and signing of the file while uploading to remote FTP/s(FTP) servers are currently available only when the servers are publicly accessible. For privately hosted FTP/(s)FTP servers, you must encrypt and/or sign the file prior to uploading the file to the privately-hosted server using the FTP Adapter.
+
+Enables you to decrypt a file being read or downloaded from a remote FTP/sFTP server using PGP cryptography. Decryption and verification of the file while downloading from a remote FTP/s(FTP) server to Oracle Integration are currently available only when the servers are publicly accessible. For privately hosted FTP/(s)FTP servers, you must download the file from privately-hosted FTP/(s)FTP servers to Oracle Integration using the FTP Adapter prior to decrypting and verifying the contents of the file.
+
+Supports implicit and explicit FTP over SSL.
+Supports FTP, sFTP, and FTP over SSL connections. For FTP over SSL connections, you must use an SSL certificate in Public-Key Cryptography Standard (PKCS12) format. For sFTP connections using a key, you must use a key in PEM format.
+
+See Using Secure FTP with the Oracle FTP Adapter.
+
+Supports self-diagnosing connectivity issues that may occur when integrating with external sFTP servers.
+
+Supports host key authentication, public key authentication, and multilevel authentication:
+
+Supports different authentication schemes
+Supports different types of file handling operations (List File, Read File, Write File, Download File, Move File, and Delete File)
+Supports compression and decompression of files in ZIP and GZIP formats
+Supports signing the content before sending the file to an FTP server. You can upload the PGP sign private key and PGP sign private key password on the Connections page. Signing can be combined with PGP encryption.
+Supports verification of the signature after downloading the file from the FTP server. You must upload the PGP sign public key on the Connections page to verify the signature.
+Supports the optional describing of data definitions for the files uploaded/downloaded to / from FTP servers using one of the following formats.
+Sample XML document
+XML schema archive containing XML schema that can have XML schema imports and can include XML schema without a target namespace
+Sample JSON document
+Support for using File Server with the FTP Adapter to read and write files. File Server is an sFTP server and uses sFTP connection details. See About File Server of Using File Server with Oracle Integration Generation 2.
+The FTP Adapter is one of many predefined adapters included with Oracle Integration. You can configure the FTP Adapter as a connection in an integration in Oracle Integration.
+
+
+Was this page helpful?  
+About Oracle
+Contact Us
+Products A-Z
+Terms of Use & Privacy
+Cookie Preferences
+Ad Choices
+© Oracle
