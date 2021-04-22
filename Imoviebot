@@ -1,0 +1,177 @@
+
+GEEKSFORGEEKS
+How to Design Movie Telegram Bot using Node.js ?
+Telegram bot API can be used to create a chatbot that returns the complete details of movies, web series, and Tv series by sending the name of the movie or series as a command. Telegram provides a bunch of API’s methods to perform different functions. The telegram bot can be used to know the complete details of the movie without going to other websites like the IMDb site, etc.
+
+Prerequisites:
+
+Knowledge of Javascript and setting up a node environment.
+The latest version of Node (version > 10)
+The latest version of npm (version > 6)
+Command to check if Node and npm are present in your system:
+
+$ npm --v
+6.14.5
+
+$ node --version
+v10.15.0
+Creating Bot and Getting API Token:
+
+Open the telegram app and search for @BotFather.
+Click on the start button or send “/start”.
+Then send “/newbot” message to set up a name and a username.
+The BotFather will then give you an API token.
+Getting Movie API Key:
+
+
+
+Go to the OMDB (open movie database ) website.
+Create an account as per the limit.
+You will receive your own API key.
+Modules Installation:
+
+Requests: To install this module type the below command in the terminal.
+
+$ npm install --save requests
+node-telegram-bot-api: Node.js module to interact with the official Telegram Bot API.
+
+$ npm install node-telegram-bot-api
+Filename: bot.js
+
+// Requiring module 
+
+var reques = require('requests') 
+
+var TelegramBot = require('node-telegram-bot-api') 
+
+token = "YOUR-TELEGRAM_API-TOKEN"
+
+movieapi = "YOUR-OMDB_API-TOKEN"
+
+  
+// Create a bot that uses 'polling'  
+// to fetch new updates 
+
+var bot = new TelegramBot(token, { polling: true }); 
+
+  
+
+bot.on("polling_error", (err) => console.log(err)); 
+
+  
+
+bot.onText(/\/movie (.+)/, function (msg, match) { 
+
+  
+
+    // The 'msg' is the received Message from 
+
+    // user and 'match' is the result of  
+
+    // execution above on the text content 
+
+  
+
+    // Getting the name of movie from the  
+
+    // message sent to bot 
+
+    var movie = match[1]; 
+
+    var chatId = msg.chat.id 
+
+  
+
+    reques('http://www.omdbapi.com/?t=' 
+
+        + movie + '&apikey=movieapi', 
+
+        function (error, response, body) { 
+
+            if (!error && response.statusCode == 200) { 
+
+                bot.sendMessage(chatId,  
+
+                    '_Looking for_ ' + movie + '...',  
+
+                    { parse_mode: "Markdown" }).then(msg) { 
+
+                    res = JSON.parse(body) 
+
+  
+
+                    bot.sendPhoto(chatId, res.Poster, { 
+
+                        caption: 'Result:\nTitle: ' 
+
+                            + res.Title + '\nGenre: ' 
+
+                            + res.Genre + '\nRated: ' 
+
+                            + res.Rated + '  \nReleased: ' 
+
+                            + res.Released 
+
+                    }) 
+
+  
+
+                    // Sending back response from the  
+
+                    // bot to the user  
+
+                    // Response has many other details,  
+
+                    // which can be used or sent as per  
+
+                    // requirement 
+
+                } 
+
+            } 
+
+        }) 
+}) 
+Steps to run the program: Run bot.js file using the following command:
+
+$ node bot.js
+Now, Go to your bot and type /movie movie-name and see the results.
+
+Output:
+
+
+
+
+
+
+Attention reader! Don’t stop learning now. Get hold of all the important DSA concepts with the DSA Self Paced Course at a student-friendly price and become industry ready.
+
+Article Tags : Node.jsTechnical ScripterWeb Technologies Node.js-MiscTechnical Scripter 2020
+
+Read Full Article
+GeeksforGeeks
+710-B, Advant Navis Business Park,
+Sector-142, Noida, Uttar Pradesh - 201305
+feedback@geeksforgeeks.org
+COMPANY
+About Us
+Careers
+Privacy Policy
+Contact Us
+LEARN
+Algorithms
+Data Structures
+Languages
+CS Subjects
+Video Tutorials
+PRACTICE
+Company-wise
+Topic-wise
+Contests
+Subjective Questions
+CONTRIBUTE
+Write an Article
+GBlog
+Videos
+    
+@geeksforgeeks, Some rights reserved
