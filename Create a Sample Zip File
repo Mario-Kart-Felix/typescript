@@ -1,0 +1,17 @@
+Create a Sample Zip File
+On your local machine, create a zip file, containing a few individual files, to use in this tutorial.
+
+Create a .txt file and name it test-file1. Add the following data into it.
+Test Data Row1 From File1
+Test Data Row2 From File1
+Create two more .txt files and name them test-file2 and test-file3. Add the following data into them, respectively.
+Test Data Row1 From File2
+Test Data Row2 From File2
+Test Data Row3 From File2
+Test Data Row4 From File2
+Test Data Row5 From File2
+Test Data Row1 From File3
+Test Data Row2 From File3
+Test Data Row3 From File3
+Create a folder named test-data and copy the three files you created into it.
+Zip the test-data folder. Your sample file is now ready to use
