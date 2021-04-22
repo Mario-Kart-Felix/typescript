@@ -1,0 +1,12 @@
+Hi there,
+First of all I am not sure if this situation is expected, when userA blocks userB, userA will also get blocked by userB.
+
+If it is true, then I just tried something like:
+@userA.block_friend( @lewagon)
+
+
+It actually worked and removed userB from userA's blocked list, which should not happen as described in README.
+
+I am wondering if anybody else has the same issue or just me doing something wrong?
+
+Any answer or clarification is appreciated, thanks
