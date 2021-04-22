@@ -1,0 +1,33 @@
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+Prerequisites for Creating a Connection
+You must satisfy the following prerequisites for creating a connection with the FTP Adapter.
+
+Ensure that you have write permissions on the FTP server directory to which to transfer files.
+
+Ensure that you have read permissions on the FTP server directory from which to transfer files.
+
+Know the host name or IP address and port number of the FTP server.
+
+Know the user name and password for connecting to the FTP server.
+
+If you want to use FTP over SSL, know the location of the FTP server certificate in PKCS12 format.
+
+If you want to use secure FTP with a public key, know the location of the private key of the server and optionally the passphrase to access the private key. If you are using Secure FTP (sFTP) with HostKey-based authentication, know the location of hostkey to upload:
+
+The default location of the RSA key is /etc/ssh on the server.
+
+If you are using Oracle Managed File Transfer Cloud Service, download the host key from the Oracle Managed File Transfer Cloud Service console.
+
+If you are using vsftpd, you will find the host key under /etc/ssh.
+
+Was this page helpful?  
+About Oracle
+Contact Us
+Products A-Z
+Terms of Use & Privacy
+Cookie Preferences
+Ad Choices
+© Oracle
