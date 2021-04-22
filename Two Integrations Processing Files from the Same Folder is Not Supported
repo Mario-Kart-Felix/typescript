@@ -1,0 +1,2 @@
+Two Integrations Processing Files from the Same Folder is Not Supported
+The FTP Adapter does not support the processing of files from the same folder by two integrations. File deletion causes a conflict. For example, if one integration deletes a file, the second integration cannot find the file to delete and fails.
