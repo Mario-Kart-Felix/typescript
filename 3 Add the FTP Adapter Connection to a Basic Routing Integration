@@ -1,0 +1,32 @@
+
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+3 Add the FTP Adapter Connection to a Basic Routing Integration
+When you drag the FTP Adapter into the invoke area of a basic routing integration, the Adapter Endpoint Configuration Wizard appears. This wizard guides you through the configuration of the FTP Adapter endpoint properties.
+
+These topics describe the wizard pages that guide you through configuration of the FTP Adapter as an invoke in an integration. If you configure the FTP Adapter as an invoke connection in an integration, then any adapter can be configured as the trigger connection in that same integration.
+
+Note:The FTP Adapter configuration wizard differs a bit when used in orchestrated integrations. That version of the wizard is described at Add the FTP Adapter Connection to an Orchestrated Integration.
+Topics:
+
+Basic Information Page
+Trigger Configure File Read Page
+
+Invoke File Contents - Definition Page
+
+Invoke Configure File Write Page
+
+Invoke PGP Configuration Page
+
+Summary Page
+
+Was this page helpful?  
+About Oracle
+Contact Us
+Products A-Z
+Terms of Use & Privacy
+Cookie Preferences
+Ad Choices
+© Oracle
