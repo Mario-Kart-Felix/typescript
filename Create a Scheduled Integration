@@ -1,0 +1,31 @@
+
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+Create a Scheduled Integration
+Let's create an orchestrated integration, triggered by a schedule, in which an invoke FTP Adapter reads the sample zip file from the sFTP server and another invoke FTP Adapter writes the transformed zip file back to the server. You'll create a schedule to run this integration at a specified frequency later in this example.
+
+In the navigation pane, click Integrations.
+On the Integrations page, click Create.
+The Create Integration - Select a Style dialog is displayed.
+
+Select Scheduled Orchestration. The Create New Integration dialog is displayed.
+Enter the following information.
+Field	Information to Enter
+What do you want to call your integration?
+
+Provide a name for the integration, FTP Bulk Import.
+
+Identifier
+
+Accept the default identifier value.
+
+Version
+
+Accept the default version number of 01.00.0000.
+
+What does this integration do?
+
+Enter the following text: Loads and transforms files from a secure FTP location.
+
