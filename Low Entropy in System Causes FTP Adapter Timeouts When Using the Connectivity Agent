@@ -1,0 +1,19 @@
+
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+Low Entropy in System Causes FTP Adapter Timeouts When Using the Connectivity Agent
+When running the connectivity agent on Oracle Cloud Infrastructure compute, you may see timeouts/slowness in FTP Adapter invocations to SFTP servers. The FTP Adapter uses cryptographic libraries that need a SecureRandom randomizer to seed cryptographic key generation. Seeding makes use of entropy in the system and an insufficient amount of entropy leads to slowdowns and results in slowness in the FTP Adapter and timeouts in some cases.
+
+To resolve this issue, ensure that the system has an entropy value greater than 3000. Entropy can be obtained on Linux by executing the following command:
+cat /proc/sys/kernel/random/entropy_avail
+See doc: 2738113.1 at My Oracle Support to set entropy to more than 3000.
+Was this page helpful?  
+About Oracle
+Contact Us
+Products A-Z
+Terms of Use & Privacy
+Cookie Preferences
+Ad Choices
+© Oracle
