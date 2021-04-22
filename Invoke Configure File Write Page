@@ -1,0 +1,40 @@
+
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+Invoke Configure File Write Page
+Enter the FTP Adapter invoke file write parameters.
+
+Note:You can override the values for the output location and file name pattern in the mapper. Use XPath functions in the mapper to create the output location and file name.
+Element	Description
+Select a Transfer Mode
+
+Select the transfer mode:
+
+ASCII: Transfers special control characters to format the data.
+
+Binary: Transfers raw bytes of the file data.
+
+Specify an Output Directory
+
+Specify the directory path to which to transfer files (for example, /Oracle/output/file/).
+
+Specify a File Name Pattern
+
+Specify the pattern of file names to transfer to the output directory. Use the pattern inside %%. For example, Oracle%SEQ%ICS.txt creates files in sequence, such as Oracle1ICS.txt, Oracle2ICS.txt, and so on. For a list of supported file patterns, click the information icon.
+
+Note: Use of these patterns leads to message loss if the messages are written to the file system at the same time or files are written to a separate node. To ensure that files are not overwritten, use the mapper to assign the file names explicitly. You can use XPath functions to ensure that file names are unique.
+
+Append to Existing File
+
+If selected, the file name is appended to the existing file name and is not overwritten.
+
+Was this page helpful?  
+About Oracle
+Contact Us
+Products A-Z
+Terms of Use & Privacy
+Cookie Preferences
+Ad Choices
+© Oracle
