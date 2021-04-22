@@ -1,0 +1,66 @@
+
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+Add a Stage File Action to Write Modified Records into a New File
+Add a second stage file action to read individual records of each file, modify or transform them, and write the modified records into a new file.
+
+On the right side of the canvas, click Actions Actions icon and drag and drop the Stage File action inside the For_Each_InputRow action. Placing this stage file action within the second loop ensures that each record in a file under iteration is read.
+The Configure Stage File Action dialog is displayed.
+
+On the Basic Info page, enter a name for the action (Write_Row). Click Next.
+On the Configure Operation page, enter the following details.
+Field	Information to Enter
+Choose Stage File Operation	Select Write File.
+Specify the File Name	
+Click Edit Edit icon to build an expression to specify the name for the new file that is created.
+
+Let's build an expression such that the names of the new individual files are: their old names plus the suffix, - modified.
+
+In the Source tree, select the filename field present under $OneTextFile > ICSFile > Properties (this represents the old names of the files), and click Move Move icon to populate the Expression field on the right.
+
+Add a comma after filename and enter '-modified'. Enclose the entire expression in parenthesis and prefix the term concat as follows: concat($OneTextFile/nsmpr2:ICSFile/nsmpr2:Properties/nsmpr2:filename, '-modified')
+
+Click Save and then Exit Expression Builder.
+
+Specify the Output Directory	
+Click Edit Edit icon to build an expression to specify the output directory, where the files will be written.
+
+Type the following expression into the Expression field: '/tmp/zip-test/staged/modified'.
+
+Click Save and then Exit Expression Builder.
+
+Append to Existing File	
+Select to append records to the existing file.
+
+Click Next.
+
+Leave the configurations on the Schema Options page as they are. Click Next.
+On the Format Definition page, perform the following actions to upload a file from which to create a schema.
+Field	Information to Enter
+Select the Delimited Data File	
+Click Choose File and upload the test-file1.txt file you created. See Create a Sample Zip File.
+
+The content of the file is then displayed at the bottom of the page.
+
+Enter the Record Name	
+Enter the name you want to assign to the records in the schema file. This becomes the parent element in the created schema file for the record names selected as column headers from the CSV file.
+
+Enter ModifiedRow.
+
+Enter the Recordset Name	
+Enter the name you want to assign to the recordset in the schema file. This becomes the root element of the created schema file.
+
+Enter ModifiedRowSet.
+
+Use the First Row as Column Headers	
+Deselect this check box.
+
+The rest of the fields are automatically populated from the uploaded CSV file. Click Next.
+
+On the Summary page, review the data you've entered and click Done.
+At this point, the integration flow appears as follows:
+Description of bulk-files-integration.png follows
+Description of the illustration bulk-files-integration.png
+
