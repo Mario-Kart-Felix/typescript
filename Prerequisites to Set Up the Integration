@@ -1,0 +1,8 @@
+Prerequisites to Set Up the Integration
+To complete this tutorial, you need:
+
+Access to Oracle Integration. Don't have access? Use free credits to try Oracle Integration now.
+Sign-in credentials (user name, password, data center/region, and identity domain) for your Oracle Integration user account.
+A secure FTP (sFTP) server.
+An FTP client to access the sFTP server.
+The sample file, test-data.zip. To create this file, see Create a Sample Zip File.
