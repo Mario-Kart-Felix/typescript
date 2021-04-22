@@ -1,0 +1,190 @@
+
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+Invoke Operations Page
+Enter the FTP Adapter operation properties. All FTP operations in orchestrated integrations are synchronous.
+
+Choose one of the following operations to perform on files. Depending on which operation you choose, you are presented with different options and parameters that apply specifically to that operation. All operations support dynamic file name and directory via mapping.
+
+Read a File: Reads a file from the FTP/FTPS/sFTP location. This operation reads a single file. If you have not selected any schema, a file size of up to 1 GB is supported. If you have selected the schema, a file size of up to 10 MB is supported.
+
+Write File: Writes a single file onto the target FTP server.
+
+List Files: Lists the names of the files in the input directory. This operation returns the list of files without any data. It is similar to running the ls command in Linux.
+
+Move a File: Moves a file from one location to another on the same target FTP server.
+
+Delete a File: Deletes a single file on the FTP server.
+
+Download File: Specifies a directory to be used for staged activity. Use this directory to stage large files for processing. This operation downloads a single file in the logical directory you specify. File size support is up to 1 GB.
+Note:If you try to decrypt an encrypted file that is less than 1 GB in size, and after decryption it exceeds 1 GB, the operation fails. This also applies to ZIP files. If a ZIP file is less than 1 GB and you select to unzip it, if the file size exceeds 1 GB after unzipping, the operation also fails.
+Note:If you want to read/download multiple files, use the following integration pattern. FTP List File (Operation) > For Each Loop > FTP Read File (Operation) > End For Each Loop
+The following tables describe the key information on the FTP Adapter invoke Operations page. Depending on which operation you choose, you are presented with different options and parameters that apply specifically to that operation. Each table corresponds to a specific operation.
+
+Each operation can be performed against ZIP and GZIP file formats.
+
+Read a File
+
+Note:Elements marked with “+” can be mapped in the mapper and can be passed dynamically at runtime.
+When using the connectivity agent, the Read a File operation when used without a schema supports files of up to 1 GB in size. This limit is the same as the Download File operation. If you are using a schema for transformation, the file size limit is 10 MB. You can specify sample XML and JSON documents for the payload when configuring the FTP Adapter for read operations.
+
+Element	Description
+Select a Transfer Mode
+
+Select the transfer mode:
+
+ASCII: Transfers special control characters to format the data.
+
+Binary: Transfers raw bytes of the file data.
+
++Input Directory
+
+The name of the directory that contains the file to be read. For example, /tmp/Oracle/input.
+
++File Name
+
+The name of the file to be read. The name can also be provided by the mapper. File sizes of up to 10 MB are supported.
+
+Write File
+
+When using the connectivity agent, the Write File operation when used without a schema supports files of up to 1 GB in size. This limit is the same as the Download File operation. If you are using a schema for transformation, the file size limit is 10 MB. You can specify sample XML and JSON documents for the payload when configuring the FTP Adapter for write operations.
+
+Element	Description
+Select a Transfer Mode
+
+Select the transfer mode:
+
+ASCII: Transfers special control characters to format the data.
+
+Binary: Transfers raw bytes of the file data.
+
++Output Directory
+
+The directory path to which to write the file. For example, /tmp/Oracle/output.
+
++File Name Pattern
+
+The pattern of file names to transfer to the output directory. Use the pattern inside %%. For example, Oracle%SEQ%ICS.txt creates files in sequence, such as Oracle1ICS.txt, Oracle2ICS.txt, and so on. For a list of supported file patterns, click the information icon.
+
+Note: Use of these patterns leads to message loss if the messages are written to the file system at the same time or files are written to a separate node. To ensure that files are not overwritten, use the mapper to assign the file names explicitly. You can use XPath functions to ensure that file names are unique.
+
+Append to Existing File
+
+If selected, the file content is appended to the existing file content and is not overwritten.
+
+Notes:
+If you append JSON or XML content, the final file is invalid XML or JSON.
+Writing record by record using the Append to Existing File option creates too many network calls and eventually slows down the process. Instead, use a stage file action and write the records to a stage directory. Once all records are written, use the List File option in the stage file action and the FTP Adapter Write File option to transfer the file to an FTP location. This approach reduces processing time and prevents too many calls to the FTP server.
+
+You may be performing successive appends by putting multiple write operations or using a write operation in a for-each loop. In this scenario, if the FTP server is running on multiple nodes or on a cloud service, it should synchronize the data immediately among all nodes. Otherwise, if the next request goes to a different node, there is inconsistency in the final output file. As an alternative, you can also place a wait activity before or after every append to give the data time to synchronize.
+
+PGP Encryption / Decryption	Oracle Integration can perform PGP encryption using a public key on the file to send to external FTP servers for protecting sensitive data and preserving confidentiality and privacy. Oracle Integration can also perform PGP decryption using a private key on the incoming file to decrypt the encrypted contents.
+Perform PGP Encryption on the file to be sent to external FTP Server: Encrypts the data. This requires that you specify a public key, ASCII Armor, and cipher algorithm on the Connections page.
+Perform PGP Decryption on an encrypted file to be sent to external FTP Server as clear text: Decrypts the encrypted data. This mode requires that you create a private key and private key password on the Connections page.
+No PGP Encryption/Decryption on the file to be sent to external FTP Server: No encryption or decryption is performed.
+Sign / Verify Signature	Oracle Integration can perform signing using the private key to allow the receiver to verify that the file contents were not altered during transit. Oracle Integration can also perform signature verification using the public key on the incoming file to verify that the contents were not altered during transit.
+Perform signing on the file to be sent to external FTP Servers: Generates a signature only and attaches it. This requires that you create an ASCII armor, cipher algorithm, sign private key, and sign private key password for signing on the Connections page.
+Perform verification on the incoming signing file that needs to be sent to external FTP Server: Verifies the signature present in the data. This requires that you create a sign public key on the Connections page.
+No Signing/Verification on the file to be sent to external FTP Server : No signing or signing verification is performed.
+List Files
+
+Element	Description
++Input Directory
+
+The name of the directory that contains the file to be read. For example, /tmp/Oracle/input.
+
++File Name Pattern
+
+Specify a wildcard pattern to be used for listing files from the input directory. For example, order*.csv.
+
+Max Files
+
+The maximum number of file names that should be listed. The maximum value is 1000.
+
+Note: The List File operation returns the file list in a sorted order according to the last modified time. If you selected 10 as the maximum number of files and the last modified time of the eleventh file is the same as the tenth file, then the eleventh file is also added. This continues until you get a file with a different timestamp.
+
+For example, assume the directory has 15 files and you select 10 as the maximum number of files. If the tenth, eleventh, twelfth, and thirteenth files have the same time stamp, then the list file returns thirteen files.
+
+Minimum Age
+
+The minimum age in seconds for files to be displayed. For example, if the last time a file was modified is 02:28:45 AM and the minimum age is defined as 80 seconds, the file will not be listed at 02:29:00 AM and 02:30:00 AM. It will be listed after 02:30:05.
+
+List Files Recursively
+
+List files within directories recursively beneath the input directory.
+
+Move a File
+
+Element	Description
++Directory Path
+
+The name of the directory that contains the file to be moved. For example, /tmp/Oracle/input.
+
++File Name
+
+The name of the file to be moved. There is no limit to the size of the file to move.
+
++Target Directory Path
+
+The name of the directory to which the file will be moved.
+
++Target File Name
+
+The name of the file as it will be written in the target directory.
+
+Overwrite	
+Select to overwrite the file in the target directory.
+
+Delete a File
+
+Element	Description
++Directory Path
+
+The directory path to the file you wish to delete.
+
++File Name
+
+The name of the file to delete.
+
+Download File
+
+The Download File operation enables you to map the download directory dynamically. This works fine for new integrations. You can also edit an existing Download File operation in the Adapter Endpoint Configuration Wizard to add more file download operations, then click Done to regenerate the adapter artifacts. You can download file sizes of up to 1 GB.
+
+Using the Download File operation with the connectivity agent enables you to upload the file from the connectivity agent server to Oracle Integration. This operation enables you to download and upload files of up to 1 GB in size. This operation may take more time depending on the network conditions between FTP and the connectivity agent and the connectivity agent and Oracle Integration.
+
+Element	Description
+Select a Transfer Mode
+
+Select the transfer mode:
+
+ASCII: Transfers special control characters to format the data.
+
+Binary: Transfers raw bytes of the file data.
+
++Input Directory
+
+Specify the name of the directory that contains the file to be read. For example, /tmp/Oracle/input.
+
++File Name
+
+The name of the file to download. This can be overridden using the mapper.
+
++Download Directory
+
+The name of the directory to be used for stage file action. See Processing Files in Scheduled Integrations with a Stage File Action.
+
+Do not enter the directory path in double quotes. The quotes are mistakenly included as part of the directory name.
+
+Perform unzip on compressed file downloaded from external FTP server	Select if the file to download is in compressed mode. Selecting this option causes the Retain the zip directory structure option to be displayed. If selected, this option preserves the directory structure while unzipping content in the download directory.
+Perform PGP Decryption on an encrypted file downloaded from external FTP server	Select if the file to download was encrypted by the sender using PGP encryption to protect sensitive data and preserve confidentiality and privacy. The private key required for decryption must be uploaded to the connection specific to this FTP server.
+Perform verification on the signed file downloaded from external FTP server	Select if the file to download must have signature verification to ensure that the file contents were not altered during transit and it came from the actual sender. The corresponding public key required for signature verification must be uploaded to the connection specific to this FTP server.
+Was this page helpful?  
+About Oracle
+Contact Us
+Products A-Z
+Terms of Use & Privacy
+Cookie Preferences
+Ad Choices
+© Oracle
