@@ -1,0 +1,19 @@
+
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+Add a For-Each Action to Iterate Over Individual Records
+When an individual file is staged in Oracle Integration, add a second for-each action to iterate through each record in the file.
+
+On the right side of the canvas, click Actions Actions icon and drag and drop the For Each action after the Process_Single_File action but within the first for-each loop.
+The Create Action dialog is displayed.
+
+Enter a name for the action, For_Each_InputRow.
+Provide an optional description.
+In the Repeating Element field, specify the element over which to iterate.
+Here, the element over which to loop is Row, which is the name you've provided for individual rows/records within a file in the previous action. Expand the Source tree to find this element. It's present under $Process_Single_File > ReadResponse > RowSet. After you've selected the element, click Move Move icon to populate the field with the element.
+
+Description of each-records.png follows
+Description of the illustration each-records.png
+
