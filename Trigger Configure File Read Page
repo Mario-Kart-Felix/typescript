@@ -1,0 +1,51 @@
+
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+Trigger Configure File Read Page
+Enter the FTP Adapter trigger file read parameters.
+
+Element	Description
+Select a Transfer Mode
+
+Select the transfer mode:
+
+ASCII: Transfers special control characters to format the data.
+
+Binary: Transfers raw bytes of the file data.
+
+Specify an Input Directory
+
+Specify the directory path from which to read the files to transfer (for example, /Oracle/input/file/).
+
+Specify a File Name Pattern
+
+Specify the pattern of files to be processed by the file adapter. For example, *.csv can be used to read all CSV files in an input directory.
+
+Maximum Files
+
+Specify the maximum number of files to be processed in one scheduled call. If the schedule is every hour, then every hour the maximum number of files must be processed. See Scheduling Integration Runs.
+
+Chunk Size
+
+Specify the chunk size per call. Chunking enables large files to be processed, one logical chunk at a time. A logical chunk is retrieved from a huge file, enabling the file to stay within memory constraints.
+
+Processing Delay
+
+Specify the delay in seconds. After a file is created, the value specified indicates how long to wait to process the file. For example, if a file is created at 11:02:30 and a processing delay of 60 seconds is provided, the file is not picked up until 11:03:30 for processing.
+
+If you specify a processing delay value of greater than zero, select your FTP server time zone from the FTP Server Time Zone dropdown list in the Connection Properties dialog. This is because the server checks the difference in the time stamp of the file. If you do not select a time zone, the default value is that of the Oracle Integration server. This can delay the processing of files for up to 12 hours. See Configure Connection Properties.
+
+Delete Files After Successful Retrieval
+
+Select to delete the file from the directory from which it was read after the transfer is successful. If the transfer is initially unsuccessful and the transfer is resubmitted, the source file is deleted after the resubmitted transfer is successful.
+
+Was this page helpful?  
+About Oracle
+Contact Us
+Products A-Z
+Terms of Use & Privacy
+Cookie Preferences
+Ad Choices
+© Oracle
