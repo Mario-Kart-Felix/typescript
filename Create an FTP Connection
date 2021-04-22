@@ -1,0 +1,42 @@
+
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+Create an FTP Connection
+In the integration you'll set up, you'll use an FTP Adapter to connect to the sFTP server and retrieve files for transformation. In order to use an FTP Adapter, you'll have to first define a connection based on it to your server.
+
+In the navigation pane, click Integrations, then click Connections.
+Click Create.
+The Create Connection — Select Adapter dialog is displayed.
+
+Select the FTP Adapter from the dialog.
+The Create Connection dialog is displayed.
+
+Enter the information to describe the connection.
+Enter a name for your connection (FTP Connection).
+Select Trigger and Invoke in the Role field.
+Enter an optional description of the connection.
+Click Create.
+Your connection is created and you are now ready to configure other details.
+
+In the Connection Properties section, enter the following details.
+Field	Information to Enter
+FTP Server Host Address	Enter the host address of your sFTP server.
+FTP Server Port	Enter 22.
+SFTP Connection	Select Yes from the list.
+In the Security section, enter the following details.
+Field	Information to Enter
+Security Policy	Select FTP Server Access Policy.
+User Name	Enter the user name to connect to your sFTP server.
+Password	Enter the password to connect to your sFTP server, and then enter the password a second time for confirmation.
+Click Save.
+Click Test to ensure that your connection is successfully configured. In the resulting dialog, click Test again. If necessary, you can self-diagnose connectivity issues that occur with the sFTP server, see Test the Connection.
+A confirmation message is displayed if your test is successful.
+
+Description of test-success.png follows
+Description of the illustration test-success.png
+
+Click Back Back icon to return to the Connections page. Click Save again if prompted.
+Now you're ready to create the integration.
+
