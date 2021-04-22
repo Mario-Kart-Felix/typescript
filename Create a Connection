@@ -1,0 +1,432 @@
+
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+Create a Connection
+Before you can build an integration, you have to create the connections to the applications with which you want to share data.
+
+To create a connection in Oracle Integration:
+
+In the left navigation pane, click Home > Integrations > Connections.
+
+Click Create.
+
+Note:You can also create a connection in the integration canvas of:
+An orchestrated integration (See Define Inbound Triggers and Outbound Invokes.)
+
+A basic routing integration (See Add a Trigger (Source) Connection.)
+
+In the Create Connection — Select Adapter dialog, select the adapter to use for this connection. To find the adapter, scroll through the list, or enter a partial or full name in the Search field and click Search iconSearch.
+
+In the Create Connection dialog, enter the information that describes this connection.
+
+Enter a meaningful name to help others find your connection when they begin to create their own integrations. The name you enter is automatically added in capital letters to the Identifier field. If you modify the identifier name, don't include blank spaces (for example, SALES OPPORTUNITY).
+Enter optional keywords (tags). You can search on the connection keywords on the Connections page.
+Select the role (direction) in which to use this connection (trigger, invoke, or both). Only the roles supported by the adapter are displayed for selection. When you select a role, only the connection properties and security policies appropriate to that role are displayed on the Connections page. If you select an adapter that supports both invoke and trigger, but select only one of those roles, you'll get an error when you try to drag the adapter into the section you didn't select. For example, let's say you configure a connection for the Oracle Service Cloud (RightNow) Adapter as only an invoke. Dragging the adapter to a trigger section in the integration produces an error.
+Enter an optional description of the connection.
+Click Create.
+
+Your connection is created. You're now ready to configure the connection details, such as connection properties, security policies, connection login credentials, and (for certain connections) agent group.
+
+Configure Connection Properties
+The FTP Adapter supports the following types of FTP connections.
+
+FTP connection: The FTP Adapter supports passive communication to an FTP server. You must configure passive configurations in the FTP server.
+FTP over SSL connection: The FTP Adapter supports FTP over SSL, which supports explicit FTP over SSL.
+sFTP connection: The FTP Adapter supports communication with a secure FTP server.
+Note:File Server only supports sFTP connections.
+Configure an FTP Connection
+Enter FTP connection information so your application can process requests.
+
+Go to the Connection Properties section.
+Enter the following details:
+Element	Description
+FTP Server Host Address	Enter the host address of the FTP/FTPS server.
+FTP Server Port	Enter the FTP server port number.
+SFTP Connection	Select No from the list.
+Passive IP as Host Address	If using a different IP in a passive configuration, select Yes from the list.
+FTP Server OS	Select either Unix or Windows as the operating system of the host on which the FTP server is installed. The list operation requires this information to parse the response because Unix and Microsoft Windows use different line-ending characters.
+Note: This is an optional field used only with the List Files operation on the Invoke Operations page. See Invoke Operations Page.
+
+FTP Server Time Zone	Select the time zone of the FTP server.
+Note: This is an optional field. If you plan to specify a processing delay, use the Minimum Age field of the List Files operation on the Invoke Operations page.
+
+Configure an FTP over SSL Connection
+Enter FTP over SSL connection information so your application can process requests.
+
+Go to the Connection Properties section.
+Enter the following details:
+Element	Description
+FTP Server Host Address	Enter the host address of the FTP/FTPS/sFTP server.
+FTP Server Port	Enter the FTP server port number.
+SFTP Connection	Select No from the list.
+Passive IP as Host Address	If using a different IP in a passive configuration, select Yes from the list.
+FTP SSL Type	
+Explicit
+Implicit
+SSL Certificate	Note: This field is now optional. The PKCS12 certificate format is no longer required. You can instead upload a public certificate on the Certificates page. See Upload an SSL Certificate in Using Integrations in Oracle Integration.
+If you are using an FTP over SSL certificate, click Upload icon to upload a certificate in PKCS12 format (.p12 extension).
+
+FTP Server OS	Select either Unix or Windows as the operating system of the host on which the FTP server is installed. The list operation requires this information to parse the response because Unix and Microsoft Windows use different line-ending characters.
+Note: This is an optional field used only with the List Files operation on the Invoke Operations page. See Invoke Operations Page.
+
+Channel Mask	If you are using FTP over SSL, select a channel encryption option:
+Control: Encrypts the control channel. Data is transferred in plain text.
+Data: Encrypts the data transferred. Commands in the control channel are in plain text.
+Both: Encrypts both the control and data channels.
+None: No encryption is performed.
+FTP Server Time Zone	Select the time zone of the FTP server.
+Configure an sFTP Connection
+Enter sFTP connection information so your application can process requests.
+
+Note:File Server only supports this type of connection.
+Go to the Connection Properties section.
+Enter the following details:
+Element	Description
+FTP Server Host Address	Enter the host address of the FTP/FTPS/sFTP server.
+FTP Server Port	Enter the FTP server port number.
+SFTP Connection	Select Yes from the list.
+Host Key	This is an optional field for adding extra security for host key authentication. Host key authentication is used by a server to verify its identity to a client (the FTP Adapter, in this case). This authentication guards against “man-in-the-middle” style attacks.
+Click the Host Key checkbox.
+Note: If you are using Oracle Managed File Transfer Cloud Service, see Post-Provisioning Tasks in Using Oracle Managed File Transfer Cloud Service for information about gathering this information on MFT embedded servers.
+
+Click Upload to upload the host key.
+The default location of the RSA key is /etc/ssh on the server.
+
+If you are using Oracle Managed File Transfer Cloud Service, download the host key from the Oracle Managed File Transfer Cloud Service console.
+
+If you are using vsftpd, you can find the host key under /etc/ssh.
+
+See Generate SSH Keys in PEM Format to Connect to a Public or On-Premises sFTP Server.
+
+SFTP Key Exchange Algorithm	This selection is required if you are using an sFTP connection. If your sFTP server is restricted to a specific algorithm, select an algorithm to use from the list.
+Note: If you use the FTP Adapter with the connectivity agent, you must select a value for this field. Do not select the algorithm diffie-hellman-group1-sha1. This algorithm is not supported with the connectivity agent.
+
+Configure Connection Security
+Security policies capture information about how the FTP Adapter must authenticate against the target FTP server.
+
+The following security policies are supported:
+
+FTP Server Access Policy: This policy uses the user name and password for authentication and enables users to configure the PGP values.
+
+FTP Public Key Authentication: This policy connects to the sFTP server using a key. This is used only for sFTP connections. The user enters a user name and uploads the private key file. A passphrase for the private key is optional. The user can also configure the PGP values in this connection.
+
+FTP Multi Level Authentication: This policy uses multiple independent credentials to log in to the server. This process creates an extra layer of defense against unauthorized users. With this policy, you provide a user name, user password, private key, and private key passphrase to connect to the sFTP server. You also configure the first authentication sequence between the password and the public key.
+Note:File Server does not support use of this security policy.
+In addition, each security policy provides options for specifying PGP encryption and decryption and signing verification details.
+Encryption
+Provide encryption details if the FTP Adapter connection is used to encrypt the contents while writing the file to a target FTP server.
+Do not provide encryption details if the file being written to the target FTP server is already encrypted using the stage file action.
+Decryption
+Provide decryption details if the FTP Adapter connection decrypts the contents while downloading the file from the source FTP server.
+Do not provide decryption details if the stage file action is used to decrypt the downloaded file.
+Signing and verification details:
+Signing
+Provide signing details if the FTP Adapter connection is used to write a file to the target FTP server that must be optionally signed.
+Signature verification
+Provide signature verification details if the FTP Adapter connection reads and downloads a file that is digitally signed from the source FTP server.
+Configure FTP Connection Security
+Configure FTP connection security.
+
+Go to the Security section.
+Complete the following fields to configure an FTP connection.
+Element	Description
+Security Policy	Select FTP Server Access Policy.
+User Name
+
+Enter the username to connect to the FTP server.
+
+Password
+
+The FTP Adapter supports a nonmanaged connection factory.
+
+Enter the password to connect to the FTP server, then enter the password a second time for confirmation.
+
+SSL Certificate Password
+
+If you uploaded an FTP over SSL certificate, enter the password for the .p12 format certificate. Enter the password a second time for confirmation.
+
+If required for your integration, specify PGP encryption and decryption and signing verification details. See Configure a PGP Encryption Decryption Connection.
+Configure FTP over SSL Connection Security
+Configure FTP over SSL connection security.
+
+Go to the Security section.
+Complete the following fields to configure an FTP over SSL connection.
+Element	Description
+Security Policy	Select FTP Server Access Policy.
+User Name
+
+Enter the username to connect to the FTP server.
+
+Password
+
+The FTP Adapter supports a nonmanaged connection factory.
+
+Enter the password to connect to the FTP server, then enter the password a second time for confirmation.
+
+SSL Certificate Password
+
+If you uploaded an FTP over SSL certificate, enter the password for the .p12 format certificate. Enter the password a second time for confirmation.
+
+If required for your integration, specify PGP encryption and decryption and signing verification details. See Configure a PGP Encryption Decryption Connection.
+Configure sFTP Connection Security
+Configure sFTP connection security.
+
+Go to the Security section.
+Select a security policy. The fields that are displayed for configuring are based on your selection.
+FTP Server Access Policy
+
+FTP Public Key Authentication
+
+FTP Multi Level Authentication
+If you select FTP Server Access Policy:
+Complete the following fields.
+Element	Description
+User Name
+
+Enter the username to connect to the FTP server.
+
+Password
+
+Enter the password to connect to the FTP server, then enter the password a second time for confirmation.
+
+The FTP Adapter supports a nonmanaged connection factory.
+
+If required for your integration, specify PGP encryption and decryption and signing verification details. See Configure a PGP Encryption Decryption Connection.
+If you select FTP Public Key Authentication:
+Complete the following fields.
+Element	Description
+User Name
+
+Enter the username to connect to the FTP server.
+
+Private Key File
+
+If you have a private key, click the checkbox and then click Upload to upload the key. You do not need to enter a password to access the server. However, some private keys are encrypted and require a passphrase. If that is the case, enter it in the following field.
+
+PassPhrase
+
+If your private key file is passphrase protected, enter the passphrase here.
+
+If required for your integration, specify PGP encryption and decryption and signing verification details. See Configure a PGP Encryption Decryption Connection.
+If you select FTP Multi Level Authentication:
+Complete the following fields.
+Element	Description
+First Authentication
+
+This provides the sequence of authentication. If the first authentication is a password, then first password authentication is used. After a successful authentication, public key authentication is performed.
+
+User Name
+
+Enter the username to connect to the FTP server.
+
+Password
+
+The FTP Adapter supports a nonmanaged connection factory.
+
+Enter the password to connect to the FTP server, then enter the password a second time for confirmation.
+
+Private Key File
+
+If you have a private key, click the checkbox and then click Upload to upload the key. You need to enter a password to access the server. However, some private keys are encrypted and require a passphrase. If that is the case, enter it in the following field.
+
+PassPhrase
+
+If your private key file is passphrase protected, enter the passphrase, then enter it a second time for confirmation.
+
+If required for your integration, specify PGP encryption and decryption and signing verification details. See Configure a PGP Encryption Decryption Connection.
+Configure a PGP Encryption Decryption Connection
+Each security policy (FTP Server Access Policy, FTP Public Key Authentication, and FTP Multi Level Authentication) provides options for specifying PGP encryption and decryption and signing verification details.
+
+Connection Type	Supported Security Policy	See
+FTP Server	FTP Server Access Policy	Specify PGP Encryption Decryption and Signing Verification for FTP Server Access Policy
+FTP over SSL	FTP Server Access Policy	Specify PGP Encryption Decryption and Signing Verification for FTP Server Access Policy
+sFTP	
+FTP Server Access Policy
+FTP Public Key Authentication
+FTP Multi Level Authentication
+Specify PGP Encryption Decryption and Signing Verification for FTP Server Access Policy
+Specify PGP Encryption Decryption and Signing Verification for FTP Public Key Authentication
+Specify PGP Encryption Decryption and Signing Verification for FTP Multi Level Authentication
+Specify PGP Encryption Decryption and Signing Verification for FTP Server Access Policy
+
+Specify PGP encryption and decryption and signing verification details.
+Element	Description
+PGP Public Key
+
+If using a PGP public key, click the checkbox, then click Upload to upload the key for encrypting the payload. Pretty Good Privacy (PGP) is a data encryption and decryption program that provides cryptographic privacy and authentication for encrypting and decrypting message files. Message file encryption uses a serial combination of hashing, data compression, symmetric-key cryptography, and public-key cryptography. Each step uses one of several supported algorithms. Each public key is bound to a user name, an e-mail address, or both.
+
+ASCII-Armor Encryption Format
+
+Select to format the encrypted message in ASCII armor. ASCII armor is a binary-to-textual encoding converter. ASCII armor formats encrypted messaging in ASCII. This enables messages to be sent in a standard messaging format. This selection impacts the visibility of message content. If not selected, the message is sent in binary format.
+
+Cipher Algorithm
+
+Select the symmetric cryptographic algorithm to use. Symmetric-key algorithms for cryptography use the same cryptographic keys for both encryption of plain text and decryption of cipher text.
+CAST5
+
+3DES
+
+AES128
+
+AES192
+
+AES256
+
+PGP Private Key
+
+If using a PGP private key, click the checkbox, then click Upload to upload the key for decrypting the payload.
+
+PGP Private Key Password
+
+Enter the password to encrypt the payload. Enter the password a second time for confirmation.
+
+PGP Sign Public Key
+
+Click the checkbox, then click Upload to upload the public key to verify a digitally-signed certificate.
+
+PGP Sign Private Key
+
+Click the checkbox, then click Upload to create a digitally-signed certificate.
+
+PGP Sign Private Key Password
+
+Enter the sign private key password, then enter the password a second time for confirmation.
+
+Specify PGP Encryption Decryption and Signing Verification for FTP Public Key Authentication
+
+Specify PGP encryption and decryption and signing verification details.
+Element	Description
+PGP Public Key
+
+If using a PGP public key, click the checkbox, then click Upload to upload the key for encrypting the payload. Pretty Good Privacy (PGP) is a data encryption and decryption program that provides cryptographic privacy and authentication for encrypting and decrypting message files. Message file encryption uses a serial combination of hashing, data compression, symmetric-key cryptography, and public-key cryptography. Each step uses one of several supported algorithms. Each public key is bound to a user name, an e-mail address, or both.
+
+ASCII-Armor Encryption Format
+
+Select to format the encrypted message in ASCII armor. This option is used if you want the encrypted file in readable format. Readable format does not mean that anyone can view the decrypted data.
+
+If you select Yes, the file has a BEGIN PGP MESSAGE header.
+If you select No, the file is not readable and has junk characters.
+ASCII armor is a binary-to-textual encoding converter. ASCII armor formats encrypted messaging in ASCII. This enables messages to be sent in a standard messaging format. This selection impacts the visibility of message content. If not selected, the message is sent in binary format.
+
+Cipher Algorithm
+
+Select the symmetric cryptographic algorithm to use for encryption. Symmetric-key algorithms for cryptography use the same cryptographic keys for both encryption of plain text and decryption of cipher text.
+CAST5
+
+3DES
+
+AES128
+
+AES192
+
+AES256
+
+PGP Private Key
+
+If using a PGP private key, click the checkbox, then click Upload to upload the key for decrypting the payload.
+
+PGP Private Key Password
+
+Enter the password to encrypt the payload. Enter the password a second time for confirmation. If the PGP private key is passphrase-protected, enter the passphrase. Otherwise leave it blank. This field is optional.
+
+PGP Sign Public Key
+
+Click the checkbox, then click Upload to upload the public key to verify a digitally-signed certificate.
+
+PGP Sign Private Key
+
+Click the checkbox, then click Upload to create a digitally-signed certificate.
+
+PGP Sign Private Key Password
+
+Enter the sign private key password, then enter the password a second time for confirmation.
+
+If the PGP sign private key is passphrase-protected, enter the passphrase. Otherwise leave it blank.
+
+Specify PGP Encryption Decryption and Signing Verification for FTP Multi Level Authentication
+
+Specify PGP encryption and decryption and signing verification details.
+Element	Description
+PGP Public Key
+
+If using a PGP public key, click the checkbox, then click Upload to upload the key for encrypting the payload. Pretty Good Privacy (PGP) is a data encryption and decryption program that provides cryptographic privacy and authentication for encrypting and decrypting message files. Message file encryption uses a serial combination of hashing, data compression, symmetric-key cryptography, and public-key cryptography. Each step uses one of several supported algorithms. Each public key is bound to a user name, an e-mail address, or both.
+
+ASCII - Armor Encryption Format
+
+Select to format the encrypted message in ASCII armor. This option is used if you want the encrypted file in readable format. Readable format does not mean that anyone can view the decrypted data.
+
+If you select Yes, the file has a BEGIN PGP MESSAGE header.
+If you select No, the file is not readable and has junk characters.
+ASCII armor is a binary-to-textual encoding converter. ASCII armor formats encrypted messaging in ASCII. This enables messages to be sent in a standard messaging format. This selection impacts the visibility of message content. If not selected, the message is sent in binary format.
+
+Cipher Algorithm
+
+Select the symmetric cryptographic algorithm to use for encryption. Symmetric-key algorithms for cryptography use the same cryptographic keys for both encryption of plain text and decryption of cipher text.
+CAST5
+
+3DES
+
+AES128
+
+AES192
+
+AES256
+
+PGP Private Key
+
+If using a PGP private key, click the checkbox, then click Upload to upload the key for decrypting the payload.
+
+PGP Private Key Password
+
+Enter the password to encrypt the payload, then enter it a second time for confirmation.
+
+Enter the password to encrypt the payload. Enter the password a second time for confirmation. If the PGP private key is passphrase-protected, enter the passphrase. Otherwise leave it blank. This field is optional.
+
+PGP Sign Public Key
+
+Click the checkbox, then click Upload to upload the public key to verify a digitally-signed certificate.
+
+PGP Sign Private Key
+
+Click the checkbox, then click Upload to create a digitally-signed certificate.
+
+PGP Sign Private Key Password
+
+Enter the sign private key password, then enter the password a second time for confirmation.
+
+If the PGP sign private key is passphrase-protected, enter the passphrase. Otherwise leave it blank.
+
+Configure an Agent Group
+Configure an agent group for accessing the service hosted on your premises behind the fire wall.
+
+Specify an agent group only when the FTP server is not publicly accessible from Oracle Integration. Install the connectivity agent on the same network as the FTP server. This enables the connectivity agent to access the FTP server. Troubleshoot any connectivity agent issues that occur. See Troubleshoot Connectivity Agent Issues with the FTP Adapter.
+
+Click Configure Agents.
+The Select an Agent Group page appears.
+Click the name of the agent group.
+Click Use.
+To configure an agent group, you must download and install the on-premises connectivity agent. See Download and Run the Connectivity Agent Installer and About Connectivity Agents and Integrations Between On-Premises Applications and Oracle Integration in Using Integrations in Oracle Integration.
+Test the Connection
+Test your connection to ensure that it is successfully configured. If necessary, you can self-diagnose connectivity issues that occur with the sFTP server.
+
+In the upper right corner of the page, click Test.
+Select the type of connection testing to perform:
+Diagnose & Test: If you receive issues after selecting Test, select this option to diagnose sFTP server networking issues. The diagnostics can take more than 15 minutes to perform. Once selected, you cannot cancel this option. After completing network diagnostics, a response is displayed for debugging the issue. Resolve the issues, or, if necessary, contact your network support for additional assistance.
+
+Test: Performs a normal connection test.
+
+If successful, the following message is displayed and the progress indicator shows 100%.
+Connection connection_name was tested successfully.
+
+If your connection was unsuccessful, an error message is displayed with details. Verify that the configuration details you entered are correct. Select Diagnose & Test to perform further diagnosis.
+When complete, click Save, then click Back button.
+Was this page helpful?  
+About Oracle
+Contact Us
+Products A-Z
+Terms of Use & Privacy
+Cookie Preferences
+Ad Choices
+© Oracle
