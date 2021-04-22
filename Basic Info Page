@@ -1,0 +1,40 @@
+
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+Basic Info Page
+You can enter a name and description on the Basic Info page of each adapter in your integration.
+
+Element	Description
+What do you want to call your endpoint?
+
+Provide a meaningful name so that others can understand the responsibilities of this connection. You can include English alphabetic characters, numbers, underscores, and hyphens in the name. You can't include the following characters:
+
+No blank spaces (for example, My Inbound Connection)
+
+No special characters (for example,  #;83& or righ(t)now4) except underscores and hyphens
+
+No multibyte characters
+
+What does this endpoint do?
+
+Enter an optional description of the connection’s responsibilities. For example:
+
+This connection receives an inbound request to synchronize account information with the cloud application.
+
+B2B Trading Partner Mode	Select this checkbox only if you plan to use this FTP endpoint for each of the following:
+Note: This feature is only available with Oracle Integration Generation 2.
+
+Transfer files to or from a B2B trading partner
+Translate file content to or from Electronic Data Interchange (EDI) format with a B2B action in an integration
+See Trading Partners and Agreements and Manage Trading Partners in Using B2B for Oracle Integration.
+
+Was this page helpful?  
+About Oracle
+Contact Us
+Products A-Z
+Terms of Use & Privacy
+Cookie Preferences
+Ad Choices
+© Oracle
