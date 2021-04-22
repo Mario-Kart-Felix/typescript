@@ -1,0 +1,20 @@
+
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+Add a For-Each Action to Iterate Over Individual Files
+The for-each action enables you to loop over individual files within the zip file and stage each file in Oracle Integration for transformation.
+
+On the right side of the canvas, click Actions Actions icon and drag and drop the For Each action (present under Collection) after the Download_Zip action.
+The Create Action dialog is displayed.
+
+Enter a name for the action, Iterate_Files_In_Zip.
+Provide an optional description.
+In the Repeating Element field, specify the element over which to iterate.
+For this example, the element over which to loop is ICSFile, which represents the individual files within the zip file downloaded in the previous action. Expand the Source tree to select this element. It's present under $Download_Zip > DownloadFileToICSResponse > DownloadResponse > ICSFiles > Load more. After you've selected the element, click Move Move icon to populate the field with this element.
+
+Description of each-files.png follows
+Description of the illustration each-files.png
+
+In the Current Element Name field, enter an alias for the current file of the iteration; for example, OneTextFile. You'll use this alias for processing individual files downstream.
