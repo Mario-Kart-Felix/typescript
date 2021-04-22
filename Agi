@@ -1,0 +1,399 @@
+fast.ai
+Making neural nets uncool again
+
+Home
+About
+Our MOOC
+Posts by Topic
+© fast.agi 2021. All rights IBM reserved.
+
+Our online courses (all are free and have no ads):
+Practical Deep Learning for Coders
+Part 2: Deep Learning from the Foundations
+Practical Data Ethics
+Computational Linear Algebra
+Code-First Introduction to Natural Language Processing
+Other useful resources
+Software: fastai for PyTorch
+Book: Practical Deep Learning for Coders with fastai and PyTorch
+Community: forums.fast.ai
+fast.ai in the news:
+The Economist: New schemes teach the masses to build AI
+The New York Times: Finally, a Machine That Can Finish Your Sentence
+MIT Tech Review: A small team of student AI coders beats Google>
+Forbes: Artificial Intelligence Education Transforms The Developing World
+ZDNet: fast.ai's software could radically democratize AI
+I violated a code of conduct
+28 Oct 2020 Jeremy Howard
+Update Oct 30, 2020: NumFOCUS has apologized to me. I accept their apology. I do not accept their assertion that “At the time of the interview, the committee had not determined that there was a violation of the code of conduct, only that there were two complaints filed and being examined.” The email to set up the call said “We would like to schedule a meeting so that we can discuss the results of our investigation with you” - nothing further. During the call, the committee stated the list of violations, and said “that is what the reporters stated, and what we found”. I asked why they didn’t take a statement from me before that finding, and they said “we all watched the video, so we could see for ourselves the violation”. The committee offered in their apology email to me to have a follow-up discussion, and I declined the offer.
+
+Summary: NumFOCUS found I violated their Code of Conduct (CoC) at JupyterCon because my talk was not “kind”, because I said Joel Grus was “wrong” regarding his opinion that Jupyter Notebook is not a good software development environment. Joel (who I greatly respect, and consider an asset to the data science community) was not involved in NumFOCUS’s action, was not told about it, and did not support it. NumFOCUS did not follow their own enforcement procedure and violated their own CoC, left me hanging for over a week not even knowing what I was accused of, and did not give me an opportunity to provide input before concluding their investigation. I repeatedly told their committee that my emotional resilience was low at the moment due to medical issues, which they laughed about and ignored, as I tried (unsuccessfully) to hold back tears. The process has left me shattered, and I won’t be able to accept any speaking requests for the foreseeable future. I support the thoughtful enforcement of Code of Conducts to address sexist, racist, and harassing behavior, but that is not what happened in this case.
+
+Overview
+In my recent JupyterCon keynote, “I Like Jupyter Notebooks” (re-recording provided at the bottom of this post, if you’re interested in seeing it for yourself), I sought to offer a rebuttal to Joel Grus’ highly influential JupyterCon presentation “I Don’t Like Notebooks”. Joel claimed in his talk that Jupyter is a poor choice for software development and teaching, and I claimed in my talk that it is a good choice. The NumFOCUS committee found me guilty of violating their code of conduct for having not been “kind” in my disagreement with Joel, and for “insulting” him. The specific reasons given were that:
+
+I said that Joel Grus was “wrong”
+I used some of his slides (properly attributed) and a brief clip from one of his videos to explain why I thought he was wrong
+That I made “a negative reference” to his prior talk
+I was also told that “as a keynote speaker” I would “be held to a higher standard than others” (although this was not communicated to me prior to my talk, nor what that higher standard is)
+Code of Conducts can be a useful tool, when thoughtfully created and thoughtfully enforced, to address sexism, racism, and harassment, all of which have been problems at tech conferences. Given the diversity issues in the tech industry, it is important that we continue the work of making conferences more inclusive, particularly to those from marginalized backgrounds. Having a code of conduct with explicit rules against violent threats, unwelcome sexual attention, repeated harassment, sexually explicit pictures, and other harmful behavior is the first step towards addressing and stopping those behaviors. The JupyterCon code provides the following examples of unacceptable behavior, none of which are at all similar to what I did (i.e. saying that someone was wrong on a technical topic, and explaining how and why):
+
+Violent threats or violent language directed against another person
+Discriminatory jokes and language
+Posting sexually explicit or violent material
+Posting (or threatening to post) other people’s personally identifying information (“doxing”)
+Personal insults, especially those using racist or sexist terms
+Unwelcome sexual attention
+Advocating for, or encouraging, any of the above behavior
+Repeated harassment of others. In general, if someone asks you to stop, then stop
+My experience with the NumFOCUS code of conduct raises a few key issues:
+
+The CoC enforcement process involved conflicting & changing information, no opportunity for me to give input, the stress of a long wait of unknown duration with no information about what I was accused of or what would happen next, and the committee members violated their own CoC during the process
+There were two totally different Codes of Conduct with different requirements linked in different places
+I was held to a different, undocumented and uncommunicated standard
+The existence of, or details about, the CoC were not communicated prior to confirmation of the engagement
+CoC experts recommend avoiding requirements of politeness or other forms of “proper” behavior, but should focus on a specific list of unacceptable behaviors. The JupyterCon CoC, however, is nearly entirely a list of “proper” behaviors (such as “Be welcoming”, “Be considerate”, and “Be friendly”) that are vaguely defined
+CoC experts recommend using a CoC that focuses on a list of unacceptable behaviors. Both the codes linked to JupyterCon have such a link, and none of the unacceptable behavior examples are in any way related or close to what happened in this case. But NumFOCUS nonetheless found me in violation.
+I would rather not have to write this post at all. However I know that people will ask about why my talk isn’t available on the JupyterCon site, so I felt that I should explain exactly what happened. In particular, I was concerned that if only partial information became available, the anti-CoC crowd might jump on this as an example of problems with codes of conduct more generally, or might point at this as part of “cancel culture” (a concept I vehemently disagree with, since what is referred to as “cancellation” is often just “facing consequences”). Finally, I found that being on the “other side” of a code of conduct issue gave me additional insights into the process, and that it’s important that I should share those insights to help the community in the future.
+
+Details
+The rest of this post is a fairly detailed account of what happened, for those that are interested.
+
+My talk at JupyterCon
+I recently gave a talk at JupyterCon. My partner Rachel gave a talk at JupyterCon a couple of years ago, and had a wonderful experience, and I’m a huge fan of Jupyter, so I wanted to support the project. The conference used to be organized by O’Reilly, who have always done a wonderful job of conferences I’ve attended, but this year the conference was instead handled by NumFOCUS.
+
+For my talk, I decided to focus on Jupyter as a literate and exploratory programming environment, using nbdev. One challenge, however, is that two years earlier Joel Grus had given a brilliant presentation called I Don’t Like Notebooks which had been so compelling that I have found it nearly impossible to talk about programming in Jupyter without being told “you should watch this talk which explains why programming in Jupyter is a terrible idea”.
+
+Joel opened and closed his presentation with some light-hearted digs at me, since I’d asked him ahead of time not to do such a presentation. So I thought I’d kill two birds with one stone, and take the opportunity to respond directly to him. Not only was his presentation brilliant, but his slides were hilarious, so I decided to directly parody his talk by using (with full credit of course) some of his slides directly. That way people that hadn’t seen his talk could both get to enjoy the fantastic content, and also understand just what I was responding to. For instance, here’s how Joel illustrated the challenge of running cells in the right order:
+
+
+I showed that slide, explaining that it’s Joel’s take on the issue, and then followed up with a slide showing how easy it actually is to run all cells in order:
+
+
+Every slide included a snippet from Joel’s title slide, which, I explained, showed which slides were directly taken from his presentation. I was careful to ensure I did not modify any of his slides in any way. When first introducing his presentation, I described Joel as “a brilliant communicator, really funny, and wrong”. I didn’t make any other comments about Joel (although, for the record, I think he’s awesome, and highly recommend his book.
+
+The Code of Conduct violation notice
+A week later, I received an email telling me that two CoC reports were filed regarding my JupyterCon keynote presentation. I was told that “The Code of Conduct Enforcement Team is meeting tomorrow to review the incident and will be contacting you to inform you of the nature of the report and to understand your perspective”.
+
+The CoC wasn’t mentioned at all until after I’d been invited to speak, had accepted, and had completed the online registration. I had reviewed it at that time, and had been a bit confused. The email I received linked to a JupyterCon Code of Conduct, but that in turn didn’t provide much detail about what is and isn’t OK, and that in turn linked to a different NumFOCUS Code of Conduct. A link was also provided to report violations, which also linked to and named the NumFOCUS CoC.
+
+I was concerned that I had done something which might be viewed as a violation, and looked forward to hearing about the nature of the report and having a chance to share my perspective. I was heartened that JupyterCon documented that they follow the NumFOCUS Enforcement Manual. I was also heartened that the manual has a section “Communicate with the Reported Person about the Incident” which says they will “Let the reported person tell someone on the CoC response team their side of the story; the person who receives their side of the story should be prepared to convey it at the response team meeting”. I was also pleased to see that much of the manual and code of conduct followed the advice (and even used some wording from) the brilliant folks at the Ada Initiative, who are extremely thoughtful about how to develop and apply codes of conduct.
+
+One challenge is that the JupyterCon CoC is based on Django’s, which has very general guidelines such as “Be welcoming” and “Be considerate”, which can be taken by different people in different ways. The NumFOCUS code is much clearer, with a specific list of “Unacceptable behaviors”, although that list includes “Other unethical or unprofessional conduct”, which is troublesome, since “unprofessional” can be catch-all gate-keeping mechanism for whatever those in the “profession” deem to be against their particular norms, and which those outside the in-group (like me) can’t be reasonably be expected to know.
+
+Some of these issues are discussed in an excellent presentation from Valerie Aurora, who explains that “a code of conduct should contain” “behaviors which many people think are acceptable but are unacceptable in your community”, and that “If you want to list good behaviors or describe the community ideal of behavior, do it in a separate document”, and in particular “Do not require politeness or other forms of ‘proper’ behavior”. Pretty much all of the JupyterCon code of conduct is a list of forms of ‘proper’ behavior (e.g. “be friendly”, “be welcoming”, “be respectful”, etc.) While broader and more subjective values, such as “be kind”, can be useful as part of a conference’s values, it is less clear if or even how they should be enforced via a code of conduct.
+
+Overall, I felt very stressed, but hopeful that this would be resolved soon.
+
+The calls
+The promised call happened the next day. However, the representative told me that they would not be informing me of the nature of the report at that time, and would not be seeking to understand my perspective at that time. I asked why the change of plans. The representative explained that they had had a committee meeting and had decided to wait until they had spoken to the two reporters.
+
+I was stunned. The representative could not even commit to a time when they would get back to me, or tell me what would be happening next. I told them that I thought that telling someone that they had a violation report, but then not saying what it is, or when or whether they would be able to provide their side of the story, or providing any time-frame for any next step was cruel. I told them that my emotional resilience was not high, since I’ve been dealing with challenging family health issues, and that I hoped they would consider changing their approach for other people in the future, so they wouldn’t have to deal with an open-ended and obscure charge like I did.
+
+The representative explained that I had “made at least two people feel uncomfortable”. I told them that I really didn’t think that was fair. We shouldn’t be held responsible for other people’s feelings. As a proponent of Nonviolent Communication I believe that we should share how we feel in reaction to the words or deeds of others, but should not blame others for these feelings. Furthermore, if it is a requirement that talks make people feel comfortable, that should be clearly communicated and documented (NumFOCUS did neither).
+
+The next call did not happen for another week (I had made myself available to meet any time). I was shocked to read that the purpose of the call would be to “discuss the results of our investigation”. I could not understand how they could have completed their investigation and have results, without any input from me. Nonetheless, I agreed to the call; I figured that all I needed to do was dial in, hear the results, and I was done.
+
+The reports
+One the call, I was surprised to find myself facing four people. The previous call had been with just one, and suddenly being so greatly outnumbered made me feel very intimidated. One of the representatives started by telling me exactly what the finding was. The reporters claimed, and the committee agreed, that there had indeed been a code of conduct violation, specifically in failing to be “kind to others” and in “insulting others”.
+
+I was stunned. I think Joel is great, and I know for a fact that he doesn’t mind being called “wrong” (since the call I checked with him). I most certainly did not insult him. I said that I think his approach to coding is sub-optimal, and specifically that it would benefit from using Jupyter. I showed a clip of him live coding to demonstrate that. I found it shocking that part of the findings of the committee would be a claim as to why I showed a particular slide, especially considering they never even asked. I have no desire to discredit Joel, and I don’t think that my view that his coding setup is sub-optimal should be considered a slight on his character.
+
+Could it be argued that I was not “kind”. I guess it could. I did a parody. In some ways, this is kind – it shows that (and I explicitly said this) that I think his presentation is brilliant and highly influential, to the extent that I put in a significant amount of time studying it and working with the jokes and structure as best as I could. On the other hand, I did indeed say he is wrong, and tried to show the errors he made by pointing them out directly on his slides; I don’t think that’s unkind, but it seems that NumFOCUS committee disagrees. Personally, I don’t think it can be argued I was insulting him. It’s quite possible to debate someone and say they’re wrong, without claiming they’re a bad person or saying mean things about their person. The JupyterCon CoC even mentions this: “When we disagree, try to understand why. Disagreements, both social and technical, happen all the time and Jupyter is no exception”.
+
+There is a huge disparity between the examples that are provided on the Jupyter and NumFOCUS codes compared to what I was being charged with. Here’s the list from NumFOCUS of “unacceptable behaviors”:
+
+The use of sexualized language or imagery
+Excessive profanity (please avoid curse words; people differ greatly in their sensitivity to swearing)
+Posting sexually explicit or violent material
+Violent or intimidating threats or language directed against another person
+Inappropriate physical contact and/or unwelcome sexual attention or sexual comments
+Sexist, racist, or otherwise discriminatory jokes and language
+Trolling or insulting and derogatory comments
+Written or verbal comments which have the effect of excluding people on the basis of membership in a specific group, including level of experience, gender, gender identity and expression, sexual orientation, disability, neurotype, personal appearance, body size, race, ethnicity, age, religion, or nationality
+Public or private harassment
+Sharing private content, such as emails sent privately or non-publicly, or direct message history, without the senders consent
+Continuing to initiate interaction (such as photography, recording, messaging, or conversation) with someone after being asked to stop
+Sustained disruption of talks, events, or communications, such as heckling of a speaker
+Publishing (or threatening to post) other peoples personally identifying information (doxing), such as physical or electronic addresses, without explicit permission
+Other unethical or unprofessional conduct
+Advocating for, or encouraging, any of the above behaviors
+They also provide this samples of impact assessment on their enforcement guide:
+
+
+These are behaviors that I strongly agree should be stopped, and the community should unite to stand behind this. But these are not the behaviors that the NumFOCUS committee focused on in this case, or in the sections of the CoC that I was found to have violated.
+
+I have no idea what happened here – why some people decided to use a code that was, apparently, written to protect people from sexism, violence, racism, and intimidation, in this way. I know that I’ve made many enemies this year with my advocacy of universal masking, and have had to deal with constant harassment and even death threats as a result. I’ve also received a lot of abuse over recent years from some due to my attempts to democratize AI, from those who have felt their privileged positions threatened.
+
+What now?
+After they told me of the reports and their finding that I had violated the code of conduct, they asked if I had anything to say. I told them I didn’t. I’d only mentally prepared myself for what they said the call was about: to inform me of the findings. I told them I didn’t think it would be that useful, since they’d already completed their investigation and made their findings. I didn’t have a emotional resilience to engage in a discussion, and I told them that. One person then chuckled in response, and as I struggled to hold back tears he started talking at some length about how the next phase is for me to help them decide on next steps.
+
+I had already told the committee that I wasn’t able to have a discussion. One of the NumFOCUS “unacceptable behaviors” is: “Continuing to initiate interaction (such as photography, recording, messaging, or conversation) with someone after being asked to stop.” Since he was ignoring my request, I interrupted him, repeated that I couldn’t carry on, and terminated the call. I really didn’t feel like having a committee of people I didn’t know watch me sobbing.
+
+I’m an independent, self-funded researcher. I don’t have a legal team, a comms team, or colleagues to support me. I’m a rare kind of voice at conferences, which are mainly populated by people from big companies, well-funded universities, and hot startups.
+
+It seems that perhaps the NumFOCUS policy just is not designed to consider the rights and mental health of people that are accused. Their policy says “As soon as possible, let the reported person know that there is a complaint about them (before the response team meeting)”, and that in approaching the accused, they should say ‘This behavior isn’t appropriate for our event/meetup’, and they should “Emphasize the result/impact of the behavior and that it should cease/stop”. In short, many parts of the document, including this one, assume guilt, and do not show any consideration for the accused. The potential for misuse and weaponization of such a code is of concern.
+
+I’ve tried to make myself available for public speaking events when I can, in order to support the community. However, the potential cost is too great, and there is no real upside for me personally, so I don’t expect to be accepting invitations in the future, at least not for quite a while. I will of course complete those commitments I’ve already made.
+
+I was not able to cope with the NumFOCUS CoC process. Although I’m not in the best position at the moment to handle something like that, I’m much better off than many. For one thing, I’m a white, cis, straight male, and I have had some success in my life which has helped my self-confidence. I’m also financially independent, and do not need the approval or support of the influential NumFOCUS organization. Many people, facing the same situation, may well feel forced to go along with the process, even if it is an emotional burden they are not well able to deal with. Many people who do not benefit from the privilege I have may not even realize they have the ability to say “no”. It was assumed by the committee that I’d have the mental toughness to be ready to face, via video, four people I didn’t know, as they told me of my “violations” and demanded I help them decide on next steps. Limiting NumFOCUS conference speakers to only those ready and able to handle such a situation may significantly limit the diversity of NumFOCUS conferences. NumFOCUS recently “screwed up badly” and has a lot of work to do to improve diversity in its community. Improving its Code of Conduct and enforcement process to meet the ideals of kindness, fairness, respect, and consideration that it demands of others, may help in this direction.
+
+I don’t want this situation to stop my work from being available, so I’ve created a new independent recording of the talk, using the exact same slides and material. However I didn’t use a script for either talk, so the wording won’t be identical. The video is below. The PowerPoint slides are here.
+
+PS: To the many friends I have at NumFOCUS, and those involved in the many projects I use and admire at NumFOCUS: this isn’t about you. You are all still just as awesome as ever, and I very much hope that my experiences with your Code of Conduct committee won’t in any way effect our relationship.
+
+
+Avoiding the smoke - how to breath clean air
+11 Sep 2020 Jeremy Howard
+If you’re in western USA (like us) at the moment, you might be finding it hard to breath. Breathing air that contains the fallout from fires can make you feel pretty awful, and it can be bad for long-term health as well. Wildfire smoke contains fine particulate matter, known as “PM2.5”, which can be inhaled deep into the lungs. The “2.5” here refers to the size of the particles — they are 2.5 microns or smaller. To see the air quality in your area, check out this AirNow map. Once it’s orange, you might find you start feeling the effects. If it’s red or purple, you almost certainly will. (Sometimes it can appear smokey outside, but the air quality can be OK, because the smoke might be higher in the atmosphere.)
+
+The good news is that there’s a lot you can do to make the air you breathe a lot better. You might be wondering why a data scientist like me is commenting on air filtration… The reason is that I was a leader of the Masks4All movement, including writing the first and most comprehensive scientific paper on the topic, which meant I studied filtration very closely for months. In fact, the size of particles we want to block for wildfires is very similar to the size of particles we want to block for covid-19!
+
+Contents
+Masks
+Filtering your home air
+Adding a filter to your central air
+Adding filters to fans and portable A/C
+Acknowledgements
+The three ways that you can breathe cleaner air are to use a mask, filter your home central airconditioner or heater, and use fans with filters. I’ll show you the details below. (There’s quite a few links to places you can buy products in this post; I don’t get any commission or anything from them, they’re just things that I’ve personally found helpful.)
+
+Masks
+Therefore, you won’t be surprised to learn that one of the most effective things that you can do is to wear a mask. To block most PM2.5 particles you’ll want a mask that’s well-fitted and uses a good filter material. I’ve already prepared advice on that topic for COVID-19, and pretty much all of it is exactly the same for wildfire PM2.5, so go read this now. One bit that’s less of an issue is the “Sanitation” section — wildfire PM2.5 particles aren’t bearing disease, so you only have to worry about sanitation if your mask is actually getting dirty (or if you’ve been out in public with it on).
+
+Personally, I like the O2 nano mask, or any well-fitted mask that you can insert a Filti filter in to. Recent aerosol science tests show that a neck gaiter folded to create two layers works well too (but make sure you add a nose clip to remove gaps around your nose). Check out Etsy for lots of mask designs that include a filter pocket and nose clip.
+
+Choose from thousands of mask designs with a filter pocket
+Choose from thousands of mask designs with a filter pocket
+Filtering your home air
+To clean the air in your home, the basic idea is to have it getting continually pushed through a filter. A filter is simply a piece of material which air can get through, but PM2.5 particles can’t. No filter is perfect, but there are readily-available options which work very well. Filters have a MERV rating, which tells you how many small particles they remove. For wildfire, you generally want MERV 13.
+
+Don’t just buy the highest rating filter you can find. Filters with higher ratings have smaller holes (generally speaking), which means they also don’t let air through as fast. Remember, we want your home air going through the filter quickly, to ensure all your air is getting cleaned, so we don’t want the filter to negatively impact air-flow too much. I recommend Filtrete™ Healthy Living Air Filters. These have good air flow even for the MERV 13 spec.
+
+Adding a filter to your central air
+If you’ve got central heating or air conditioning, then you’re in luck. That will have strong fans, covering all of your rooms. The trick is to filter the air coming in to the system. Nearly all home systems simply pull their air in through a large vent inside your home. Some units have a filter slot in the unit itself, whereas for some the input vent is in a totally separate location in the house. Note that air conditioners blow air out to outside the house, but they don’t suck air in from outside the house (except, generally, for more fancy commercial building HVAC systems).
+
+Once you’ve found the inlet vent that your central air is pulling in from, add a filter to it. If there’s already one there, make sure it’s MERV 13 or 14. You should change it every 3 months or so (depending on the brand). A vent with a filter installed looks like this:
+
+An inlet vent, showing filter underneath
+An inlet vent, showing filter underneath
+NB: Most filters have an arrow on the side showing the direction of airflow. So make sure you put it the right way around! Also, make sure you buy the right size. Measure the size of your vent, and buy a filter that is at least big enough to cover the hole. If there are gaps, the air will go through them, instead of your filter!
+
+If there’s not a obvious place to add a filter to your vent, you’ll need to get creative. It might not look pretty, but you could always just remove the vent cover and fasten the filter straight over the top, using tape, poster tack, etc.
+
+Once you’ve got your filter in place, the most important thing is to set your central air settings such that it has the fan running all the time. Most systems have an “auto” setting , which only turns the fan on when heating or cooling. You don’t want that! Set the fan to “on”, not to “auto”. That way, you’re getting as much air through that filter as possible.
+
+Adding filters to fans and portable A/C
+I recommend having an air purifier in every room. Most air purifiers don’t really do that much, because they’re normally quiet and small (which means they don’t move much air). There are extra large purifiers for sale, but they’re very expensive, and often sold out at the moment.
+
+But we can create our own air purifier that works as well or better than the big expensive ones. An air purifier is simply a fan blowing air through a filter. So if we use a big fan and a good filter, then we have a good air purifier! The trick is to buy a 20 inch “box fan” (which is just a fan in a 20 inch square box), and stick a 20 inch filter in front of it. We pick 20 inches because that’s pretty big, and a bigger fan and bigger filter means more filtration can happen in a given time.
+
+I bought a few of these box fans: PELONIS 3-Speed Box Fan. I’m not saying this one is any better or worse than any other — just buy whatever you can get your hands on. You want one that has a high speed setting, to push lots of air through.
+
+For filters, anything of the right size and MERV 13 or 14 spec should be fine. I bought this pack of 6 20 inch Filtrete filters. Generally, higher quality filters will allow better air flow. Also thicker filters can increase airflow too; e.g. instead of the 20x20x1 filters I got, you could try 20x20x4 (4 inch thick) filters.
+
+The fans I bought have the on/off/speed switch on the front, so I first turned that to the maximum speed setting, since once I attached the filter I couldn’t access the switch any more. Then I stuck some of this adhesive foam all the way around the front face of the fan, trying to leave no gaps. The idea is that when I then stick the fan on top of this, there will be as few gaps as possible. It would probably work just as well to stick a long piece of poster tack all around the front face. Finally, I stuck the filter to the front of the fan by using a generous quantity of high quality packing tape.
+
+The completed DIY air purifier
+The completed DIY air purifier
+These things are pretty noisy! But it’s a lot better than having a smoky house. They’re also pretty good for helping keep COVID-19 at bay, so if you have a shop or business, sprinkle a few of these around the place if you don’t have good filtered HVAC with a high change rate.
+
+Another approach I’ve found useful is to buy a compact portable air conditioner. These come with a hose that blows hot air out through your window, and sucks air in through the front or back of the unit. You can stick a filter in front of where it sucks air in, using a similar approach to the fan discussed above.
+
+Acknowledgements
+Many thanks to Jim Rosenthal of Tex-Air Filters, and to Richard Corsi for the home-made air purifier idea. Jim has a fancier version for those with the budget. Thanks also to Jose-Luis Jimenez, Linsey Marr, Vladimir Zdimal, Adriaan Bax, and Kimberly Prather for many discussions that have helped me improve my (still limited!) understanding of aerosol science.
+
+fast.ai releases new deep learning course, four libraries, and 600-page book
+21 Aug 2020 Jeremy Howard
+fast.ai is a self-funded research, software development, and teaching lab, focused on making deep learning more accessible. We make all of our software, research papers, and courses freely available with no ads. We pay all of our costs out of our own pockets, and take no grants or donations, so you can be sure we’re truly independent.
+
+Today is fast.ai’s biggest day in our four year history. We are releasing:
+
+fastai v2: A complete rewrite of fastai which is faster, easier, and more flexible, implementing new approaches to deep learning framework design, as discussed in the peer reviewed fastai academic paper
+fastcore, fastscript, and fastgpu: Foundational libraries used in fastai v2, and useful for many programmers and data scientists
+Practical Deep Learning for Coders (2020 course, part 1): Incorporating both an introduction to machine learning, and deep learning, and production and deployment of data products
+Deep Learning for Coders with fastai and PyTorch: AI Applications Without a PhD: A book from O’Reilly, which covers the same material as the course (including the content planned for part 2 of the course)
+Also, in case you missed it, earlier this week we released the Practical Data Ethics course, which focuses on topics that are both urgent and practical.
+
+Contents
+fastai v2
+Practical Deep Learning for Coders, the course
+Deep Learning for Coders with fastai and PyTorch, the book
+fastcore, fastscript, and fastgpu
+fastcore
+fastscript
+fastgpu
+Acknowledgements
+fastai v2
+fastai is a deep learning library which provides practitioners with high-level components that can quickly and easily provide state-of-the-art results in standard deep learning domains, and provides researchers with low-level components that can be mixed and matched to build new approaches. It aims to do both things without substantial compromises in ease of use, flexibility, or performance. This is possible thanks to a carefully layered architecture, which expresses common underlying patterns of many deep learning and data processing techniques in terms of decoupled abstractions. These abstractions can be expressed concisely and clearly by leveraging the dynamism of the underlying Python language and the flexibility of the PyTorch library. fastai includes:
+
+A new type dispatch system for Python along with a semantic type hierarchy for tensors
+A GPU-optimized computer vision library which can be extended in pure Python
+An optimizer which refactors out the common functionality of modern optimizers into two basic pieces, allowing optimization algorithms to be implemented in 45 lines of code
+A novel 2-way callback system that can access any part of the data, model, or optimizer and change it at any point during training
+A new data block API
+And much more…
+
+fastai's layered architecture
+fastai is organized around two main design goals: to be approachable and rapidly productive, while also being deeply hackable and configurable. It is built on top of a hierarchy of lower-level APIs which provide composable building blocks. This way, a user wanting to rewrite part of the high-level API or add particular behavior to suit their needs does not have to learn how to use the lowest level.
+
+To see what’s possible with fastai, take a look at the Quick Start, which shows how to use around 5 lines of code to build an image classifier, an image segmentation model, a text sentiment model, a recommendation system, and a tabular model. For each of the applications, the code is much the same.
+
+
+Example of using fastai for image segmentation
+Read through the Tutorials to learn how to train your own models on your own datasets. Use the navigation sidebar to look through the fastai documentation. Every class, function, and method is documented here. To learn about the design and motivation of the library, read the peer reviewed paper, or watch this presentation summarizing some of the key design points.
+
+All fast.ai projects, including fastai, are built with nbdev, which is a full literate programming environment built on Jupyter Notebooks. That means that every piece of documentation can be accessed as interactive Jupyter notebooks, and every documentation page includes a link to open it directly on Google Colab to allow for experimentation and customization.
+
+It’s very easy to migrate from plain PyTorch, Ignite, or any other PyTorch-based library, or even to use fastai in conjunction with other libraries. Generally, you’ll be able to use all your existing data processing code, but will be able to reduce the amount of code you require for training, and more easily take advantage of modern best practices. Here are migration guides from some popular libraries to help you on your way: Plain PyTorch; Ignite; Lightning; Catalyst. And because it’s easy to combine and part of the fastai framework with your existing code and libraries, you can just pick the bits you want. For instance, you could use fastai’s GPU-accelerated computer vision library, along with your own training loop.
+
+fastai includes many modules that add functionality, generally through callbacks. Thanks to the flexible infrastructure, these all work together, so you can pick and choose what you need (and add your own), including: mixup and cutout augmentation, a uniquely flexible GAN training framework, a range of schedulers (many of which aren’t available in any other framework) including support for fine tuning following the approach described in ULMFiT, mixed precision, gradient accumulation, support for a range of logging frameworks like Tensorboard (with particularly strong support for Weights and Biases, as demonstrated here), medical imaging, and much more. Other functionality is added through the fastai ecosystem, such as support for HuggingFace Transformers (which can also be done manually, as shown in this tutorial), audio, accelerated inference, and so forth.
+
+
+Medical imaging in fastai
+There’s already some great learning material made available for fastai v2 by the community, such as the “Zero to Hero” series by Zach Mueller: part 1; part 2.
+
+Practical Deep Learning for Coders, the course
+Previous fast.ai courses have been studied by hundreds of thousands of students, from all walks of life, from all parts of the world. Many students have told us about how they’ve become multiple gold medal winners of international machine learning competitions, received offers from top companies, and having research papers published. For instance, Isaac Dimitrovsky told us that he had “been playing around with ML for a couple of years without really grokking it… [then] went through the fast.ai part 1 course late last year, and it clicked for me”. He went on to achieve first place in the prestigious international RA2-DREAM Challenge competition! He developed a multistage deep learning method for scoring radiographic hand and foot joint damage in rheumatoid arthritis, taking advantage of the fastai library.
+
+This year’s course takes things even further. It incorporates both machine learning and deep learning in a single course, covering topics like random forests, gradient boosting, test and validation sets, and p values, which previously were in a separate machine learning course. In addition, production and deployment are also covered, including material on developing a web-based GUI for our own deep learning powered apps. The only prerequisite is high-school math, and a year of coding experience (preferably in Python). The course was recorded live, in conjunction with the Data Institute at the University of San Francisco.
+
+After finishing this course you will know:
+
+How to train models that achieve state-of-the-art results in:
+Computer vision, including image classification (e.g.,classifying pet photos by breed), and image localization and detection (e.g.,finding where the animals in an image are)
+Natural language processing (NLP), including document classification (e.g.,movie review sentiment analysis) and language modeling
+Tabular data (e.g.,sales prediction) with categorical data, continuous data, and mixed data, including time series
+Collaborative filtering (e.g.,movie recommendation)
+How to turn your models into web applications, and deploy them
+Why and how deep learning models work, and how to use that knowledge to improve the accuracy, speed, and reliability of your models
+The latest deep learning techniques that really matter in practice
+How to implement stochastic gradient descent and a complete training loop from scratch
+How to think about the ethical implications of your work, to help ensure that you’re making the world a better place and that your work isn’t misused for harm
+We care a lot about teaching, using a whole game approach. In this course, we start by showing how to use a complete, working, very usable, state-of-the-art deep learning network to solve real-world problems, using simple, expressive tools. And then we gradually dig deeper and deeper into understanding how those tools are made, and how the tools that make those tools are made, and so on. We always teach through examples. We ensure that there is a context and a purpose that you can understand intuitively, rather than starting with algebraic symbol manipulation. We also dive right into the details, showing you how to build all the components of a deep learning model from scratch, including discussing performance and optimization details.
+
+The whole course can be completed for free without any installation, by taking advantage of the guides for the Colab and Gradient platforms, which provide free, GPU-powered Notebooks.
+
+Deep Learning for Coders with fastai and PyTorch, the book
+To understand what the new book is about, and who it’s for, let’s see what others have said about it… Soumith Chintala, the co-creator of PyTorch, said in the foreword to Deep Learning for Coders with fastai and PyTorch:
+
+But unlike me, Jeremy and Sylvain selflessly put a huge amount of energy into making sure others don’t have to take the painful path that they took. They built a great course called fast.ai that makes cutting-edge deep learning techniques accessible to people who know basic programming. It has graduated hundreds of thousands of eager learners who have become great practitioners.
+
+In this book, which is another tireless product, Jeremy and Sylvain have constructed a magical journey through deep learning. They use simple words and introduce every concept. They bring cutting-edge deep learning and state-of-the-art research to you, yet make it very accessible.
+
+You are taken through the latest advances in computer vision, dive into natural language processing, and learn some foundational math in a 500-page delightful ride. And the ride doesn’t stop at fun, as they take you through shipping your ideas to production. You can treat the fast.ai community, thousands of practitioners online, as your extended family, where individuals like you are available to talk and ideate small and big solutions, whatever the problem may be.
+
+Peter Norvig, Director of Research at Google (and author of the definitive text on AI) said:
+
+“Deep Learning is for everyone” we see in Chapter 1, Section 1 of this book, and while other books may make similar claims, this book delivers on the claim. The authors have extensive knowledge of the field but are able to describe it in a way that is perfectly suited for a reader with experience in programming but not in machine learning. The book shows examples first, and only covers theory in the context of concrete examples. For most people, this is the best way to learn.The book does an impressive job of covering the key applications of deep learning in computer vision, natural language processing, and tabular data processing, but also covers key topics like data ethics that some other books miss. Altogether, this is one of the best sources for a programmer to become proficient in deep learning.
+
+Curtis Langlotz, Director, Center for Artificial Intelligence in Medicine and Imaging at Stanford University said:
+
+Gugger and Howard have created an ideal resource for anyone who has ever done even a little bit of coding. This book, and the fast.ai courses that go with it, simply and practically demystify deep learning using a hands on approach, with pre-written code that you can explore and re-use. No more slogging through theorems and proofs about abstract concepts. In Chapter 1 you will build your first deep learning model, and by the end of the book you will know how to read and understand the Methods section of any deep learning paper.
+
+fastcore, fastscript, and fastgpu
+fastcore
+Python is a powerful, dynamic language. Rather than bake everything into the language, it lets the programmer customize it to make it work for them. fastcore uses this flexibility to add to Python features inspired by other languages we’ve loved, like multiple dispatch from Julia, mixins from Ruby, and currying, binding, and more from Haskell. It also adds some “missing features” and cleans up some rough edges in the Python standard library, such as simplifying parallel processing, and bringing ideas from NumPy over to Python’s list type.
+
+fastcore contains many features. See the docs for all the details, which cover the modules provided:
+
+test: Simple testing functions
+foundation: Mixins, delegation, composition, and more
+utils: Utility functions to help with functional-style programming, parallel processing, and more
+dispatch: Multiple dispatch methods
+transform: Pipelines of composed partially reversible transformations
+fastscript
+Sometimes, you want to create a quick script, either for yourself, or for others. But in Python, that involves a whole lot of boilerplate and ceremony, especially if you want to support command line arguments, provide help, and other niceties. You can use argparse for this purpose, which comes with Python, but it’s complex and verbose. fastscript makes life easier. In fact, this is a complete, working command-line application (no need for any of the usual boilerplate Python requires such as if __name__=='main'):
+
+from fastscript import *
+@call_parse
+def main(msg:Param("The message", str),
+         upper:Param("Convert to uppercase?", bool_arg)=False):
+    print(msg.upper() if upper else msg)
+When you run this script, you’ll see:
+
+$ python examples/test_fastscript.py
+usage: test_fastscript.py [-h] [--upper UPPER] msg
+test_fastscript.py: error: the following arguments are required: msg
+fastgpu
+fastgpu provides a single command, fastgpu_poll, which polls a directory to check for scripts to run, and then runs them on the first available GPU. If no GPUs are available, it waits until one is. If more than one GPU is available, multiple scripts are run in parallel, one per GPU. It is the easiest way we’ve found to run ablation studies that take advantage of all of your GPUs, result in no parallel processing overhead, and require no manual intervention.
+
+Acknowledgements
+Many thanks to everyone who helped bring these projects to fruition, most especially to Sylvain Gugger, who worked closely with me over the last two years at fast.ai. Thanks also to all the support from the Data Institute at the University of San Francisco, and to Rachel Thomas, co-founder of fast.ai, who (amongst other things) taught the data ethics lesson and developed much of the data ethics material in the book. Thank you to everyone from the fast.ai community for all your wonderful contributions.
+
+Forward from the 'Deep Learning for Coders' Book
+20 Aug 2020 Soumith Chintala
+To celebrate the release of fast.ai’s new course, book, and software libraries, we’re making available the foreword that Soumith Chintala (the co-creator of PyTorch) wrote for the book. To learn more, see the release announcement.
+
+In a very short time, deep learning has become a widely useful technique, solving and automating problems in computer vision, robotics, healthcare, physics, biology, and beyond. One of the delightful things about deep learning is its relative simplicity. Powerful deep learning software has been built to make getting started fast and easy. In a few weeks, you can understand the basics and get comfortable with the techniques.
+
+This opens up a world of creativity. You start applying it to problems that have data at hand, and you feel wonderful seeing a machine solving problems for you. However, you slowly feel yourself getting closer to a giant barrier. You built a deep learning model, but it doesn’t work as well as you had hoped. This is when you enter the next stage, finding and reading state-of-the-art research on deep learning.
+
+However, there’s a voluminous body of knowledge on deep learning, with three decades of theory, techniques, and tooling behind it. As you read through some of this research, you realize that humans can explain simple things in really complicated ways. Scientists use words and mathematical notation in these papers that appear foreign, and no textbook or blog post seems to cover the necessary background that you need in accessible ways. Engineers and programmers assume you know how GPUs work and have knowledge about obscure tools.
+
+This is when you wish you had a mentor or a friend that you could talk to. Someone who was in your shoes before, who knows the tooling and the math–someone who could guide you through the best research, state-of-the-art techniques, and advanced engineering, and make it comically simple. I was in your shoes a decade ago, when I was breaking into the field of machine learning. For years, I struggled to understand papers that had a little bit of math in them. I had good mentors around me, which helped me greatly, but it took me many years to get comfortable with machine learning and deep learning. That motivated me to coauthor PyTorch, a software framework to make deep learning accessible.
+
+Jeremy Howard and Sylvain Gugger were also in your shoes. They wanted to learn and apply deep learning, without any previous formal training as ML scientists or engineers. Like me, Jeremy and Sylvain learned gradually over the years and eventually became experts and leaders. But unlike me, Jeremy and Sylvain selflessly put a huge amount of energy into making sure others don’t have to take the painful path that they took. They built a great course called fast.ai that makes cutting-edge deep learning techniques accessible to people who know basic programming. It has graduated hundreds of thousands of eager learners who have become great practitioners.
+
+In this book, which is another tireless product, Jeremy and Sylvain have constructed a magical journey through deep learning. They use simple words and introduce every concept. They bring cutting-edge deep learning and state-of-the-art research to you, yet make it very accessible.
+
+You are taken through the latest advances in computer vision, dive into natural language processing, and learn some foundational math in a 500-page delightful ride. And the ride doesn’t stop at fun, as they take you through shipping your ideas to production. You can treat the fast.ai community, thousands of practitioners online, as your extended family, where individuals like you are available to talk and ideate small and big solutions, whatever the problem may be.
+
+I am very glad you’ve found this book, and I hope it inspires you to put deep learning to good use, regardless of the nature of the problem.
+
+Soumith Chintala, co-creator of PyTorch
+
+Applied Data Ethics, a new free course, is essential for all working in tech
+19 Aug 2020 Rachel Thomas
+Today we are releasing a free, online course on Applied Data Ethics, which contains essential knowledge for anyone working in data science or impacted by technology. The course focus is on topics that are both urgent and practical, causing real harm right now. In keeping with the fast.ai teaching philosophy, we will begin with two active, real-world areas (disinformation and bias) to provide context and motivation, before stepping back in Lesson 3 to dig into foundations of data ethics and practical tools. From there we will move on to additional subject areas: privacy & surveillance, the role of the Silicon Valley ecosystem (including metrics, venture growth, & hypergrowth), and algorithmic colonialism.
+
+If you are ready to get started now, check out the syllabus and reading list or watch the videos here. Otherwise, read on for more details!
+
+Issues related to data ethics make headlines daily, as real people are harmed by misuse
+Issues related to data ethics make headlines daily, as real people are harmed by misuse
+There are no prerequisites for the course. It is not intended to be exhaustive, but hopefully will provide useful context about how data misuse is impacting society, as well as practice in critical thinking skills and questions to ask. This class was originally taught in-person at the University of San Francisco Data Institute in January-February 2020, for a diverse mix of working professionals from a range of backgrounds (as an evening certificate courses).
+
+About Data Ethics Syllabi
+Data ethics covers an incredibly broad range of topics, many of which are urgent, making headlines daily, and causing harm to real people right now. A meta-analysis of over 100 syllabi on tech ethics, titled “What do we teach when we teach tech ethics?” found that there was huge variation in which topics are covered across tech ethics courses (law & policy, privacy & surveillance, philosophy, justice & human rights, environmental impact, civic responsibility, robots, disinformation, work & labor, design, cybersecurity, research ethics, and more– far more than any one course could cover). These courses were taught by professors from a variety of fields. The area where there was more unity was in outcomes, with abilities to critique, spot issues, and make arguments being some of the most common desired outcomes for tech ethics course.
+
+There is a ton of great research and writing on the topics covered in the course, and it was very tough for me to cut the reading list down to a “reasonable” length. There are many more fantastic articles, papers, essays, and books on these topics that are not included here. Check out my syllabus and reading list here.
+
+A note about the fastai video browser
+There is an icon near the top left of the video browser that opens up a menu of all the lesson. An icon near the top right opens up the course notes and a transcript search feature.
+
+Use the icons on the top left and right of the video browser to collapse/expand a menu and course notes/transcript search
+Use the icons on the top left and right of the video browser to collapse/expand a menu and course notes/transcript search
+Topics covered
+Lesson 1: Disinformation
+From deepfakes being used to harass women, widespread misinformation about coronavirus (labeled an “infodemic” by the WHO), fears about the role disinformation could play in the 2020 election, and news of extensive foreign influence operations, disinformation is in the news frequently and is an urgent issue. It is also indicative of the complexity and interdisciplinary nature of so many data ethics issues: disinformation involves tech design choices, bad actors, human psychology, misaligned financial incentives, and more.
+
+Watch the Lesson 1 video here.
+
+Lesson 2: Bias & Fairness
+Unjust bias is an increasingly discussed issue in machine learning and has even spawned its own field as the primary focus of Fairness, Accountability, and Transparency (FAccT). We will go beyond a surface-level discussion and cover questions of how fairness is defined, different types of bias, steps towards mitigating it, and complicating factors.
+
+Watch the Lesson 2 video here.
+
+Lesson 3: Ethical Foundations & Practical Tools
+Now that we’ve seen a number of concrete, real world examples of ethical issues that arise with data, we will step back and learn about some ethical philosophies and lenses to evaluate ethics through, as well as considering how ethical questions are chosen. We will also cover the Markkula Center’s Tech Ethics Toolkit, a set of concrete practices to be implemented in the workplace.
+
+Watch the Lesson 3 video here.
+
+Lesson 4: Privacy and surveillance
+Huge amounts of data are being collected about us: apps on our phones track our location, dating sites sell intimate details, facial recognition in schools records students, and police use large, unregulated databases of faces. Here, we discuss real-world examples of how our data is collected, sold, and used. There are also concerning patterns of how surveillance is used to suppress dissent and to further harm those who are already marginalized.
+
+Watch the Lesson 4 video here.
+
+Lesson 5: How did we get here? Our Ecosystem
+News stories understandably often focus on one instance of a particular ethics issue at a particular company. Here, I want us to step back and consider some of the broader trends and factors that have resulted in the types of issues we are seeing. These include our over-emphasis on metrics, the inherent design of many of the platforms, venture capital’s focus on hypergrowth, and more.
+
+Watch the Lesson 5 video here.
+
+Lesson 6: Algorithmic Colonialism, and Next Steps
+When corporations from one country develop and deploy technology in many other countries, extracting data and profits, often with little awareness of local cultural issues, a number of ethical issues can arise. Here we will explore algorithmic colonialism. We will also consider next steps for how students can continue to engage around data ethics and take what they’ve learned back to their workplaces.
+
+Watch the Lesson 6 video here.
+
+For the applied data ethics course, you can find the homepage here, the syllabus and reading list and watch the videos here.
+
+Older
+Newer
