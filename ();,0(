@@ -1,0 +1,88 @@
+Programming language Zero
+Contents
+1	The language
+2	Examples
+3	Modifying methods
+4	Higher-order methods
+The language
+Zero is an object-oriented statically-typed experimental programming language which features a pure object model, method-based state representation, and metaprogramming paradigm. The basic idea of Zero is the capability of runtime alteration of behaviour and structure within a static typing system. Zero is built upon the infrastructure of the Z0 language. Key language concepts include class-based hierarchy with a multiple inheritance model, efficient typing, compiled architecture, and structural reflection that preserves typing correctness of methods and classes. We consider Zero a statically-typed language despite certain cases when type checking at run-time is mandatory. The same criterion is used for Java, C++, and other statically-typed, object-oriented languages. Strictly speaking, however, Zero is a hybridly-typed language.
+
+In Zero, the object state is not represented as an aggregation of instance variables but as a collection of methods, similar to prototype-based languages. A state is modified exclusively by replacing methods. Every modification or replacement of a method indicates a meta operation. In Zero we have added reflection facilities, meta classes such as Class, Method, and Closure, and safely-typed higher-order methods.
+
+Reflection in Zero is not limited to mere introspection -- the ability to reason about one's internals. In addition to behavioural reflection, Zero enables structural reflection which preserves signatures of methods and classes. It is possible to replace methods of classes that are loaded into a virtual machine environment and are already instantiated. It is also possible to alter or completely replace methods of run-time objects. Because Zero is a statically-typed programming language, type safety must be ensured during reflective operations. Reflective facilities have, therefore, been designed to preserve the types of methods and classes. When replacing a method, for example, the new method must have the same signature as the old one. This is signature compatibility.
+
+In Zero, blocks and iterative statements are first class values based on closures and represented as objects. The reflective abilities of meta class Closure enable us to inspect these constructs and modify their behaviour. Reflective capabilities enable very elaborate introspection and modification of run-time program behaviour, for example, when tailoring the body of a For loop.
+
+Representing methods as first class values is important for higher-order methods. In Zero, a method may be taken as a parameter or returned by another method. A compile-time method checker is provided so that casting between method types may be addressed during compilation, rather than postponing it until execution time. Casting between method types is similar to casting between classes -- it is only performed when casting from supertype to subtype. Considering the imperative nature of Zero, it has an elegant model of higher-order methods, both semantically and structurally.
+
+Language syntax was designed to be concise, simple, and easily readable and for this reason we made it similar to Java. Zero is compiled into bytecode that executes in an underlying virtual machine environment.
+
+Examples
+In Zero a counter is implemented as follows:
+
+class Counter {
+
+public Counter { /* empty constructor */ } public getValue : Integer { return 0; } public increment { Integer v = getValue(); getValue <- method : Integer { return v + 1; }; } public main { Counter counter = new Counter; while{ counter.getValue() < 10; } {
+("value=" + counter.getValue()).toString().print(); counter.increment(); }; }
+}
+
+In Zero, blocks are first class values, meaning they can be used as arguments and passed from functions. Control structures are based on closures and may be changed at runtime using reflection:
+
+Integer n = 60; // store while loop to local variable
+Executable loop = while { n <= 80; } {
+
+("n is " + n).print(); n++; }
+// execute our while loop. this prints integers from 60 to 80.
+loop.exec();
+
+// modify condition of while loop
+loop.setChild( loop.getChildren().at(0), { n < 90; } );
+
+// and body to print only even numbers
+Closure newBody = { if{ n%2==0;} then { ("n is " + n).print(); }; n++; };
+loop.setChild( loop.getChildren().at(1), newBody );
+
+// execute modified version of loop
+n = 70;
+loop.exec(); // this prints even integers between 70 and 90
+
+
+Class hierarchy of control structures has the following structure:
+Closures.jpg
+
+
+Modifying methods
+Zero enables to modify methods at run-time. Methods may be tailored at run-time to suit the needs which were unknown at compile-time. This enables run-time optimisation and code specialisation.
+
+
+Higher-order methods
+Higher-order functions are usually supported in declarative programming languages such as Lisp, ML, and Haskell. Zero supports higher-order functions despite its imperative nature. In Zero we call them higher-order methods. They are methods represented as objects. They are statically-safe but when casting from generic to specific method types, type checking at runtime is needed. An anonymous method is created using a reserved word method:
+
+// accepts one argument of Method type
+executeMyMethod(Method(String s) m){
+
+m( "executing " + m.getName() );
+}
+...
+// pass anonymous method as argument
+executeMyMethod( method(String s) { s.print(); } );
+
+
+A method may be stored to a variable:
+
+Method(Integer) m = method(Integer a) { ("my anonymous method with a=" + a).print(); }
+
+// we may invoke it like this
+m( 66 );
+
+// or like this
+Vector args = new Vector;
+args.add( 55 );
+
+m.invoke( args );
+
+
+Method types may be casted just as any ordinary type. The above method 'm' may be casted as following:
+Method g = m; // no runtime check
+// invocation requires explicit cast back to original type
+(g as Method(Integer))(66);
