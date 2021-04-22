@@ -1,0 +1,57 @@
+
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+Basic Information Page
+Enter the basic information parameters.
+
+Element	Description
+What do you want to call your endpoint?
+
+Provide a meaningful name so that others can understand the connection. For example, FTPReadWriteConnection. You can include English alphabetic characters, numbers, underscores, and dashes in the name. You cannot include the following:
+Blank spaces (for example, My FTP Connection)
+
+Special characters (for example,  #;83& or righ(t)now4)
+
+Multibyte characters
+
+What does this endpoint do?
+
+Enter an optional description of the connection’s responsibilities. For example: This connection transfers files to a directory.
+
+Do you want to define a schema for this endpoint?
+
+Yes: Select to define a schema format to use for the files to transfer. This option enables you to read and write files up to 1 MB in size.
+
+No: Select if a schema is not required and you want to send opaque files (for example, a GIF or PNG file). This option enables you to read and write files up to 1 GB in size.
+
+Note: If configuring the FTP Adapter in the trigger (inbound) direction, schema selection is not supported. If you select Yes and upload a schema, it is not used. You must select No to transfer files as an attachment.
+
+Do you want to create a new schema or select an existing one?
+
+Select an option:
+Create a new schema from a CSV file: Select to create a new schema file from a comma-separated value (CSV) file. On a subsequent page of this wizard, you are prompted to select the CSV file from which to create the schema.
+
+Select an existing schema from the file system: Select an existing schema file. On a subsequent page of this wizard, you are prompted to select the existing schema (XSD) file from the file system.
+
+Do you want to enable PGP security?
+
+Note: This selection is only available in the invoke (outbound) direction.
+
+Select Yes if you want to encrypt or decrypt the file to transfer using Pretty Good Privacy (PGP) cryptography. If you select Yes, you must have already configured PGP encryption on the Connections page when you created the FTP Adapter connection.
+
+What security mode do you want to employ?
+
+This field is displayed if you selected Do you want to enable PGP security?.
+
+Select to encrypt or decrypt the file to transfer using Pretty Good Privacy (PGP) cryptography. You must have already configured PGP on the Connections page when you created the FTP Adapter connection.
+
+Was this page helpful?  
+About Oracle
+Contact Us
+Products A-Z
+Terms of Use & Privacy
+Cookie Preferences
+Ad Choices
+© Oracle
