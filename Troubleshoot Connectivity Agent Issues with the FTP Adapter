@@ -1,0 +1,53 @@
+
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+Troubleshoot Connectivity Agent Issues with the FTP Adapter
+Troubleshoot issues with the connectivity agent based on the type of FTP Adapter connection you are using.
+
+When Using an FTP Connection Type
+When Using an FTP over SSL Connection Type
+When Using an sFTP Connection Type
+When Using an FTP Connection Type
+
+The FTP server must be publicly accessible when the agent group is not configured.
+Try to connect using FileZilla or winscp to see whether the connection is occurring from a public laptop.
+
+If the FTP server is not publicly accessible, ensure that the connectivity agent is installed either on-premises or on a private cloud that has network connectivity with the FTP server.
+Enter the following command from the connectivity agent host instance.
+
+ftp user@host
+If using privately-hosted FTP servers, ensure that the proxy configured for the connectivity agent to use allows an FTP connection. If not, also try including the FTP host address as the noproxyHost for the connectivity agent configuration.
+When Using an FTP over SSL Connection Type
+
+If you have not used the agent group, the FTP server should be publicly accessible.
+Use an FTP client such as winscp or FileZilla and enter the correct password to confirm whether it's a connectivity issue.
+
+If you used the connectivity agent, the FTP server should be accessible from the agent host.
+Enter the following command from the connectivity agent host:
+ftp user@host
+If you used a proxy server in the agent configuration, check if the proxy used allows an FTP server connection. Also, try using the FTP host address as the nonProxyHost for the agent configuration.
+When Using an sFTP Connection Type
+
+If you have not used the agent group, the sFTP server should be publicly accessible.
+Verify the connectivity agent connection is working from outside the Oracle network using winscp or FileZilla.
+
+If you are getting a private key or a passphrase is not correct, open the private key file and see whether it has the following header:
+-----BEGIN RSA PRIVATE KEY-----
+If the key is any other format, convert the key in this format using PuTTYgen. PuTTYgen is available on Windows.
+
+Load the keys in PuTTYgen, then export the open SSH key.
+
+If using multilevel authentication, check the first authentication.
+If using the connectivity agent, the sftp command should work from the connectivity agent host.
+If using a proxy on the connectivity agent host, run the sftp command using the proxy or add the sFTP host as the nonProxyHost.
+If you uploaded the host key on the Connections page and are receiving a Host Key Exception, remove the host key and test the connection.
+Was this page helpful?  
+About Oracle
+Contact Us
+Products A-Z
+Terms of Use & Privacy
+Cookie Preferences
+Ad Choices
+© Oracle
