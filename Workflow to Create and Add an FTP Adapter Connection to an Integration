@@ -1,0 +1,65 @@
+
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+Workflow to Create and Add an FTP Adapter Connection to an Integration
+You follow a very simple workflow to create a connection with an adapter and include the connection in an integration in Oracle Integration.
+
+Step	Description	More Information
+1
+
+Create the adapter connections for the applications you want to integrate. The connections can be reused in multiple integrations and are typically created by the administrator.
+
+Create an FTP Adapter Connection
+
+2
+
+Create the integration. When you do this, you add trigger and invoke connections to the integration.
+
+Create Integrations and Add the FTP Adapter Connection to a Basic Routing Integration
+
+3
+
+Map data between the trigger connection data structure and the invoke connection data structure.
+
+Map Data of Using Integrations in Oracle Integration
+
+4
+
+(Optional) Create lookups that map the different values used by those applications to identify the same type of object (such as gender codes or country codes).
+
+Manage Lookups of Using Integrations in Oracle Integration
+
+5
+
+Activate the integration.
+
+Manage Integrations of Using Integrations in Oracle Integration
+
+6
+
+Monitor the integration on the dashboard.
+
+Monitor Integrations of Using Integrations in Oracle Integration
+
+7
+
+Track payload fields in messages during runtime.
+
+Assign Business Identifiers for Tracking Fields in Messages and Manage Business Identifiers for Tracking Fields in Messages of Using Integrations in Oracle Integration
+
+8
+
+Manage errors at the integration level, connection level, or specific integration instance level.
+
+Manage Errors of Using Integrations in Oracle Integration
+
+Was this page helpful?  
+About Oracle
+Contact Us
+Products A-Z
+Terms of Use & Privacy
+Cookie Preferences
+Ad Choices
+© Oracle
