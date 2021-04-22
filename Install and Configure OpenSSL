@@ -1,0 +1,49 @@
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+Install and Configure OpenSSL
+OpenSSL is an open source implementation of the SSL protocol. OpenSSL implements basic cryptographic functions and provides utility functions. Install and configure OpenSSL on the Solaris or Linux host to be used as the FTP server.
+
+Go to the following URL:
+http://www.openssl.org/source
+Locate openssl-0.9.7g.tar.gz in the list of available files. For example:
+ 3132217 Apr 11 17:21:51 2005 openssl-0.9.7g.tar.gz (MD5) (PGP sign)
+Download the following files:
+openssl-0.9.7g.tar.gz
+
+openssl-0.9.7g.tar.gz.md5 (under the MD5 link)
+
+openssl-0.9.7g.tar.gz.asc (under the PGP sign link)
+
+Unzip the following file using gunzip.
+gunzip openssl-0.9.7g.tar.gz
+Untar the following file:
+tar xvf openssl-0.9.7g.tar
+Change directories to the following location:
+cd openssl-0.9.7g
+Run the following command:
+./config --prefix=/usr --openssldir=/usr/local/openssl
+Change to the Bourne shell (if you are not using it):
+sh
+Configure and export the PATH variable:
+PATH=${PATH}:/usr/ccs/bin; export PATH 
+Run the following command:
+make
+Exit the Bourne shell:
+exit
+Run the following command:
+make test
+Log in as the super user:
+msu
+Enter the password when prompted.
+Run the following command:
+make install
+Was this page helpful?  
+About Oracle
+Contact Us
+Products A-Z
+Terms of Use & Privacy
+Cookie Preferences
+Ad Choices
+© Oracle
