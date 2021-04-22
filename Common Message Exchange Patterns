@@ -1,0 +1,42 @@
+
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+Common Message Exchange Patterns
+You can use the FTP Adapter in a variety of message exchange patterns, including the following:
+
+Triggered by the SOAP Adapter, the REST Adapter, or a schedule in an integration.
+
+Polling an FTP directory:
+
+Create a scheduled orchestrated integration. Do not create a Map Data integration.
+
+Configure the FTP Adapter with the List File operation.
+
+Create a for-each action.
+
+Configure the FTP Adapter with the Read File Operation inside the for-each action to read a file.
+
+Map the file name and directory header from the for-each action loop.
+
+Downloading a file from an embedded SFTP server with Oracle Managed File Transfer / Oracle Managed File Transfer Cloud Service:
+
+A file is placed in an embedded SFTP server.
+
+Oracle Managed File Transfer sends a multipart SOAP notification to Oracle Integration.
+
+Oracle Integration receives the SOAP message and extracts the file name.
+
+The FTP Adapter is invoked and sets the file name.
+
+The file is downloaded to Oracle Integration.
+
+Was this page helpful?  
+About Oracle
+Contact Us
+Products A-Z
+Terms of Use & Privacy
+Cookie Preferences
+Ad Choices
+© Oracle
