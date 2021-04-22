@@ -1,0 +1,50 @@
+
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+Connect to a Private FTP Server Using the FTP Adapter
+You can integrate Oracle Integration with an FTP server, even when that server is in a private network and not accessible publicly. This scenario is possible when you configure the connectivity agent with the FTP Adapter.
+
+The FTP Adapter supports connectivity to the following servers:
+
+FTP/sFTP server hosted on-premises through the connectivity agent
+FTP/sFTP server hosted in the cloud without the connectivity agent
+See Manage the Agent Group and the On-Premises Connectivity Agent in Provisioning and Administering Oracle Integration and Oracle Integration for SaaS, Generation 2.
+
+Configure Connection Properties
+
+Provide connection property values:
+In the Connection Properties section on the Connections page:
+Enter the FTP/sFTP host address and port.
+If using a secure FTP server, select Yes for the SFTP Connection field. Otherwise, select No.
+
+Connection Properties section with FTP Server Host Address, FTP Server Port, and SFTP Connection fields
+
+Configure Connection Security
+
+Provide connection security values:
+
+In the Security section on the Connections page, select the security policy:
+FTP Server Access Policy: For username/password authentication.
+FTP Public Key Authentication: For public key authentication.
+FTP Multi Level Authentication: For authentication using both username/password and public key.
+
+Security section with options for FTP Server Access Policy, FTP Public Key Authentication, and FTP Multi Level Authentication.
+
+Configure Agent Group
+
+If the FTP server is not directly accessible from Oracle Integration (for example, the server is installed on-premises or behind a firewall), you must configure the connectivity agent for this connection. This can be done in the Configure Agents section.
+Select an Agent group dialog with available agent groups listed.
+
+There are file size limits when using the FTP Adapter. For example, the Download File operation on the Operations page does not support a schema, and can send a file of up to 1 GB in size. The download may take time to complete considering the network latency between the connectivity agent and Oracle Integration. See Service Limits.
+
+There are also restrictions when the FTP Adapter is configured with the connectivity agent. See FTP Adapter Restrictions.
+Was this page helpful?  
+About Oracle
+Contact Us
+Products A-Z
+Terms of Use & Privacy
+Cookie Preferences
+Ad Choices
+© Oracle
