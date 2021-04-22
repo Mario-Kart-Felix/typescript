@@ -1,0 +1,42 @@
+
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+Configure an FTP Adapter to Download the Zip File
+Add an FTP Adapter to your flow to download the sample zip file present on the sFTP server.
+
+Click Invokes Invokes icon on the pane to the right of the canvas.
+Expand FTP and drag FTP Connection to the plus sign in your integration flow.
+The Oracle Adapter Endpoint Configuration Wizard is displayed.
+
+On the Basic Info page, enter a name without a space (Download_Zip) and a description for the adapter. Click Next.
+On the Operations page, enter the following details.
+Element	Information to Enter
+Select Operation
+
+Select Download File.
+
+Select a Transfer Mode
+
+Select Binary.
+
+Input Directory
+
+Specify the path of the directory on your FTP server that contains the file to be read. For example, /home/user2/FTP Bulk Transfer.
+
+File Name
+
+Enter test-data.zip.
+
+Download Directory
+
+Specify the directory to use in Oracle Integration to stage the downloaded file temporarily; for example, /tmp/zip-test/staged.
+
+Perform unzip on compressed file downloaded from external FTP server
+
+Select this field to unzip the sample file.
+
+Click Next. On the Summary page, review the data you've entered and click Done.
+Description of download-zip-summary.png follows
+Description of the illustration download-zip-summary.png
