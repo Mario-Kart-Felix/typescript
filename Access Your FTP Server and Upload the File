@@ -1,0 +1,6 @@
+Access Your FTP Server and Upload the File
+Obtain an sFTP server and ensure that you're able to access it.
+
+Log in to the server using your user name and password through an FTP client; for example, FileZilla.
+Create a directory (FTP Bulk Transfer) on the server from which to read and write files.
+Upload the sample file (test-data.zip) into the directory you've created.
