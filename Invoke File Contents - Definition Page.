@@ -1,0 +1,138 @@
+
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+Invoke File Contents - Definition Page
+Enter the format definition parameters.
+
+The fields that display on the Format Contents - Definition page are determined by your selection on the Schema page:
+
+Creating a New Schema from a CSV File
+Select an existing XML schema or schema archive from the file system
+Provide a sample XML document from the file system
+Provide a sample JSON document from the file system
+Note:
+If configuring the adapter in the trigger (inbound) direction, schema selection is not supported. If you select Yes to define a schema for the endpoint on the Basic Info page, nothing prevents you from uploading a schema on the Format Contents - Definition page. However, this schema is not used. You must select No on the Basic Info page to transfer files as an attachment.
+
+The adapter can only be configured as an invoke connection in an orchestrated integration.
+
+Creating a New Schema from a CSV File
+
+Element	Description
+Select the Delimited Data File
+
+Select the delimited comma-separated value (CSV) file from which to create the schema file. The content of the file is then displayed at the bottom of the page.
+
+Enter the Record Name
+
+Enter the record name. This becomes the parent element in the created schema file for the record names selected as column headers from the CSV file.
+
+Enter the Recordset Name
+
+Enter the recordset name. This becomes the root element of the created schema file.
+
+Select the Field Delimiter
+
+Select one of the following supported file delimiter options:
+
+Single space
+
+Comma
+
+Semicolon
+
+Tab
+
+Pipe (for example, Name|City|Country)
+
+Character Set
+
+Select a character set. The selected value will be used as the encoding format while reading the sample data file.
+
+This field is used for character encoding during file transfer. If data sent to the adapter is in a specific encoding format, then select that same encoding format in the adapter. Otherwise, there may be some character loss in the final written file. This also corrupts the file. For example, if a REST Adapter is using UTF-8 encoding and the adapter is configured with the ASCII character set, this may corrupt the file. If you select the same UTF-8 encoding in the adapter, the problem is resolved.
+
+Optionally Enclosed By
+
+This value causes occurrences of the selected delimiter to be ignored during processing. For example, when processing the following record:
+
+Fred,"2 Old Street, Old Town,Manchester",20-08-1954,0161-499-1718
+
+If the selected Field Delimiter is “,” and the Optionally Enclosed By value is quot; (“), then the value 2 Old Street, Old Town,Manchester is treated as a single record column.
+
+If Optionally Enclosed By is used, the character must not be part of any field. Therefore, the following is invalid:
+a,b",c (In this scenario, " is part of the second field)
+a,"b,c",d (In this scenario, the second field is created using Optionally Enclosed By ('"'). However, it has ',' as content for the second field value.)
+Terminated By
+
+Displays by default the first row of the selected CSV file as the column headers. Select the option to terminate the end of a line.
+
+${eol}
+\n
+\r\n
+\r
+Detach
+
+Select to edit the CSV file in a separate window.
+
+Use First Row as Column Headers	Select to use the first row as the column headers.
+Mark All As Optional
+
+Select to mark elements as optional in the schema file. By default, all elements are mandatory. You can also select the data type (for example, string, byte, integer, and so on) to use for each column in the table and mark specific elements as optional. While this option enables you to select all elements as optional, you must have at least one mandatory element to validate this page. This checkbox provides a convenient method to select the majority of elements as optional.
+
+Select an existing XML schema or schema archive from the file system
+
+The schema archive can have a single top level schema with nested input and include elements containing absolute or relative paths.
+
+Element	Description
+Select File
+
+Select the existing schema file to use.
+
+Selected File Name	
+Displays the selected schema file name.
+
+Select the Schema Element
+
+Select the schema element. This field is displayed after the schema file is selected. The element name is treated as the root element in the uploaded schema file.
+
+Provide a sample XML document from the file system
+
+The XML document should contain no namespaces or only a single namespace.
+
+Element	Description
+Select File
+
+Select the existing XML document to use.
+
+Selected File Name
+
+Displays the selected schema file name.
+
+Select the Schema Element
+
+Select the schema element. This field is displayed after the schema file is selected. The element name is treated as the root element in the uploaded schema file.
+
+Provide a sample JSON document from the file system
+
+Element	Description
+Select File
+
+Select the existing JSON file to use.
+
+Selected File Name
+
+Displays the selected file name.
+
+Select the Schema Element
+
+Select the schema element. This field is displayed after the schema file is selected. The element name is treated as the root element in the uploaded schema file.
+
+Was this page helpful?  
+About Oracle
+Contact Us
+Products A-Z
+Terms of Use & Privacy
+Cookie Preferences
+Ad Choices
+© Oracle
