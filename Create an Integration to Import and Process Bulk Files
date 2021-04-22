@@ -1,0 +1,53 @@
+
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+Create an Integration to Import and Process Bulk Files
+In this tutorial, you’ll learn how to create a scheduled integration in Oracle Integration to load and transform files from a secure File Transfer Protocol (FTP) location.
+
+For the purpose of this tutorial, let’s consider a simple use case where you’ll require to communicate with an external application through an FTP server, import raw data, and convert it into a standard format. The flow for this scenario is as follows:
+
+A user or an application uploads a file or set of files to an FTP server for processing.
+The scheduled integration imports these files into Oracle Integration using an FTP Adapter.
+Using a set of relevant of actions, the integration transforms or enriches the data within the files and uploads the modified files back to the FTP server.
+Upon completing this tutorial, you’ll be familiar with several important skills in Oracle Integration, such as configuring an FTP Adapter, iterating over repeating elements, staging files, mapping data, and creating schedules.
+
+Topics:
+
+Prerequisites to Set Up the Integration
+
+Access Your FTP Server and Upload the File
+
+Create an FTP Connection
+
+Create a Scheduled Integration
+
+Configure an FTP Adapter to Download the Zip File
+
+Add a For-Each Action to Iterate Over Individual Files
+
+Configure a Stage File Action to Read Individual Files
+
+Add a For-Each Action to Iterate Over Individual Records
+
+Add a Stage File Action to Write Modified Records into a New File
+
+Configure Data Mapping to Transform Data in Files
+
+Add a Stage File Action to Zip the Modified Files
+
+Configure an FTP Adapter to Write the Modified Zip File
+
+Activate and Test Your Integration
+
+Create a Sample Schedule
+
+Was this page helpful?  
+About Oracle
+Contact Us
+Products A-Z
+Terms of Use & Privacy
+Cookie Preferences
+Ad Choices
+© Oracle
