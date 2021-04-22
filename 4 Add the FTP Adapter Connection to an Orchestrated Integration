@@ -1,0 +1,31 @@
+
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+4 Add the FTP Adapter Connection to an Orchestrated Integration
+When you drag the FTP Adapter into the invoke area of an orchestrated integration, the Adapter Endpoint Configuration Wizard is invoked. This wizard guides you through configuration of FTP Adapter endpoint properties.
+
+Note:The FTP Adapter works a bit differently when used in an orchestrated integration rather than a basic map integration. Also, the FTP Adapter can only be configured as an invoke connection in an orchestrated integrations.
+The following sections describe the wizard pages that guide you through configuration of the FTP Adapter as an invoke in an orchestrated integration.
+
+Topics:
+
+Basic Info Page
+
+Invoke Operations Page
+
+Invoke Schema Page
+
+Invoke File Contents - Definition Page
+
+Summary Page
+
+Was this page helpful?  
+About Oracle
+Contact Us
+Products A-Z
+Terms of Use & Privacy
+Cookie Preferences
+Ad Choices
+© Oracle
