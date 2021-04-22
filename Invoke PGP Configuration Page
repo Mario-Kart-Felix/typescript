@@ -1,0 +1,51 @@
+
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+Invoke PGP Configuration Page
+View the FTP Adapter invoke PGP configuration parameters. For version 16.4.1 and earlier of imported integrations, this page is displayed in view-only mode. This page is not displayed if you created a new PGP-configured FTP Adapter because you now configure those details on the Connections page when creating an FTP Adapter connection.
+
+The fields that are displayed on this page are based on whether you selected to encrypt or decrypt the message file to transfer using Pretty Good Privacy (PGP) cryptography on the Basic Info page.
+
+PGP is a data encryption and decryption program that provides cryptographic privacy and authentication for encrypting and decrypting message files. Message file encryption uses a serial combination of hashing, data compression, symmetric-key cryptography, and public-key cryptography. Each step uses one of several supported algorithms. Each public key is bound to a user name, an e-mail address, or both. For existing integrations, this page is displayed in view only mode. This page is not displayed if you created a new PGP-configured FTP Adapter.
+
+Select to Encrypt
+
+Element	Description
+Format the Encrypted Message in ASCII-Armor
+
+Displays the format of the encrypted message in ASCII armor. ASCII armor is a binary-to-textual encoding converter. ASCII armor formats encrypted messaging in ASCII. This enables messages to be sent in a standard messaging format. This selection impacts the visibility of message content. If not selected, the message is sent in binary format.
+
+Select the Cipher Algorithm
+
+Displays the symmetric cryptographic algorithm to use. Symmetric-key algorithms for cryptography use the same cryptographic keys for both encryption of plain text and decryption of cipher text.
+CAST5
+
+3DES
+
+AES128
+
+AES192
+
+AES256
+
+Select to Decrypt
+
+Element	Description
+Select the PGP Private Key to Upload
+
+Displays the private key to use for decryption.
+
+Specify the Private Key Password
+
+Displays the private key password to use to decrypt this message. Only the private key belonging to the receiver can decrypt the key.
+
+Was this page helpful?  
+About Oracle
+Contact Us
+Products A-Z
+Terms of Use & Privacy
+Cookie Preferences
+Ad Choices
+© Oracle
