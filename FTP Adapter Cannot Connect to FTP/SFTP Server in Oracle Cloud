@@ -1,0 +1,26 @@
+
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+FTP Adapter Cannot Connect to FTP/SFTP Server in Oracle Cloud
+When trying to connect from Oracle Integration to an FTP server running in Oracle Cloud, the connection may not work. For example, if Oracle Support Services runs the following command:
+
+sftp -o "ProxyCommand /usr/bin/nc -X connect -x  proxy_host:proxy_port
+%h %p" FTP_username@FTP_hostname
+The following error message can be displayed. This occurs because routing is not enabled from Oracle Integration to the FTP server.
+
+Connecting to FTP_hostname...
+nc: port range not valid
+ssh_exchange_identification: Connection closed by remote host
+Couldn't read packet: Connection reset by peer
+Either file a service request to ensure that the proxy allows connections to the port on which the FTP server is running or use an FTP server not running in Oracle Cloud.
+
+Was this page helpful?  
+About Oracle
+Contact Us
+Products A-Z
+Terms of Use & Privacy
+Cookie Preferences
+Ad Choices
+© Oracle
