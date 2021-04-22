@@ -1,0 +1,18 @@
+
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+Use of FTP Adapter Connections Created Before Release 16.3.3 in Integrations Created in Release 16.3.3 or Later
+FTP Adapter connections created before release 16.3.3 had the option to select User Name Password Token as the security policy. Beginning with release 16.3.3, this security policy was changed to FTP Server Access Policy. If you open the Connections page for an FTP Adapter connection created before release 16.3.3 for editing, the security policy field is empty and the connection is unusable in orchestrated integrations. To use this connection, you must manually select FTP Server Access Policy as the security policy, enter the user credentials, and test the connection. After that, you can use this connection in orchestrated integrations.
+
+If you created the FTP Adapter connection in release 16.3.3 or later, this problem does not occur.
+
+Was this page helpful?  
+About Oracle
+Contact Us
+Products A-Z
+Terms of Use & Privacy
+Cookie Preferences
+Ad Choices
+© Oracle
