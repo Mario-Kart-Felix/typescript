@@ -1,0 +1,18 @@
+Configure Data Mapping to Transform Data in Files
+Configure the data mapping in the automatically added mapper to modify the content of the files. You can use functions and operators to enrich or transform each record before it's written into a new file.
+
+In this topic, you'll configure a simple mapping that suffixes the term - Modified to each row or record of a file as a way of transforming the file contents.
+
+Click Map to Write_Row and select Edit Edit icon to open the mapper.
+Click XSLT on the toolbar to enter an advanced view.
+Expand $InputRow (which corresponds to an old row or record under iteration) on the left and map the C1 element within it to the C1 element under ModifiedRowSet (which corresponds to a new record in a new file) on the right.
+The expression builder with a corresponding mapping expression opens.
+
+Click Toggle Functions Toggle Functions icon in the toolbar to view the Components pane. Expand String and drag the concat function to the expression builder pane.
+Copy the existing expression in the pane (for example, $InputRow/nsmpr6:Row/nsmpr6:C1) into the concat function as the first operator and add " - Modified" as the second operator. The final expression in the pane will be of the following format: concat ( $InputRow/nsmpr6:Row/nsmpr6:C1 , " - Modified" ).
+This ensures the term - Modified is appended to each old record before it's written to a new file.
+
+Click Save Save icon and click Validate.
+Click Close to return to the integration canvas.
+Description of map-write-row.png follows
+Description of the illustration map-write-row.png
