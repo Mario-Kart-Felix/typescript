@@ -1,0 +1,29 @@
+
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+Activate and Test Your Integration
+Check for errors, save, and activate the integration flow.
+
+You'll notice an error notification on the canvas. To resolve it, assign a primary business identifier for tracking. Business identifiers enable you to track payload fields in messages during runtime. A primary business identifier is required to activate an integration. See Assign Business Identifiers for Tracking Fields in Messages.
+
+To assign an identifier:
+
+Click Actions Menu Actions menu. in the top-right corner of the canvas, and select Tracking.
+In the resulting dialog, select startTime on the left and move it to the table on the right.
+Click Save.
+Save the integration and click Close.
+Now, activate and test your integration.
+
+On the Integrations page, click the Activate Activate icon button against your integration.
+Click Activate in the Activate Integration dialog.
+After the integration is activated, click Run Run icon and select Submit Now to test run the integration.
+Select Ad hoc request in the resulting dialog and click Submit Now.
+You've now successfully submitted the integration for a test run. To create a sample schedule for your integration, see Create a Sample Schedule.
+
+Log in to your sFTP server and check for the modified files returned by the integration.
+Description of ftp-server.png follows
+Description of the illustration ftp-server.png
+
+
