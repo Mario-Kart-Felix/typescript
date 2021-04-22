@@ -1,0 +1,32 @@
+Either friend can unblock a blocked friendship
+The blocker_id is not consistent between the two friendship objects, therefore either user can unblock a blocked friendship.
+
+2.6.1 :059 > user1.friend_request(user2)
+HasFriendship::Friendship Exists (0.4ms) SELECT 1 AS one FROM "friendships" WHERE "friendships"."friendable_id" = $1 AND "friendships"."friendable_type" = $2 AND "friendships"."friend_id" = $3 LIMIT $4 [["friendable_id", 1], ["friendable_type", "User"], ["friend_id", 49], ["LIMIT", 1]]
+(0.1ms) BEGIN
+User Load (0.3ms) SELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2 [["id", 49], ["LIMIT", 1]]
+User Load (0.2ms) SELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2 [["id", 1], ["LIMIT", 1]]
+HasFriendship::Friendship Create (0.2ms) INSERT INTO "friendships" ("friendable_type", "friendable_id", "friend_id", "created_at", "updated_at", "status") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id" [["friendable_type", "User"], ["friendable_id", 1], ["friend_id", 49], ["created_at", "2021-02-20 05:40:37.589275"], ["updated_at", "2021-02-20 05:40:37.589275"], ["status", 0]]
+User Load (0.1ms) SELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2 [["id", 1], ["LIMIT", 1]]
+User Load (0.1ms) SELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2 [["id", 49], ["LIMIT", 1]]
+HasFriendship::Friendship Create (0.2ms) INSERT INTO "friendships" ("friendable_type", "friendable_id", "friend_id", "created_at", "updated_at", "status") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id" [["friendable_type", "User"], ["friendable_id", 49], ["friend_id", 1], ["created_at", "2021-02-20 05:40:37.591793"], ["updated_at", "2021-02-20 05:40:37.591793"], ["status", 1]]
+(5.5ms) COMMIT
+=> true
+2.6.1 :060 > user2.block_friend(user1)
+(0.1ms) BEGIN
+HasFriendship::Friendship Load (0.2ms) SELECT "friendships".* FROM "friendships" WHERE "friendships"."friendable_id" = $1 AND "friendships"."friendable_type" = $2 AND "friendships"."friend_id" = $3 AND "friendships"."status" != $4 ORDER BY "friendships"."id" ASC LIMIT $5 [["friendable_id", 49], ["friendable_type", "User"], ["friend_id", 1], ["status", 3], ["LIMIT", 1]]
+User Load (0.2ms) SELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2 [["id", 49], ["LIMIT", 1]]
+User Load (0.3ms) SELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2 [["id", 1], ["LIMIT", 1]]
+HasFriendship::Friendship Update (0.3ms) UPDATE "friendships" SET "status" = $1, "blocker_id" = $2, "updated_at" = $3 WHERE "friendships"."id" = $4 [["status", 3], ["blocker_id", 49], ["updated_at", "2021-02-20 05:40:51.383270"], ["id", 8]]
+HasFriendship::Friendship Load (0.1ms) SELECT "friendships".* FROM "friendships" WHERE "friendships"."friendable_id" = $1 AND "friendships"."friendable_type" = $2 AND "friendships"."friend_id" = $3 AND "friendships"."status" != $4 ORDER BY "friendships"."id" ASC LIMIT $5 [["friendable_id", 1], ["friendable_type", "User"], ["friend_id", 49], ["status", 3], ["LIMIT", 1]]
+User Load (0.1ms) SELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2 [["id", 1], ["LIMIT", 1]]
+User Load (0.1ms) SELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2 [["id", 49], ["LIMIT", 1]]
+HasFriendship::Friendship Update (0.3ms) UPDATE "friendships" SET "status" = $1, "blocker_id" = $2, "updated_at" = $3 WHERE "friendships"."id" = $4 [["status", 3], ["blocker_id", 1], ["updated_at", "2021-02-20 05:40:51.386480"], ["id", 7]]
+(5.4ms) COMMIT
+=> true
+2.6.1 :061 > HasFriendship::Friendship.first
+HasFriendship::Friendship Load (0.3ms) SELECT "friendships".* FROM "friendships" ORDER BY "friendships"."id" ASC LIMIT $1 [["LIMIT", 1]]
+=> #<HasFriendship::Friendship id: 7, friendable_type: "User", friendable_id: 1, friend_id: 49, created_at: "2021-02-20 05:40:37", updated_at: "2021-02-20 05:40:51", blocker_id: 1, status: "blocked">
+2.6.1 :062 > HasFriendship::Friendship.last
+HasFriendship::Friendship Load (0.4ms) SELECT "friendships".* FROM "friendships" ORDER BY "friendships"."id" DESC LIMIT $1 [["LIMIT", 1]]
+=> #<HasFriendship::Friendship id: 8, friendable_type: "User", friendable_id: 49, friend_id: 1, created_at: "2021-02-20 05:40:37", updated_at: "2021-02-20 05:40:51", blocker_id: 49, status: "blocked">
