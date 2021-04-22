@@ -1,0 +1,25 @@
+
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+Summary Page
+You can review the specified adapter configuration values on the Summary page.
+
+Element	Description
+Summary
+
+Displays a summary of the configuration values you defined on previous pages of the wizard.
+
+The information that is displayed can vary by adapter. For some adapters, the selected business objects and operation name are displayed. For adapters for which a generated XSD file is provided, click the XSD link to view a read-only version of the file.
+
+To return to a previous page to update any values, click the appropriate tab in the left panel or click Back. Click Cancel to cancel your configuration details.
+
+Was this page helpful?  
+About Oracle
+Contact Us
+Products A-Z
+Terms of Use & Privacy
+Cookie Preferences
+Ad Choices
+© Oracle
