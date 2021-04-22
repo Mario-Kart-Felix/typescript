@@ -1,0 +1,5 @@
+Deleting `package-lock.json` to Resolve Conflicts quickly
+javascript node.js npm package-lock.json
+In a team set up, usually, I have faced merge conflicts in package-lock.json and my quick fix has always been to delete the file and regenerate it with npm install. I have not seriously thought about the implication of this fix because it has not caused any perceivable problem before.
+
+Is there a problem with deleting the file and having npm recreate it that way instead of resolving the conflicts manually?
