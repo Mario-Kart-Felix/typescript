@@ -1,0 +1,49 @@
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+Configure an FTP Adapter to Write the Modified Zip File
+Add another FTP Adapter at the end of the integration to write the transformed file back into your sFTP server, from where other applications can pick the file up for further processing.
+
+Click Invokes Invokes icon on the pane to the right of the canvas.
+Expand FTP, drag and drop FTP Connection after the Create_Zip action.
+The Oracle Adapter Endpoint Configuration Wizard is displayed.
+
+On the Basic Info page, enter a name without a space (Send_Zip) and a description for the adapter. Click Next.
+On the Operations page, enter the following details.
+Field	Information to Enter
+Select Operation
+
+Select Write File.
+
+Select a Transfer Mode
+
+Select Binary.
+
+Output Directory
+
+Specify the path of the directory on your FTP server where the new file needs to be written . For example, /home/user2/FTP Bulk Transfer.
+
+File Name Pattern
+
+Enter test-data-modified.zip.
+
+Append to Existing File
+
+Leave it unchecked.
+
+Leave the selections for other fields unchanged, and click Next.
+
+On the Schema page, select No in the Do you want to specify the structure for the contents of the file? field. Click Next.
+On the Summary page, review the data you've entered and click Done.
+Configure Data Mapping for the FTP Adapter
+
+Note that a map action corresponding to the Send_Zip action is automatically added to the integration flow. Edit this action to map the file reference of the newly-created zip file to the file reference field of the FTP Adapter.
+
+Click the Map to Send_Zip element and select Edit Edit icon.
+In the mapper, click XSLT on the toolbar to enter an advanced view.
+Expand $Create_Zip Response on the left and map the FileReference element within it to the FileReference element on the right as shown in the following image.
+Click Save Save icon in the expression builder, click Validate, and Close.
+Description of map-send-zip.png follows
+Description of the illustration map-send-zip.png
+
