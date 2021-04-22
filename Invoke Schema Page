@@ -1,0 +1,89 @@
+
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+Invoke Schema Page
+Enter the schema properties.
+
+Element	Description
+Do you want to specify the structure for the contents of the file?
+
+Yes: Select to define a schema format to use for the file to transfer. This option enables you to read and write files up to 1 MB in size.
+
+No: Select if a schema is not required and you want to send the file as an attachment. You typically select No if you want to stream large files to or from the servers. This option enables you to read and write files up to 1 GB in size.
+
+Which one of the following choices would be used to describe the structure of the file contents?
+
+Select an option:
+Sample delimited document (e.g. CSV): Select to create a new schema file from a comma-separated value (CSV) file. On a subsequent page of this wizard, you are prompted to select the CSV file from which to create the schema.
+
+XML schema (XSD) document: Select an existing schema file. On a subsequent page of this wizard, you are prompted to select the existing schema (XSD) file from the file system. You can also upload non-native schemas that are created outside of Oracle Integration.
+
+See XSD File Capabilities.
+
+Sample XML document (Single or No Namespace): Select to provide sample XML content for the payload.
+
+Sample JSON document: Select to provide sample JSON content for the payload.
+
+XSD File Capabilities
+
+The adapter supports the upload of an XSD file without a target namespace. In these cases, a surrogate namespace is added to the XSD file that all messages then use:
+http://xmlns.oracle.com/cloud/adapter/nxsd/surrogate
+The adapter supports complex XSDs that can import and include other XSDs. The included XSDs in the ZIP file can import the XSD from an HTTP location. All XSD files must be added to a ZIP file and uploaded when configuring the adapter for read and write operations in the Adapter Endpoint Configuration Wizard.
+
+In the following example, the hierarchy of the ZIP file to upload is as follows:
+zipxsd.zip
+  first.xsd
+  second (folder)
+    second.xsd
+first.xsd imports second.xsd.
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+xmlns:tns="http://xmlns.oracle.com/first" 
+targetNamespace="http://xmlns.oracle.com/first" 
+      xmlns:tns1="http://xmlns.oracle.com/second"> 
+<xs:import schemaLocation="./second/second.xsd" 
+targetNamespace="http://xmlns.oracle.com/second"/>
+<xs:import schemaLocation="https://example.com/fscmService/ItemServiceV2?
+XSD=/xml/datagraph.xsd" targetNamespace="commonj.sdo"/>
+<xs:element name="book"> 
+  <xs:complexType> 
+    <xs:sequence> 
+      <xs:element name="isbn" type="xs:string"/>
+      <xs:element name="title" type="xs:string"/> 
+      <xs:element name="author" type="tns1:author"/> 
+    </xs:sequence> 
+  </xs:complexType>  
+</xs:element> 
+</xs:schema>
+The contents of second.xsd are as follows.
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+xmlns:tns="http://xmlns.oracle.com/second" 
+targetNamespace="http://xmlns.oracle.com/second"> 
+<xs:import schemaLocation="https://example.com/fscmService/ItemServiceV2?
+XSD=/mycompany/apps/scm/productModel/items/itemServiceV2/ItemAttachment.xsd" 
+targetNamespace="http://xmlns.oracle.com/apps/scm/productModel/items/itemServiceV2/"/>
+<xs:complexType name="author">
+    <xs:sequence> 
+       <xs:element name="name" type="xs:string"/>  
+       <xs:element name="address" type="xs:string"/> 
+    </xs:sequence> 
+</xs:complexType> 
+<xs:element name="Admin">
+    <xs:complexType>
+          <xs:sequence>
+             <xs:element name="AdminName" type="xs:string"/>
+             <xs:element name="AdminAdd" type="xs:string"/>
+          </xs:sequence>
+    </xs:complexType>
+</xs:element>
+</xs:schema> 
+Note:If you are importing from HTTPS locations, ensure that you import the SSL certificates into Oracle Integration.
+Was this page helpful?  
+About Oracle
+Contact Us
+Products A-Z
+Terms of Use & Privacy
+Cookie Preferences
+Ad Choices
+© Oracle
