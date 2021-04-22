@@ -1,0 +1,6 @@
+Create PKCS#12 Certificates and Keys
+You can manage and edit security credentials by creating PKCS#12 certificates and keys.
+
+Export vsftpd.pem from Step 11 of Install and Configure vsftpd into PKCS#12 format:
+
+openssl pkcs12 -export -out vsfptd.p12 -in vsfptd.pem  -inkey vsftpd.pem
