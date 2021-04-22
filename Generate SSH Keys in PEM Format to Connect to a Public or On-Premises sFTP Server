@@ -1,0 +1,26 @@
+
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+Generate SSH Keys in PEM Format to Connect to a Public or On-Premises sFTP Server
+You receive the following error when testing your connection after using an upgraded ssh-keygen tool to generate SSH keys in OPENSSH format. OPENSSH is a proprietary format. Oracle Integration requires the keys to be in PEM format.
+
+CASDK-0004: Failed to authenticate against the application with the
+credentials provided; Private Key or Passphrase is incorrect. Please verify
+the Private Key and Passphrase.
+Verify the key by opening the file in Notepad. The key must start with the following phrase. Oracle Integration supports keys in this format:
+-----BEGIN RSA PRIVATE KEY-----
+The following format is not supported. You must regenerate your keys in PEM format.
+
+-----BEGIN OPENSSH PRIVATE KEY-----
+Use -m PEM with ssh-keygen to generate private keys in PEM format:
+ssh-keygen -t rsa -m PEM
+Was this page helpful?  
+About Oracle
+Contact Us
+Products A-Z
+Terms of Use & Privacy
+Cookie Preferences
+Ad Choices
+© Oracle
