@@ -1,0 +1,40 @@
+
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+FTP Adapter Restrictions
+Note the following FTP Adapter restrictions.
+
+The FTP Adapter does not support the IBM FTP server.
+Oracle Integration does not support the form feed char (0xc) feature in the Extensible Markup Language (XML) 1.0 specification.
+The FTP Adapter only supports homogeneous arrays in JSON. Heterogeneous arrays in JSON samples and payloads are not supported.
+You must generate SSH keys in PEM format with the ssh-keygen tool to connect to an on-premises sFTP server. See Generate SSH Keys in PEM Format to Connect to a Public or On-Premises sFTP Server.
+Note the following restrictions when using the connectivity agent with the FTP Adapter:
+Unzipping is not supported with the Download File operation.
+The FTP Adapter is not supported as a trigger connection in a Basic Routing integration style.
+When configuring the FTP Adapter to communicate with an sFTP server through the connectivity agent, you must select an algorithm from the SFTP Key Exchange Algorithm field on the Connections page. Do not select the diffie-hellman-group1-sha1 algorithm. This algorithm is not supported with the connectivity agent.
+The FTP Adapter only supports homogeneous arrays in JSON. Heterogeneous arrays in JSON samples and payloads are not supported. An example of a heterogeneous array is as follows:
+{
+    "example": [
+         "kumar",
+        {
+            "firstName": ["John"],
+        },  
+        {
+            "length": 100,
+            "width": 60,
+            "height": 30
+        }
+]
+}
+The FTP Adapter does not support the processing of files from the same folder by two integrations. File deletion causes a conflict. For example, if one integration deletes a file, the second integration cannot find the file to delete, and fails.
+Note:There are overall service limits with Oracle Integration. A service limit is the quota or allowance set on a resource. See Service Limits.
+Was this page helpful?  
+About Oracle
+Contact Us
+Products A-Z
+Terms of Use & Privacy
+Cookie Preferences
+Ad Choices
+© Oracle
