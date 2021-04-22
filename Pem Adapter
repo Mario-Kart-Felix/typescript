@@ -1,0 +1,148 @@
+ory and Thread Safety in Real-World Rust Programs PLDI ’20, June 15–20, 2020, London, UK
+Year
+2012 2019 2020 2021
+# of changes
+500
+1000
+1500
+2000
+2500
+KLOC
+200
+400
+600
+800
+Year
+2012 2020
+changes
+KLOC
+Figure 1. Rust History. Each blue
+point shows the number of feature changes
+in one release version. Each red point shows
+total LOC in one release version.
+Year
+2012 2019 2020 2021
+# of bugs
+2
+4
+6
+8
+10
+Year
+2012 2020
+Servo
+Tock
+Ethereum
+TikV
+Redox
+libs
+Figure 2. Time of Studied Bugs.
+Each point shows the number of our stud-
+ied bugs that were patched during a three
+month period.
+Table 1. Studied Applications and Libraries.
+The start time, number of stars, and commits on GitHub,
+total source lines of code, the number of memory safety
+bugs, blocking bugs, and non-blocking bugs. libraries:
+maximum values among our studied libraries. There are
+22 bugs collected from the two CVE databases.
+Software Start Time Stars Commits LOC Mem Blk NBlk
+Servo 2012/02 14574 38096 271K 14 13 18
+Tock 2015/05 1343 4621 60K 5 0 2
+Ethereum 2015/11 5565 12121 145K 2 34 4
+TiKV 2016/01 5717 3897 149K 1 4 3
+Redox 2016/08 11450 2129 199K 20 2 3
+libraries 2010/07 3106 2402 25K 7 6 10
+and memory-safe. Rust defines a set of strict safety rules and
+uses the compiler to check these rules to statically rule out
+many potential safety issues. At runtime, Rust behaves like
+C and could achieve performance that is close to C.
+Rust is the most loved language in 2019 according to a
+Stack Overflow survey [49], and it was ranked as the fifth
+fastest growing language on GitHub in 2018 [45]. Because
+of its safety and performance benefits, Rust’s adoption in
+systems software has increased rapidly in recent years [3, 16,
+23, 59, 68, 76, 77]. For example, Microsoft is actively exploring
+Rust as an alternative to C/C++ because of its memory-safety
+features [9, 44].
+Rust was first released in 2012 and is now at version 1.39.0.
+Figure 1 shows the number of feature changes and LOC over
+the history of Rust. Rust went through heavy changes in the
+first four years since its release, and it has been stable since
+Jan 2016 (v1.6.0). With it being stable for more than three
+and a half years, we believe that Rust is now mature enough
+for an empirical study like ours. Figure 2 shows the fixed
+date of our analyzed bugs. Among the 170 bugs, 145 of them
+were fixed after 2016. Therefore, we believe our study results
+reflect the safety issues under stable Rust versions.
+1 #[derive(Debug)]
+2 struct Test {v: i32}
+3 fn f0(_t: Test) {}
+4 fn f1() {
+5 let t0 = Test{v: 0};
+6 f0(t0);
+7 // println!("{:?}", t0);
+8 if true {
+9 let t1 = Test{v: 1};
+10 }
+11 // println!("{:?}", t1);
+12 }
+13 fn f2() {
+14 let mut t2 = Test{v: 2};
+15 let r1 = &t2;
+16 let mut r2 = &mut t2;
+17 r2.v = 3;
+18 // println!("{:?}", r1);
+19 }
+(a) ownership & lifetime (b) borrow
+Figure 3. Sample code to illustrate Rust’s safety rules.
+2.2 Safety Mechanisms
+The goal of Rust’s safety mechanism is to prevent memory
+and thread safety issues that have plagued C programs. Its
+design centers around the notion of ownership. At its core,
+Rust enforces a strict and restrictive rule of ownership: each
+value has one and only one owner variable, and when the
+owner’s lifetime ends, the value will be dropped (freed). The
+lifetime of a variable is the scope where it is valid, i.e., from
+its creation to the end of the function it is in or to the end
+of matching parentheses (e.g., the lifetime of t1 in Figure 3
+spans from line 9 to line 10). This strict ownership rule elim-
+inates memory errors like use-after-free and double-free,
+since the Rust compiler can statically detect and rejects the
+use of a value when its owner goes out of scope (e.g., un-
+commenting line 11 in Figure 3 will raise a compile error).
+This rule also eliminates synchronization errors like race
+conditions, since only one thread can own a value at a time.
+Under Rust’s basic ownership rule, a value has one exclu-
+sive owner. Rust extends this basic rule with a set of features
+to support more programming flexibility while still ensur-
+ing memory- and thread-safety. These features (as explained
+below) relax the restriction of having only one owner for
+the lifetime of a value but still prohibit having aliasing and
+mutation at the same time, and Rust statically checks these
+extended rules at compile time.
+Ownership move. The ownership of a value can be moved
+from one scope to another, for example, from a caller to
+a callee and from one thread to another thread. The Rust
+compiler statically guarantees that an owner variable cannot
+be accessed after its ownership is moved. As a result, a caller
+cannot access a value anymore if the value is dropped in the
+callee function, and a shared value can only be owned by
+one thread at any time. For example, if line 7 in Figure 3 is
+uncommented, the Rust compiler will report an error, since
+the ownership of t0 has already been moved to function
+f0() at line 6.
+Ownership borrowing. A value’s ownership can also be
+borrowed temporarily to another variable for the lifetime of
+this variable without moving the ownership. Borrowing is
+achieved by passing the value by reference to the borrower
+variable. Rust does not allow borrowing ownership across
+threads, since a value’s lifetime cannot be statically inferred
+across threads and there is no way the Rust compiler can
+guarantee that all usages of a value are covered by its lifetime.
+Mutable and Shared references. Another extension Rust
+adds on top of the basic ownership rules is the support of mul-
+tiple shared read-only references, i.e., immutable references
+that allow read-only aliasing. A value’s reference can also
+be mutable, allowing write access to the value, but there can
+only be one mutable reference and no immutable references
