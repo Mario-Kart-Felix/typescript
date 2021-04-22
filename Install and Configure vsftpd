@@ -1,0 +1,86 @@
+
+
+
+Integration
+Using the FTP Adapter with Oracle Integration
+Install and Configure vsftpd
+The vsftpd server is a secure and fast FTP server for UNIX systems. Install and configure vsftpd on the Solaris or Linux host to be used as the FTP server.
+
+Go to the following location:
+ftp://vsftpd.beasts.org/users/cevans/
+Download vsftpd-2.0.5 (You must have the tar and signature file (.asc file)). For example:
+[BINARY]     vsftpd-2.0.5.tar.gz. . . . . . . . . . .    [Mar 19 21:26]    149K
+[FILE]       vsftpd-2.0.5.tar.gz.asc. . . . . . . . .    [Mar 19 21:26]    189B
+Unzip the following file using gunzip.
+gunzip vsftpd-2.0.5.tar.gz
+Unzip the tar file:
+tar xvf vsftpd-2.0.5.tar
+Change directories to the following location:
+cd vsftpd-2.0.5
+Make the following change in the builddefs.h file:
+#undef VSF_BUILD_SSL
+to
+
+#define VSF_BUILD_SSL
+Log in as the super user:
+msu
+Enter the password when prompted.
+Create a file named vsftpd.conf with the following settings in the /etc directory:
+# Standalone mode
+listen=YES
+max_clients=200
+max_per_ip=4
+# Access rights
+anonymous_enable=YES
+#chroot_local_user=YES
+#userlist_enable=YES
+ftp_username=ftp
+local_enable=YES
+write_enable=YES
+anon_upload_enable=YES
+anon_mkdir_write_enable=YES
+anon_other_write_enable=YES
+chown_uploads=YES
+chown_username=ftp
+# Security
+anon_world_readable_only=NO
+allow_anon_ssl=YES
+ssl_enable=YES
+connect_from_port_20=YES
+hide_ids=YES
+pasv_min_port=50000
+pasv_max_port=60000
+# Features
+ftpd_banner="Welcome to the FTP Service"
+xferlog_enable=YES
+ls_recurse_enable=NO
+ascii_download_enable=NO
+async_abor_enable=YES
+# Performance
+one_process_model=NO
+idle_session_timeout=120
+data_connection_timeout=300
+accept_timeout=60
+connect_timeout=60
+anon_max_rate=50000
+Note:Copies of the vsftpd.conf file appear in several locations in the vsftpd-2.0.5 directory structure. If you use one of those files to create the vsftpd.conf file in the /etc directory, ensure that it only includes the parameters and settings described in Step 9.
+Run the following commands:
+mkdir /var/ftp
+useradd -d /var/ftp ftp
+chown root /var/ftp
+chmod og-w /var/ftp 
+mkdir /usr/share/empty
+mkdir /usr/share/ssl 
+mkdir /usr/share/ssl/certs 
+Run the following command:
+openssl req -x509 -nodes -newkey rsa:1024 -keyout /usr/share/ssl/certs/vsftpd.pem -out /usr/share/ssl/certs/vsftpd.pem
+Run the vsftpd daemon from the vsftpd-2.0.5 directory:
+./vsftpd
+Was this page helpful?  
+About Oracle
+Contact Us
+Products A-Z
+Terms of Use & Privacy
+Cookie Preferences
+Ad Choices
+© Oracle
