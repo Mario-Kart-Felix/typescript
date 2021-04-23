@@ -1,0 +1,120 @@
+GitHub Docs
+
+GitHub Packages  Guides  Package client guides for GitHub Packages  Configuring RubyGems for use with GitHub Packages
+Configuring RubyGems for use with GitHub Packages
+You can configure RubyGems to publish a package to GitHub Packages and to use packages stored on GitHub Packages as dependencies in a Ruby project with Bundler.
+
+GitHub Packages is available with GitHub Free, GitHub Pro, GitHub Free for organizations, GitHub Team, GitHub Enterprise Cloud, GitHub Enterprise Server 2.22, and GitHub AE.
+
+
+GitHub Packages is not available for private repositories owned by accounts using legacy per-repository plans. Also, accounts using legacy per-repository plans cannot access GitHub Container Registry since these accounts are billed by repository. For more information, see "GitHub's products."
+
+In this article
+Prerequisites
+Authenticating to GitHub Packages
+Publishing a package
+Publishing multiple packages to the same repository
+Installing a package
+Further reading
+Prerequisites
+You must have rubygems 2.4.1 or higher. To find your rubygems version:
+
+$ gem --version
+You must have bundler 1.6.4 or higher. To find your Bundler version:
+
+$ bundle --version
+Bundler version 1.13.7
+Install keycutter to manage multiple credentials. To install keycutter:
+
+$ gem install keycutter
+Authenticating to GitHub Packages
+You need an access token to publish, install, and delete packages. You can use a personal access token to authenticate with your username directly to GitHub Packages or the GitHub API. When you create a personal access token, you can assign the token different scopes depending on your needs.
+
+To authenticate using a GitHub Actions workflow:
+
+For package registries (PACKAGE-REGISTRY.pkg.github.com), you can use a GITHUB_TOKEN.
+For the container registry (ghcr.io/OWNER/IMAGE-NAME), you can use a GITHUB_TOKEN or a personal access token. We strongly recommend you use a GITHUB_TOKEN to avoid unncessary access to your repositories.
+For more information about GITHUB_TOKEN used in GitHub Actions workflows, see "Encrypted secrets" and "Authentication in a workflow."
+
+Authenticating with a personal access token
+You must use a personal access token with the appropriate scopes to publish and install packages in GitHub Packages. For more information, see "About GitHub Packages."
+
+You can authenticate to GitHub Packages with RubyGems by editing the ~/.gem/credentials file for publishing gems, editing the ~/.gemrc file for installing a single gem, or using Bundler for tracking and installing one or more gems.
+
+To publish new gems, you need to authenticate to GitHub Packages with RubyGems by editing your ~/.gem/credentials file to include your personal access token. Create a new ~/.gem/credentials file if this file doesn't exist.
+
+For example, you would create or edit a ~/.gem/credentials to include the following, replacing TOKEN with your personal access token.
+
+---
+:github: Bearer TOKEN
+To install gems, you need to authenticate to GitHub Packages by editing the ~/.gemrc file for your project to include https://USERNAME:TOKEN@rubygems.pkg.github.com/OWNER/. You must replace:
+
+USERNAME with your GitHub username.
+TOKEN with your personal access token.
+OWNER with the name of the user or organization account that owns the repository containing your project.
+If you don't have a ~/.gemrc file, create a new ~/.gemrc file using this example.
+
+---
+:backtrace: false
+:bulk_threshold: 1000
+:sources:
+- https://rubygems.org/
+- https://USERNAME:TOKEN@rubygems.pkg.github.com/OWNER/
+:update_sources: true
+:verbose: true  
+To authenticate with Bundler, configure Bundler to use your personal access token, replacing USERNAME with your GitHub username, TOKEN with your personal access token, and OWNER with the name of the user or organization account that owns the repository containing your project.
+
+$ bundle config https://rubygems.pkg.github.com/OWNER USERNAME:TOKEN
+Authenticating with the GITHUB_TOKEN
+If you are using a GitHub Actions workflow, you can use a GITHUB_TOKEN to publish and consume packages in GitHub Packages without needing to store and manage a personal access token. For more information, see "Authenticating with the GITHUB_TOKEN."
+
+Publishing a package
+By default, GitHub publishes the package to an existing repository with the same name as the package. For example, when you publish octo-gem to the octo-org organization, GitHub Packages publishes the gem to the octo-org/octo-gem repository. For more information on creating your gem, see "Make your own gem" in the RubyGems documentation.
+
+After you publish a package, you can view the package on GitHub. For more information, see "Viewing packages."
+
+Authenticate to GitHub Packages. For more information, see "Authenticating to GitHub Packages."
+
+Build the package from the gemspec to create the .gem package.
+
+gem build OCTO-GEM.gemspec
+Publish a package to GitHub Packages, replacing OWNER with the name of the user or organization account that owns the repository containing your project and OCTO-GEM with the name of your gem package.
+
+$ gem push --key github \
+--host https://rubygems.pkg.github.com/OWNER \
+OCTO-GEM-0.0.1.gem
+Publishing multiple packages to the same repository
+To publish multiple gems to the same repository, you can include the URL to the GitHub repository in the github_repo field in gem.metadata. If you include this field, GitHub matches the repository based on this value, instead of using the gem name.
+
+gem.metadata = { "github_repo" => "ssh://github.com/OWNER/REPOSITORY" }
+Installing a package
+You can use gems from GitHub Packages much like you use gems from rubygems.org. You need to authenticate to GitHub Packages by adding your GitHub user or organization as a source in the ~/.gemrc file or by using Bundler and editing you Gemfile.
+
+Authenticate to GitHub Packages. For more information, see "Authenticating to GitHub Packages."
+
+For Bundler, add your GitHub user or organization as a source in your Gemfile to fetch gems from this new source. For example, you can add a new source block to your Gemfile that uses GitHub Packages only for the packages you specify, replacing GEM NAME with the package you want to install from GitHub Packages and OWNER with the user or organization that owns the repository containing the gem you want to install.
+
+source "https://rubygems.org"
+
+gem "rails"
+
+source "https://rubygems.pkg.github.com/OWNER" do
+  gem "GEM NAME"
+end
+For Bundler versions earlier than 1.7.0, you need to add a new global source. For more information on using Bundler, see the bundler.io documentation.
+
+source "https://rubygems.pkg.github.com/OWNER"
+source "https://rubygems.org"
+
+gem "rails"
+gem "GEM NAME"
+Install the package:
+
+$ gem install octo-gem --version "0.1.1"
+Further reading
+"Deleting and restoring a package"
+Did this doc help you?
+Privacy policy
+
+ 
+
