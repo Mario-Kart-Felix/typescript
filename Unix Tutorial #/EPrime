@@ -1,0 +1,18 @@
+E-Prime is a stimulus presentation software that is used in both behavioral and neuroimaging research. The goal of this module is to help you learn E-Prime, as well as some of the basics of object-oriented programming. Don’t worry if you’ve never heard of object-oriented programming before; E-Prime has an intuitive graphical user interface that makes it easy to see the link between the objects used in the interface, and the objects that are created and modified using code.
+
+As you work through the tutorials, you will be introducted to object-oriented programming through E-Basic - E-Prime’s scripting language - which in turn will allow you to adapt your experiment to different situations, including fMRI experiments.
+
+Preprocessing Steps
+
+E-Prime Tutorial #1: Introduction to E-Prime
+E-Prime Tutorial #2: Objects
+Intermezzo: The Stroop Task
+E-Prime Tutorial #3: Slides and Advanced Properties
+E-Prime Tutorial #4: Lists, Procedures, and Attributes
+E-Prime Tutorial #5: Counterbalancing
+E-Prime Tutorial #6: The FeedbackDisplay Object and an Introduction to Slide States
+E-Prime Tutorial #7: Slide States
+E-Prime Tutorial #8: Inline Objects
+E-Prime Tutorial #9: The Startup Info Tab
+E-Prime Tutorial #10: E-Merge and E-Data Aid
+E-Prime Tutorial #11: Making an fMRI Experiment
