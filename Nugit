@@ -1,0 +1,190 @@
+GitHub Docs
+
+GitHub Packages  Guides  Package client guides for GitHub Packages  Configuring dotnet CLI for use with GitHub Packages
+Configuring dotnet CLI for use with GitHub Packages
+You can configure the dotnet command-line interface (CLI) to publish NuGet packages to GitHub Packages and to use packages stored on GitHub Packages as dependencies in a .NET project.
+
+GitHub Packages is available with GitHub Free, GitHub Pro, GitHub Free for organizations, GitHub Team, GitHub Enterprise Cloud, GitHub Enterprise Server 2.22, and GitHub AE.
+
+
+GitHub Packages is not available for private repositories owned by accounts using legacy per-repository plans. Also, accounts using legacy per-repository plans cannot access GitHub Container Registry since these accounts are billed by repository. For more information, see "GitHub's products."
+
+In this article
+Authenticating to GitHub Packages
+Publishing a package
+Publishing multiple packages to the same repository
+Installing a package
+Further reading
+Authenticating to GitHub Packages
+You need an access token to publish, install, and delete packages. You can use a personal access token to authenticate with your username directly to GitHub Packages or the GitHub API. When you create a personal access token, you can assign the token different scopes depending on your needs.
+
+To authenticate using a GitHub Actions workflow:
+
+For package registries (PACKAGE-REGISTRY.pkg.github.com), you can use a GITHUB_TOKEN.
+For the container registry (ghcr.io/OWNER/IMAGE-NAME), you can use a GITHUB_TOKEN or a personal access token. We strongly recommend you use a GITHUB_TOKEN to avoid unncessary access to your repositories.
+For more information about GITHUB_TOKEN used in GitHub Actions workflows, see "Encrypted secrets" and "Authentication in a workflow."
+
+Authenticating with a personal access token
+You must use a personal access token with the appropriate scopes to publish and install packages in GitHub Packages. For more information, see "About GitHub Packages."
+
+To authenticate to GitHub Packages with the dotnet command-line interface (CLI), create a nuget.config file in your project directory specifying GitHub Packages as a source under packageSources for the dotnet CLI client.
+
+You must replace:
+
+USERNAME with the name of your user account on GitHub.
+TOKEN with your personal access token.
+OWNER with the name of the user or organization account that owns the repository containing your project.
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <packageSources>
+        <clear />
+        <add key="github" value="https://nuget.pkg.github.com/OWNER/index.json" />
+    </packageSources>
+    <packageSourceCredentials>
+        <github>
+            <add key="Username" value="USERNAME" />
+            <add key="ClearTextPassword" value="TOKEN" />
+        </github>
+    </packageSourceCredentials>
+</configuration>
+Authenticating with the GITHUB_TOKEN
+If you are using a GitHub Actions workflow, you can use a GITHUB_TOKEN to publish and consume packages in GitHub Packages without needing to store and manage a personal access token. For more information, see "Authenticating with the GITHUB_TOKEN."
+
+Publishing a package
+You can publish a package to GitHub Packages by authenticating with a nuget.config file, or by using the --api-key command line option with your GitHub personal access token (PAT).
+
+Publishing a package using a GitHub PAT as your API key
+If you don't already have a PAT to use for your GitHub account, see "Creating a personal access token."
+
+Create a new project.
+
+dotnet new console --name OctocatApp
+Package the project.
+
+dotnet pack --configuration Release
+Publish the package using your PAT as the API key.
+
+dotnet nuget push "bin/Release/OctocatApp.1.0.0.nupkg"  --api-key YOUR_GITHUB_PAT --source "github"
+After you publish a package, you can view the package on GitHub. For more information, see "Viewing packages."
+
+Publishing a package using a nuget.config file
+When publishing, you need to use the same value for OWNER in your csproj file that you use in your nuget.config authentication file. Specify or increment the version number in your .csproj file, then use the dotnet pack command to create a .nuspec file for that version. For more information on creating your package, see "Create and publish a package" in the Microsoft documentation.
+
+Authenticate to GitHub Packages. For more information, see "Authenticating to GitHub Packages."
+
+Create a new project.
+
+dotnet new console --name OctocatApp
+Add your project's specific information to your project's file, which ends in .csproj. You must replace:
+
+OWNER with the name of the user or organization account that owns the repository containing your project.
+REPOSITORY with the name of the repository containing the package you want to publish.
+1.0.0 with the version number of the package.
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <PackageId>OctocatApp</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Octocat</Authors>
+    <Company>GitHub</Company>
+    <PackageDescription>This package adds an Octocat!</PackageDescription>
+    <RepositoryUrl>https://github.com/OWNER/REPOSITORY</RepositoryUrl>
+  </PropertyGroup>
+
+</Project>
+Package the project.
+
+dotnet pack --configuration Release
+Publish the package using the key you specified in the nuget.config file.
+
+dotnet nuget push "bin/Release/OctocatApp.1.0.0.nupkg" --source "github"
+After you publish a package, you can view the package on GitHub. For more information, see "Viewing packages."
+
+Publishing multiple packages to the same repository
+To publish multiple packages to the same repository, you can include the same GitHub repository URL in the RepositoryURL fields in all .csproj project files. GitHub matches the repository based on that field.
+
+For example, the OctodogApp and OctocatApp projects will publish to the same repository:
+
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <PackageId>OctodogApp</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Octodog</Authors>
+    <Company>GitHub</Company>
+    <PackageDescription>This package adds an Octodog!</PackageDescription>
+    <RepositoryUrl>https://github.com/octo-org/octo-cats-and-dogs</RepositoryUrl>
+  </PropertyGroup>
+
+</Project>
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <PackageId>OctocatApp</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Octocat</Authors>
+    <Company>GitHub</Company>
+    <PackageDescription>This package adds an Octocat!</PackageDescription>
+    <RepositoryUrl>https://github.com/octo-org/octo-cats-and-dogs</RepositoryUrl>
+  </PropertyGroup>
+
+</Project>
+Installing a package
+Using packages from GitHub in your project is similar to using packages from nuget.org. Add your package dependencies to your .csproj file, specifying the package name and version. For more information on using a .csproj file in your project, see "Working with NuGet packages" in the Microsoft documentation.
+
+Authenticate to GitHub Packages. For more information, see "Authenticating to GitHub Packages."
+
+To use a package, add ItemGroup and configure the PackageReference field in the .csproj project file, replacing the OctokittenApp package with your package dependency and 1.0.0 with the version you want to use:
+
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <PackageId>OctocatApp</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Octocat</Authors>
+    <Company>GitHub</Company>
+    <PackageDescription>This package adds an Octocat!</PackageDescription>
+    <RepositoryUrl>https://github.com/OWNER/REPOSITORY</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="OctokittenApp" Version="12.0.2" />
+  </ItemGroup>
+
+</Project>
+Install the packages with the restore command.
+
+dotnet restore
+Further reading
+"Deleting and restoring a package"
+Did this doc help you?
+Privacy policy
+
+ 
+
+Help us make these docs great!
+All GitHub docs are open source. See something that's wrong or unclear? Submit a pull request.
+
+Or, learn how to contribute.
+
+Still need help?
+ 
+© 2021 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+Developer API
+Training
+About
