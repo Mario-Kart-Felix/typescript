@@ -1,0 +1,141 @@
+GitHub Docs
+
+GitHub Packages  Guides  Package client guides for GitHub Packages  Configuring Apache Maven for use with GitHub Packages
+Configuring Apache Maven for use with GitHub Packages
+You can configure Apache Maven to publish packages to GitHub Packages and to use packages stored on GitHub Packages as dependencies in a Java project.
+
+GitHub Packages is available with GitHub Free, GitHub Pro, GitHub Free for organizations, GitHub Team, GitHub Enterprise Cloud, GitHub Enterprise Server 2.22, and GitHub AE.
+
+
+GitHub Packages is not available for private repositories owned by accounts using legacy per-repository plans. Also, accounts using legacy per-repository plans cannot access GitHub Container Registry since these accounts are billed by repository. For more information, see "GitHub's products."
+
+In this article
+Authenticating to GitHub Packages
+Publishing a package
+Installing a package
+Further reading
+Authenticating to GitHub Packages
+You need an access token to publish, install, and delete packages. You can use a personal access token to authenticate with your username directly to GitHub Packages or the GitHub API. When you create a personal access token, you can assign the token different scopes depending on your needs.
+
+To authenticate using a GitHub Actions workflow:
+
+For package registries (PACKAGE-REGISTRY.pkg.github.com), you can use a GITHUB_TOKEN.
+For the container registry (ghcr.io/OWNER/IMAGE-NAME), you can use a GITHUB_TOKEN or a personal access token. We strongly recommend you use a GITHUB_TOKEN to avoid unncessary access to your repositories.
+For more information about GITHUB_TOKEN used in GitHub Actions workflows, see "Encrypted secrets" and "Authentication in a workflow."
+
+Authenticating with a personal access token
+You must use a personal access token with the appropriate scopes to publish and install packages in GitHub Packages. For more information, see "About GitHub Packages."
+
+You can authenticate to GitHub Packages with Apache Maven by editing your ~/.m2/settings.xml file to include your personal access token. Create a new ~/.m2/settings.xml file if one doesn't exist.
+
+In the servers tag, add a child server tag with an id, replacing USERNAME with your GitHub username, and TOKEN with your personal access token.
+
+In the repositories tag, configure a repository by mapping the id of the repository to the id you added in the server tag containing your credentials. Replace , and OWNER with the name of the user or organization account that owns the repository. Because uppercase letters aren't supported, you must use lowercase letters for the repository owner even if the GitHub user or organization name contains uppercase letters.
+
+If you want to interact with multiple repositories, you can add each repository to separate repository children in the repositories tag, mapping the id of each to the credentials in the servers tag.
+
+GitHub Packages supports SNAPSHOT versions of Apache Maven. To use the GitHub Packages repository for downloading SNAPSHOT artifacts, enable SNAPSHOTS in the POM of the consuming project or your ~/.m2/settings.xml file.
+
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                      http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+  <activeProfiles>
+    <activeProfile>github</activeProfile>
+  </activeProfiles>
+
+  <profiles>
+    <profile>
+      <id>github</id>
+      <repositories>
+        <repository>
+          <id>central</id>
+          <url>https://repo1.maven.org/maven2</url>
+        </repository>
+        <repository>
+          <id>github</id>
+          <url>https://maven.pkg.github.com/OWNER/*</url>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </repository>
+      </repositories>
+    </profile>
+  </profiles>
+
+  <servers>
+    <server>
+      <id>github</id>
+      <username>USERNAME</username>
+      <password>TOKEN</password>
+    </server>
+  </servers>
+</settings>
+Authenticating with the GITHUB_TOKEN
+If you are using a GitHub Actions workflow, you can use a GITHUB_TOKEN to publish and consume packages in GitHub Packages without needing to store and manage a personal access token. For more information, see "Authenticating with the GITHUB_TOKEN."
+
+Publishing a package
+By default, GitHub publishes the package to an existing repository with the same name as the package. For example, GitHub will publish a package named com.example:test in a repository called OWNER/test.
+
+If you would like to publish multiple packages to the same repository, you can include the URL of the repository in the <distributionManagement> element of the pom.xml file. GitHub will match the repository based on that field. Since the repository name is also part of the distributionManagement element, there are no additional steps to publish multiple packages to the same repository.
+
+For more information on creating a package, see the maven.apache.org documentation.
+
+Edit the distributionManagement element of the pom.xml file located in your package directory, replacing OWNER with the name of the user or organization account that owns the repository and REPOSITORY with the name of the repository containing your project.
+
+<distributionManagement>
+   <repository>
+     <id>github</id>
+     <name>GitHub OWNER Apache Maven Packages</name>
+     <url>https://maven.pkg.github.com/OWNER/REPOSITORY</url>
+   </repository>
+</distributionManagement>
+Publish the package.
+
+$ mvn deploy
+After you publish a package, you can view the package on GitHub. For more information, see "Viewing packages."
+
+Installing a package
+To install an Apache Maven package from GitHub Packages, edit the pom.xml file to include the package as a dependency. If you want to install packages from more than one repository, add a repository tag for each. For more information on using a pom.xml file in your project, see "Introduction to the POM" in the Apache Maven documentation.
+
+Authenticate to GitHub Packages. For more information, see "Authenticating to GitHub Packages."
+
+Add the package dependencies to the dependencies element of your project pom.xml file, replacing com.example:test with your package.
+
+<dependencies>
+  <dependency>
+    <groupId>com.example</groupId>
+    <artifactId>test</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </dependency>
+</dependencies>
+Install the package.
+
+$ mvn install
+Further reading
+"Configuring Gradle for use with GitHub Packages"
+"Deleting and restoring a package"
+Did this doc help you?
+Privacy policy
+
+ 
+
+Help us make these docs great!
+All GitHub docs are open source. See something that's wrong or unclear? Submit a pull request.
+
+Or, learn how to contribute.
+
+Still need help?
+ 
+© 2021 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+Developer API
+Training
+About
