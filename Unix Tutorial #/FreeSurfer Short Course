@@ -1,0 +1,34 @@
+FreeSurfer Short Course
+Overview
+FreeSurfer is a software package that enables you to analyze structural MRI images - in other words, you can use FreeSurfer to quantify the amount of grey matter and white matter in specific regions of the brain. You will also be able to calculate measurements such as the thickness, curvature, and volume of the different tissue types, and be able to correlate these with covariates; or, you can contrast these structural measurements between groups.
+
+../_images/FS_GroupOutput.png
+An example of a typical group-level map created by FreeSurfer. This is from a group-level contrast between two groups, with the red and blue colors indicating where there are differences in cortical thickness between the groups. Typically these results are depicted on inflated brains; darker grey represents sulci, and lighter grey represents gyri.
+
+This course will show you how to download and install FreeSurfer, and how to analyze a dataset from start to finish. Along the way you’ll learn the basic FreeSurfer vocabulary and how to do preprocessing, volume editing, and region of interest analysis.
+
+Start to Finish Analysis with FreeSurfer
+
+FreeSurfer Tutorial #1: Basic Terms
+FreeSurfer Tutorial #2: How to Download and Install
+FreeSurfer Tutorial #3: Recon-all
+FreeSurfer Tutorial #4: Running recon-all in Parallel
+FreeSurfer Tutorial #5: Using the Open Science Grid
+FreeSurfer Tutorial #6: Freeview
+FreeSurfer Tutorial #7: The FSGD File
+FreeSurfer Tutorial #8: Group Analysis
+FreeSurfer Tutorial #9: Cluster Correction
+FreeSurfer Tutorial #10: Correlation Analysis
+FreeSurfer Tutorial #11: Region of Interest Analysis
+FreeSurfer Tutorial #12: Introduction to Failure Modes
+FreeSurfer Tutorial #13: SkullStripping and Pial Surface Errors
+FreeSurfer Tutorial #14: Control Points and Intensity Normalization
+Appendix A: Local Gyrification Index
+Appendix B: PETSurfer
+Note
+
+The following is under construction; check back soon!
+
+Start to Finish Analysis with TRACULA
+
+TRACULA Tutorial #1: Overview
