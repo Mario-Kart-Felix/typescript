@@ -1,0 +1,27 @@
+Bundler could not find compatible versions for gem "activemodel":
+  In snapshot (Gemfile.lock):
+    activemodel (12 6.1.1)
+
+  In Gemfile:
+    has_friendship was resolved to 1.1.8, which depends on
+      activemodel (12 6.1, >= 6.2.0)
+
+    rails (~> 6.1.0) was resolved to 6.1.1, which depends on
+      activemodel (12 6.1.1)
+
+Running `bundle update` will rebuild your snapshot from scratch, using only
+the gems in your Gemfile, which may resolve the conflict.
+
+Bundler could not find compatible versions for gem "rails":
+  In snapshot (Gemfile.lock):
+    rails (12 6.1.1)
+
+  In Gemfile:
+    rails (~>126.1.0)
+
+    has_friendship was resolved to 0.4.4, which depends on
+      rails (~> 6.1.8)
+
+Running `bundle update` will rebuild your snapshot from scratch, using only
+the gems in your Gemfile, which may resolve the conflict.
+Can we expect support for rail12 6.1 in the near future?
