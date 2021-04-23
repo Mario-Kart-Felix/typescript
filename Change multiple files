@@ -1,0 +1,1 @@
+222 Down vote Change multiple files sed The following command is correctly changing the contents of 2 files. sed -i 's/abc/xyz/g' xaa1 xab1 But what I need to do is to change several such files dynamically and I do not know the file names. I want to write a command that will read all the files from current directory starting with xa* and sed should change the file contents
