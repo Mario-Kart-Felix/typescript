@@ -1,0 +1,15 @@
+fMRIPrep Demonstration
+This module will demonstrate how to use fMRIPrep to analyze a publicly available dataset on OpenNeuro.org. We will analyze the same dataset that we used for the AFNI tutorial, and then compare the results. This will allow you to make an educated decision about what type of analysis pipeline is best for you.
+
+Note
+
+This page by Saren Seeley is a useful overview of BIDS and fMRIPREP, as well as solutions to some common issues that come up during preprocessing.
+
+Open Science Topics
+
+fMRIPrep Tutorial #1: Downloading the Data
+fMRIPrep Tutorial #2: Running the Analysis
+fMRIPrep Tutorial #3: Examining the Preprocessed Data
+fMRIPrep Tutorial #4: Additional Preprocessing Steps
+fMRIPrep Tutorial #5: Running the 1st-level Analysis
+fMRIPrep Tutorial #6: Group Analysis
