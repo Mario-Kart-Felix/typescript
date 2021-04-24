@@ -1,0 +1,183 @@
+
+JavaScript in Digital Marketing [5 Examples]
+By Mario H. Felix Specialist
+javascript in digital marketing
+Table of Contents	
+Where is JavaScript Used in Digital Marketing?
+1) JavaScript Changes on Website A/B Testing Tools
+2) Implement Tracking in Google Tag Manager
+3) Scrape Web Pages for Content Research
+4) Get Data From APIs (application programming interface)
+5) Automate Reporting in Google Sheets Through Google Apps Script
+Conclusion – learn JavaScript even just a little bit
+I posted a blog post on how coding is used in digital marketing. This skill is important for a web analytics consultant. This blog post will dive deeper into a practical application of a widely-used programming language: JavaScript.
+
+JS
+Disclaimer: I use coding and programming loosely here. Programming is the creation of an application, according to the web development community. I define programming or coding as using a programming language to do a specific task.
+
+Another thing to consider is that HTML and CSS, which are grouped with JavaScript for web development, are not programming languages. Those two are markup and style languages. To all web developers who are reading this, I did my research! 😜
+
+On with the post…
+
+JavaScript is hard to master. Its syntax is convoluted and its history is rich with so many updates. Its concepts have deeper concepts. And those deeper concepts are within other deeper concepts. In fact, there are many Inception moments while learning it.
+
+I still struggle with understanding it today so I would be lying if I say I know how to program. That said, there’s a practical benefit to knowing JavaScript in digital marketing since it’s considered the language of the web.
+
+Where is JavaScript Used in Digital Marketing?
+1) JavaScript Changes on Website A/B Testing Tools
+First, let’s learn about DOM manipulation. Document Object Model manipulation or DOM manipulation is what I’d define as “change a web page real-time just by using a web browser.”
+
+Websites are rendered by the browser. Whenever you see web pages, they are renditions of HTML, CSS and JavaScript code interpreted by the browser with an object element hierarchy. This is the DOM.
+
+This means that if you can change these HTML elements within the web browser, you can change web pages in real-time. No need to go to the backend.
+
+This is one of the basics of web development. I won’t bore anyone with the details. Just see for yourself…
+
+Do these steps:
+
+Go to any web page
+Press right-click
+Click ‘Inspect’
+You will now see something like this:
+
+homepagescreen
+This is the developer tool of Google Chrome called Chrome DevTools and this is what’s happening under the hood. The magic happens here!
+
+I can now change elements on my homepage by traversing the DOM and whipping out a JavaScript code in the Console.
+
+homepage 01
+I was able to change the background color of my homepage without logging in WordPress. How cool is that!
+
+Let’s say you want to re-arrange an entire block or section of a web page. That’s also possible.
+
+homepage 02
+I was able to re-arrange HTML elements on my website through Google Chrome by using the code below.
+
+var header = document.querySelector('.elementor-section-wrap')
+var intro = document.querySelector('.elementor-element-5c31627')
+var services = document.querySelector('.elementor-element-0aa0836')
+header.insertBefore(services, intro)
+Anyone can try this so I encourage anyone to do this on my homepage! 😂
+
+What does this have anything to do with digital marketing?
+
+If someone works in digital marketing, specifically conversion rate optimization, the value of learning JavaScript comes from A/B testing pages. Conversion optimizers might rely on the visual editor that is built-in to these tools, but it’s limited and it couldn’t do a more granular change.
+
+So, what to do? Make JavaScript changes.
+
+Here’s an example of implementing JavaScript changes on Google Optimize (an A/B testing tool). Digital marketers or conversion optimizers will now able to make the changes themselves without waiting on web developers. Just find the Run JavaScript and put the code in.
+
+GO
+Google Optimize interface
+Learning and practicing DOM manipulation in JavaScript will give more control over what to be A/B tested. Even though digital marketers can’t do everything themselves, this hands-on practice can make digital marketers be more collaborative with web developers.
+
+Web developers won’t be replaced. Web developers and designers are still needed if the changes on a page are too granular like a complete redesign. This part shows that certain changes (like remove elements or change the font size) can be done without pulling anyone.
+
+Learn Technical Marketing
+Learn Python, SQL, Machine Learning, and more for marketers!
+Sign-up for a trial with CXL Institute
+
+Learn More
+2) Implement Tracking in Google Tag Manager
+Another case where JavaScript knowledge will rescue a digital marketer is implementing tracking in Google Tag Manager. Google Tag Manager and JavaScript are connected in many ways. One of them is the data layer.
+
+Going back to the Chrome DevTools can unlock what can be tracked if a data layer variable needs to be put in GTM.
+
+Here are the steps to start:
+
+Go to any web page
+Press right-click
+Click ‘Inspect’
+Click ‘Console’
+Type dataLayer
+Hit Enter
+dataLayer 1
+The data layer
+These are examples of the data layer on my homepage. The data layer is automatic if the website is using WordPress (with minor tweaks depending on a plug-in).
+
+This information can now be put in Google Tag Manager.
+
+Let’s say I want to track the page title of a blog post, I can simply choose the data layer variable so that GTM can catch this data.
+
+dataLayer2
+The data layer…
+dataLayergtm
+…put into Google Tag Manager
+In addition to the data layer, Google Tag Manager gives users the ability to input custom JavaScript variables to make custom tracking on a website. This is the synergy between JavaScript and Google Tag Manager.
+
+Julius Fedorovicius of AnalyticsMania said that Google Tag Manager is not meant to replace web developers. Other teams would need to collaborate with them more. The takeaway here is not being blindly reliant on them.
+
+3) Scrape Web Pages for Content Research
+A more advanced use case is scraping web pages. Web scraping is the extraction of data from a web page. It can be collected and distributed into a digital file format. Other programing languages share this capability.
+
+It’s helpful for content research or competitor analysis. Tools like Ahrefs, or Screaming Frog kind of do these things. But the power of lies when specific data is needed.
+
+Below is where I scraped IMDB’s page “Top 250 Movies” to get the movie titles. I put the JavaScript code in Node.JS and let it do its magic. Thank you, Brad Traversy for the crash course.
+
+let request = require('request');
+let cheerio = require('cheerio');
+let fs = require('fs');
+let writeStream = fs.createWriteStream('imdb.csv');
+writeStream.write(`Title\n`)
+
+request('https://www.imdb.com/list/ls068082370/', (error, response, html) => {
+    if (!error && response.statusCode == 200) {
+        let $ = cheerio.load(html);
+        $('.lister-item-content').each((i, el) => {
+            let title = $(el)
+                .find('.lister-item-header')
+                .text()
+                .replace(/\s\s+/g, '')
+                .replace(/\,/, '')
+                .replace(/\(/, ' (')
+            writeStream.write(`${title}`)
+        });
+    };
+})
+I was able to gather the movie titles. Then export to an Excel file.
+
+node.js 1
+Another case is to do market research on message boards like Reddit or Quora. Scrape the comments on a topic, then copy and paste the data into a word cloud tool to visualize it.
+
+The steep learning curve is a barrier to entry and everything is done in Node.JS because this can’t be done on a web browser. More difficulty arises since web pages are arranged differently.
+
+Web scraping is difficult to do but I would still recommend learning it because it may come in handy. But there are now technologies that automate web scraping through an API. This leads to…
+
+4) Get Data From APIs (application programming interface)
+Another example where learning JavaScript makes more sense is APIs (application programming interface). API data is in the JSON format, which stands for JavaScript Object Notation. Learning API will allow digital marketers to do more.
+
+APIs simplify and speed up the work of digital marketers and automates so many workflows. Examples of APIs are SEO research, Facebook advertising, or even Stripe payments. Learning JavaScript helped me understand API documentation and get data from them. One of which is from a stock exchange API.
+
+stripe api
+Stripe API documentation
+Marketers can use tools like Postman without help from web developers.
+
+Learning APIs lead to…
+
+5) Automate Reporting in Google Sheets Through Google Apps Script
+This relates to APIs. Learn how to use Google Apps Script in Google Sheets to be more efficient. Build automation into spreadsheets to save time and increase productivity for digital marketers.
+
+I was able to copy and paste a script that will auto-backup a Google Sheets file. I’m able to install a script from GitHub without the help of web developers. I’m also able to install a custom ImportJSON function in Google Sheets so I can get data from public APIs.
+
+apps script
+Conclusion – learn JavaScript even just a little bit
+There are a few instances where learning JavaScript in digital marketing is advantageous. It’s less hassle for departments to run A/B tests or track user interactions especially if the team is implementing agile methodologies.
+
+You can search on YouTube and across the internet as there are many free tutorials there. Here’s a few:
+
+– Brad Traversy’s crash course tutorial
+– Ruben de Boer’s Udemy course on coding for A/B tests
+– CXL Institute’s Technical Marketing Minidegree
+
+You don’t need to be an expert and code in JavaScript. Know enough that you understand JavaScript code. You can just copy and paste them in relation to your current workflows.
+
+Check those out if you want to get started. Dedicate around 30 minutes a day to it. It’s not easy learning this stuff but the payoff is great. What’s interesting is you will also learn HTML and CSS from learning JavaScript. It’s fun too.
+
+Author
+Mario H. Felix Specialist
+Francis is the owner and runs Lupage Digital. With 4 years of experience, Francis writes everything he knows about digital marketing.
+
+Privacy Policy
+2021 Lupage Digital | GithubDocs
+We use cookies to ensure that we give the best experience. If you continue to use this site we'll assume that you are fine with it.
+Ok
