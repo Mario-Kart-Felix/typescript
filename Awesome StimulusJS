@@ -1,0 +1,89 @@
+Awesome StimulusJS
+Modestly awesome list of StimulusJS related content.
+Stimulus is, in many ways, the opposite of other modern frameworks available today. Here is what creators have to say about it:
+
+It doesn’t seek to take over your entire front-end—in fact, it’s not concerned with rendering HTML at all. Instead, it’s designed to augment your HTML with just enough behavior to make it shine. (c)
+
+This repository aims to showcase what is possible with this approach and link any other helpful content for your modest JS journey.
+Contents
+Reading
+Packages
+Podcasts
+Other Modest Code
+Community
+Packages
+StimulusReflex - Phoenix Liveview based on modern rails.
+stimulus-image-grid - A StimulusJS controller for beautiful image grids.
+stimulus-use - A collection of composable behaviors for your StimulusJS Controllers.
+stimulus-hotkeys - A Stimulus controller for mapping keystrokes to behaviors
+stimulus-existence - Stimulus controller to remove elements from the dom, and be notified with an event when they are added.
+stimulus-reveal - Stimulus controller to hide/show elements with optional transitions
+stimulus-flatpickr - A Wrapper for Flatpickr library.
+tailwindcss-stimulus-components - A set of StimulusJS components (tabs, dropdowns, modals, toggles, autosave, etc) for TailwindCSS users.
+stimulus-validation - Validation controller for StimulusJS.
+stimulus-autocomplete - StimulusJS autocomplete component.
+stimulus-tabs - A simple tabs controller for StimulusJS.
+stimulus-conductor - An optionated StimulusJS Controller to easily manage parent/children controllers.
+stimulus-remote - Stimulus controller to provide content handling for HTML sent over the wire whilst using Rails UJS.
+stimulus-sticky-table-header - Sticky Table Header Controller Using StimulusJS.
+stimulus-getaddress-io - Getaddress.io controller for StimulusJS.
+stimulus-toggle-util - A simple toggle utility controller to hide/show elements on click.
+stimulus-timeago - A Stimulus controller that returns the distance between the given date and now in words.
+stimulus-popover - A Stimulus controller to deal with HTML popover.
+stimulus-sortable - A Stimulus controller to reorder lists with drag-and-drop.
+stimulus-reveal-controller - A Stimulus controller to toggle a class on one or multiple items to show or hide them.
+stimulus-content-loader - A Stimulus controller to asynchronously load HTML from an url.
+stimulus-checkbox-select-all - A Stimulus controller for managing checkbox lists.
+stimulus-rails-nested-form - A Stimulus controller to create new fields on the fly to populate your Rails relationship.
+stimulus-textarea-autogrow - A Stimulus controller for autogrowing textarea.
+stimulus-remote-rails - A Stimulus controller to handle Rails UJS events.
+stimulus-character-counter - A Stimulus controller that counts the number of characters in any input fields.
+stimulus-animated-number - A Stimulus controller that animates a numerical value by counting to it.
+stimulus-lightbox - A Stimulus controller to add a lightbox on images.
+stimulus-scroll-progress - A Stimulus controller to add a progress bar when scrolling.
+stimulus-carousel - A Stimulus controller to deal with carousel.
+stimulus-rails-autosave - A Stimulus controller to autosubmit Rails forms.
+stimulus-transition - A stimulus controller to automatically run enter/leave transitions inspired by Vue and Alpine syntax.
+Reading
+onrails.blog: StimulusJS Tutorials - One man journey to StimulusJS written down in form of tutorials (with demos and code). My favorite:
+Building a Progressive Web App with Rails and Stimulus
+Stimulus + ActionCable + ActiveJob: Loading Asynchronous API Data
+thecrapthatcomesoutofmyhead.com: Building beautiful, fast apps with Rails and StimulusJS
+jorgemanrubia.com: Form validations with HTML5 and modern Rails
+chrislabarge.com: Using Node Modules with Rails + Webpacker and StimulusJS
+Pickr - Color Picker Library
+Tippy.js - Popup/Popover Library
+shime.sh: Testing StimulusJS - Testing was never covered in official documentation, this is an interesting alternative approach.
+dev.to: Modern Rails flash messages - Modern day flash messages with undo functionality - based on rails and stimulus.
+honeybadger.io: How We Migrated To Turbolinks Without Breaking JavaScript
+mccollester.com Using StimulusJS for Type-ahead Search
+part 1
+part 2
+cloudsh.com: StimulusJS and Shopify API; Making a Cart
+gorails.com: guides, screencasts, and tutorials - Premium content, covers everything one needs to know about StimulusJS in an easily digestible video format (with code, demos and text as well).
+Stimulus JS Framework Introduction
+Stimulus JS Twitter UI: Part 1
+Stimulus JS Twitter UI: Part 2
+Dynamic Nested Forms with Stimulus JS
+Drag and Drop sortable lists with Rails & Stimulus JS
+Google Maps and Google Places Autocomplete API with Rails, Turbolinks, and Stimulus.js
+Introduction to Stimulus Reflex
+boringrails.com: Writing better Stimulus controllers - Excellent article that shows the common failure paths when working with Stimulus and how you can improve your controllers by keeping them small, generic, and composable.
+minthesize.com: Infinite Horizontal Slider with CableReady and the Intersection Observer API
+github.com: Guide to Reactive Rails - helpful content for a Reactive Rails journey (with stimulusjs involved)
+Podcasts
+The Changelog: JavaScript sprinkles in Basecamp turned Stimulus - David Heinemeier Hansson joined the show to share the story of how JavaScript sprinkles in Basecamp evolved into a full-fledged framework called StimulusJS.
+Full Stack Radio: DHH - Stimulus in Practice + On Writing Software Well - In this episode, Adam talks to David Heinemeier Hansson about Basecamp's new JavaScript framework "StimulusJS" as well as David's new YouTube series "On Writing Software Well".
+Ruby Rogues: Stimulus - The panelists talk about different use cases for StimulusJS, how it works, and how it can help your project.
+Code with Jason: Stimulus and Webpacker with Noel Rappin - Noel Rappin talks about Webpack, Webpacker, and StimulusJS.
+Other Modest Code
+ModestJS E-Book - A short ebook for those who want to write modest JavaScript.
+Black Candy - A self hosted music streaming server. Biggest open source rails app done with StimulusJS.
+Sjabloon-lite - Modern Rails starter kit (includes StimulusJS).
+Trimmings - Set of patterns that allow you to add DOM manipulation by adding data-trimmings-* attributes.
+Turbolinks - Turbolinks makes navigating your web application faster and pairs perfectly with StimulusJS.
+jquery-events-to-dom-events - Pick up legacy jQuery "events" using DOM event listeners.
+Community
+Stimulus forums - Official community forums. Biggest wealth of information is scattered across those, but activity is slow.
+Stimulus Reflex discord - Focused on Stimulus Reflex, but a lot of discussion about stimulus and a lot of knowledgable people on matter. Very active, questions get answered in minutes.
+Better Stimulus - An opinionated collection of StimulusJS best practices from community.
