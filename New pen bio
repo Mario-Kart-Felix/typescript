@@ -1,0 +1,39 @@
+Fixing nginx: [emerg] BIO_new_file("/etc/nginx/ssl.crt/dhparams.pem") failed20.06.2015
+If after an update of Nginx or because of any other reason you faced the issue with starting Nginx, which drops an error of the following kind:
+
+Starting nginx: nginx: [emerg] BIO_new_file("/etc/nginx/ssl.crt/dhparams.pem") 
+failed (SSL: error:02001002:system library:fopen:No such file or 
+directory:fopen('/etc/nginx/ssl.crt/dhparams.pem','r') error:2006D080:BIO 
+routines:BIO_new_file:no such file)
+The error happens due to missing Diffie–Hellman (D-H) key located in /etc/nginx/ssl.crt/dhparams.pem (in your configuration its location might differ).
+
+Here is a guide on how to solve it.
+
+Directadmin and Custombuild
+As of the moment of the publication [20.06.2015] we see they at Directadmin added these lines:
+
+ssl_dhparam /etc/nginx/ssl.crt/dhparams.pem;
+in to the following files:
+
+/usr/local/directadmin/custombuild/configure/nginx/conf/nginx-defaults.conf
+/usr/local/directadmin/custombuild/configure/nginx_reverse/conf/nginx-defaults.conf
+But custombuild script does not create the file or check the existence of the file and that's the core of the issue.
+
+A simple way to fix
+Updated: 18.05.2016
+
+The current version of Custombuild, checked with 2.0.0 (rev: 1549), has a code to make sure the correct Diffie–Hellman (D-H) key exists, and creates it if it's missing. So to fix the issue run the following commands as root:
+
+cd /usr/local/directadmin/custombuild
+./build update
+./build rewrite_confs
+An universal Fix
+On old servers or on servers with custom installation, run the following commands as root in order to get it fixed. Of course make sure that you specified a correct path to the D-H key:
+
+mkdir -p /etc/nginx/ssl.crt/
+openssl dhparam -out /etc/nginx/ssl.crt/dhparams.pem 2048;
+/etc/init.d/nginx start
+Have a good day!
+
+Tags: How-To nginx custombuild 2 
+←  How to set individual PHP settings with PHP-FPM
