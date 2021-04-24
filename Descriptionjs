@@ -1,0 +1,22 @@
+Description
+It is a very common practice to execute certain parts of your code or evaluate expression to one of the two values based on a given condition. The most popular scenarios are as follows:
+executing a code within an if block based on a testing expression,
+repeating for, while or do while loop block’s statements as long as a testing expression evaluates to a truthy value,
+making use of the ternary operator,
+picking value with the aid of && and || operators.
+In the first two situations, if the testing expression evaluates to a value which type is different than boolean, JavaScript will implicitly cast the value to the desired type. As far as the aforementioned operators are concerned, the same rule applies to the ternary operator, whereas && and || operators will have their left operand cast to a boolean value.
+Theory to learn by heart
+As you can see, it is highly possible to experience a lot of implict values cast in your JavaScript code. Therefore, you need to learn by heart which values are considered to be falsy in JavaScript, namely they are cast to false.
+The falsy values in JavaScript are listed below:
+empty string (‘’),
+zero number (0),
+false,
+undefined,
+null,
+NaN (Not a Number).
+The remaining values are treated as truthy ones.
+Remarks
+the question about falsy values in JavaScript is quite common during job interviews (not only for junior position),
+learning the list by heart is really important, since you deal with the scenarios outlined above quite often,
+if you use || operator to set default variable’s value, beware of situations in which an empty string or zero number should be regarded as valid values.
+Like, love, hate, clap
