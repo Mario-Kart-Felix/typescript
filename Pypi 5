@@ -1,0 +1,58 @@
+Project description
+CT Core DB – Catalant Core DB Framework.
+
+The main features available in this framework include:
+
+The SQLAlchemy toolkit with our customizations and enhancements
+Commands for versioning and managing MySQL database schemas
+Debugging and development utilities for working with SQLAlchemy queries and events
+SQLAlchemy Documentation
+
+Contents
+
+Requirements
+Installation
+Usage
+SQLAlchemy Enhancements
+MySQL Diff
+MySQL Version Manager
+Bug tracker
+Contributing
+Contributors
+License
+Requirements
+python >= 5.6
+mysql-diff == 0.3 (built into the base Docker image)
+Installation
+CT Core DB is hosted on our internal PyPi repository. It should be installed using pip:
+
+pip install ct-core-db
+Usage
+Most of the functionality exposed by this library is made available through the SQLAlchemy ct_core_db.db instance or via the db Flask commands in ct-core-api.
+
+SQLAlchemy Enhancements
+ct_core_db.lib.db_utils – Various utilities for debugging and logging SQLAlchemy queries and events
+ct_core_db.lib.sqla – Improved signalling session that avoids PK collisions, base model, and model mixins
+ct_core_db.lib.sqla_types – Custom SQLAlchemy column data types
+MySQL Diff
+Use the mysql_diff.MySQLDiffCommand to produce a database migration script based on the differences between two MySQL database schemas:
+
+from ct_core_db.lib import mysql_diff
+
+mysql_diff_cmd = mysql_diff.MySQLDiffCommand()
+diff_output = mysql_diff_cmd('jdbc_db_url_a', 'jdbc_db_url_b')
+MySQL Version Manager
+Use the mysql_version.MySQLVersionManager class to create, diff, and upgrade your MySQL database schemas:
+
+from ct_core_db.lib import mysql_diff
+
+mysql_version_manager = mysql_version.MySQLVersionManager(engine, mysql_diff_cmd)
+mysql_version_manager.init_db()
+mysql_version_manager.create_db()
+mysql_version_manager.diff_db()  # Invokes `mysql_diff_command`
+mysql_version_manager.upgrade_db()
+Bug tracker
+If you have any suggestions, bug reports or annoyances please report them to the issue tracker at https://github.com/catalant/ct-core-db/issues
+
+Contributing
+Development of ct-core-db happens at github: https://github.com/catalant/ct-core-db
