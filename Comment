@@ -1,0 +1,52 @@
+
+
+ClassFoo = {
+    "Total": 3, 
+    "students": [
+        {
+            "name": "Peter",
+            "grade": "C"
+        },
+        {
+            "name": "Ben",
+            "grade": "B"
+        },
+        {
+            "name": "Ann",
+            "grade": "B"
+        },
+    ]
+};
+
+Comments(B) = {
+    "grade": "B",
+    "comment": "Good"
+};
+
+Comments(C) = {
+    "grade": "C",
+    "comment": "Work harder"
+};
+Become like this
+
+ClassFoo = {
+    "Total": 3, 
+    "students": [
+        {
+            "name": "Peter",
+            "grade": "C",
+            "comment": "Work harder"
+        },
+        {
+            "name": "Ben",
+            "grade": "B",
+            "comment": "Good"
+        },
+        {
+            "name": "Ann",
+            "grade": "B",
+            "comment": "Good"
+        },
+    ]
+};
+Should I create a new object? use .map for ClassFoo.students? and then match comments if Comments.grade === ClassFoo.students.grade, then .push comment?
