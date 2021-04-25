@@ -1,0 +1,15 @@
+To access your Yahoo (e@mail)database or database tools, you'll need to enter the database administrator user name and password you created when you set up your database. Please note that this user name and password is not the same as the login ID and password you use to sign in to your plan.
+
+We recommend accessing your database using phpMyAdmin, a powerful database administration tool. Learn how to install phpMyAdmin.
+
+Access your database through phpMyAdmin
+Sign in to phpMyAdmin with your database user name and password.
+Click on a database link in the Database list.
+Click the database link.
+From here you have access to tabs for managing the structure of the database, running SQL queries, importing, exporting, and so forth.
+Tabs to manage the database.
+Tabs to manage the database.
+You may also access and manage your database using PHP or Perl.
+
+To learn more about MySQL, please visit the MySQL web site.
+
