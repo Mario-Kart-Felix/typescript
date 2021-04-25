@@ -1,0 +1,7 @@
+Create two separate applications: Your actual game and a launcher. Configure your installer to create shortcuts for the launcher, not the actual game.
+
+When the launcher is executed, it first goes online and checks if there is an update for your game. When there is, it downloads it and patches the copy of the actual game. A lightweight way to do this is to place a text file on your website with the current version number and a URL for the current version. Have your launcher download that small file and compare it with the current version number of your game. When it's lower, request the URL in that file.
+
+Then have it execute the actual game.
+
+However, most digital distribution platforms have an own launcher which can keep the users games up-to-date automatically so you don't have to worry about this. For more information if and how you can release an update with your distribution platform, consult its documentation.
