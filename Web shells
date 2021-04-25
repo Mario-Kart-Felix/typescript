@@ -1,0 +1,57 @@
+Thermal camera view
+Gjoko Krstic, a security researcher with Zero Science Labs, has discovered secret hard-coded accounts in thermal security cameras manufactured by FLIR Systems, Inc., one of the largest vendor of such products.
+
+According to Krstic, the backdoor accounts "are never exposed to the end-user and cannot be changed through any normal operation of the camera."
+
+Multiple product series affected
+The hard-coded credentials affect the following FLIR thermal camera series:
+A ransomware gang made $260,000 in 5 days using the 7zip utility
+
+FC-Series S (FC-334-NTSC)
+FC-Series ID
+FC-Series R
+PT-Series (PT-334 200562)
+D-Series
+F-Series
+Depending on the FLIR camera version, the following username-password combos will grant an attacker access over the device.
+
+
+ 
+root:indigo
+root:video
+default:video
+default:[blank]
+ftp:video
+Besides the secret backdoors, Krstic also found four other vulnerabilities:
+
+Stream Disclosure — attackers can access the security camera's stream without needing to authenticate.
+Remote Root Exploit — attackers can execute code on vulnerable cameras with root privileges.
+Authenticated OS Command Injection — attackers with access to limited accounts can inject commands and have them executed with root privileges.
+Multiple Information Disclosures — attackers can access/query certain camera files and read other local resources.
+No response from vendor
+The researcher reported the vulnerabilities to FLIR, via the Beyond Security's managed disclosure program, but neither he or Beyond Security received a response from FLIR regarding the issues.
+
+In late September, Krstic published proof of concept code for all the issues he reported [1, 2, 3, 4, 5].
+
+
+Two days ago, Depth Security also published research on other vulnerabilities in FLIR products the company failed to patch.
+
+There are several ways that FLIR customers can protect themselves. The easiest one is to prevent access to these cameras from the Internet by placing the devices behind a firewall until the vendor issues a patch.
+
+UPDATE [October 17, 15:35 ET]: FLIR has told Bleeping Computer that it issued security updates for the flaws reported above. Customers can download the firmware updates and installation instructions from this page.
+
+FLIR is a well-known brand for security cameras. Its thermal cameras are nothing more than regular IP-based security cameras with the extra feature of being able to function in thermal mode during night time.
+
+FLIR's thermal camera imaging capabilities have been recently used to film the "Walk On Water" music video by famous rock band 30 Seconds to Mars.
+
+
+Related Articles:
+QNAP removes backdoor account in NAS backup, disaster recovery app
+
+Microsoft's MSERT tool now finds web shells from Exchange Server attacks
+
+Google fixes exploited Chrome zero-day dropped on Twitter last week
+
+CISA orders federal orgs to mitigate Pulse Secure VPN bug by Friday
+
+SonicWall warns customers to patch 3 zero-days exploited in the wild
