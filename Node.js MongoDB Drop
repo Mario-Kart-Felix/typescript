@@ -1,0 +1,162 @@
+
+
+Node.js MongoDB Drop
+Drop Collection
+You can delete a table, or collection as it is called in MongoDB, by using the drop() method.
+
+The drop() method takes a callback function containing the error object and the result parameter which returns true if the collection was dropped successfully, otherwise it returns false.
+
+Example
+Delete the "customers" table:
+
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/";
+
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  var dbo = db.db("mydb");
+  dbo.collection("customers").drop(function(err, delOK) {
+    if (err) throw err;
+    if (delOK) console.log("Collection deleted");
+    db.close();
+  });
+});
+Save the code above in a file called "demo_drop.js" and run the file:
+
+Run "demo_drop.js"
+
+C:\Users\Your Name>node demo_drop.js
+Which will give you this result:
+
+Collection deleted
+ADVERTISEMENT
+
+
+db.dropCollection
+You can also use the dropCollection() method to delete a table (collection).
+
+The dropCollection() method takes two parameters: the name of the collection and a callback function.
+
+Example
+Delete the "customers" collection, using dropCollection():
+
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/";
+
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  var dbo = db.db("mydb");
+  dbo.dropCollection("customers", function(err, delOK) {
+    if (err) throw err;
+    if (delOK) console.log("Collection deleted");
+    db.close();
+  });
+});
+Save the code above in a file called "demo_dropcollection.js" and run the file:
+
+Run "demo_dropcollection.js"
+
+C:\Users\Your Name>node demo_dropcollection.js
+Which will give you this result:
+
+Collection deleted
+
+ADVERTISEMENT
+
+
+COLOR PICKER
+colorpicker
+LIKE US
+  
+Get certified
+by completing
+a course today!
+
+w
+3
+s
+c
+h
+o
+o
+l
+s
+C
+E
+R
+T
+I
+F
+I
+E
+D
+.
+2
+0
+2
+1
+CODE GAME
+Code Game
+
+Certificates
+ADVERTISEMENT
+
+
+Top Tutorials
+HTML Tutorial
+CSS Tutorial
+JavaScript Tutorial
+How To Tutorial
+SQL Tutorial
+Python Tutorial
+W3.CSS Tutorial
+Bootstrap Tutorial
+PHP Tutorial
+Java Tutorial
+C++ Tutorial
+jQuery Tutorial
+Top References
+HTML Reference
+CSS Reference
+JavaScript Reference
+SQL Reference
+Python Reference
+W3.CSS Reference
+Bootstrap Reference
+PHP Reference
+HTML Colors
+Java Reference
+Angular Reference
+jQuery Reference
+Top Examples
+HTML Examples
+CSS Examples
+JavaScript Examples
+How To Examples
+SQL Examples
+Python Examples
+W3.CSS Examples
+Bootstrap Examples
+PHP Examples
+Java Examples
+XML Examples
+jQuery Examples
+Web Courses
+HTML Course
+CSS Course
+JavaScript Course
+Front End Course
+SQL Course
+Python Course
+PHP Course
+jQuery Course
+Java Course
+C++ Course
+C# Course
+XML Course
+W3Schools is optimized for learning and training. Examples might be simplified to improve reading and learning. Tutorials, references, and examples are constantly reviewed to avoid errors, but we cannot warrant full correctness of all content. While using W3Schools, you agree to have read and accepted our terms of use, cookie and privacy policy.
+
+Copyright 1999-2021 by Refsnes Data. All Rights Reserved.
+W3Schools is Powered by W3.CSS.
+
+
