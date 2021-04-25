@@ -1,0 +1,34 @@
+While probably not front and center in your mind in September in a pandemic… the team working on the deployment of the next generation FIRST Robotics Competition control system wanted to provide an update to our February, 2020 pre-pandemic blog on the matter. The whole team is excited about getting these new devices to the community, but the roll out needs a bit of revision. Shocker, right?  
+
+Here’s the latest and greatest of where we are as of this moment…
+
+NI will provide the next generation roboRIO 
+Similar functionality (improvements are evolutionary, not revolutionary) 
+NI has made targeted changes to improve the user experience with roboRIO 2.0 including increased memory, increased on-board storage, and increased processor speed.  
+roboRIO 2.0 is designed to be backwards-compatible with hardware and software from the original roboRIO   
+NI will donate 1 roboRIO 2.0 per Rookie Kickoff Kit in FRC seasons 2022-2026 (in addition to other important support of FIRST that emphasizes ED&I)
+REV Robotics will provide brand-new support modules 
+Power Distribution Hub 
+20 power distribution channels 
+40A load capability on all channels 
+2 software switchable channels 
+All toolless & connectorless terminals 
+USB & CAN interfaces 
+Pneumatic Hub 
+12 solenoid channels (6 double solenoids) 
+Analog and digital pressure sensing 
+Regulated 12V & 24V modes 
+USB & CAN interfaces 
+Voltage Regulation Hub 
+12v or 5v module options 
+3 individually protected output channels 
+Due to Covid-19 impacts (overall cost considerations and no off-season events available for testing brand-new products), FIRST is delaying rollout of the new REV boards in Kickoff Kits until the 2023 FRC season.  
+
+REV is on track with the new support modules, getting ready for a launch in 2021 for the 2022 Season. FIRST may make these new products competition legal in 2022 for teams who choose to adopt these products on their own. 
+
+For the 2022 Season, rookie teams will receive the existing CTRE products and these products will continue to remain competition legal in future years. 
+WPI and the WPILib development team will provide software in support of the new devices. 
+The wireless solution will continue to be the Open Mesh radio for the foreseeable future, and we will continue to pursue a solution to succeed these radios.
+We emphasize that this is our plan as of today and encourage absorbing this with a Jupiter-sized grain of salt given that we all face so much uncertainty regarding the pandemic. We commit to providing updates though, so please stay tuned!  
+
+ 
