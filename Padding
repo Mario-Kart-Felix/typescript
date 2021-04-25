@@ -1,0 +1,37 @@
+I'm using openssl library and I want to read a public key from a .pem file with BIO. I tried this, but my rsa variable remains uninitialized :
+
+ RSA *rsa = RSA_new();
+
+ BIO *keybio = NULL;
+
+ keybio = BIO_new(BIO_s_file());
+ BIO_read_filename(keybio, "public.pem");
+
+ // and also tried this instead of last two lines:
+ // keybio = BIO_new_file("public.rem", "r");
+
+ rsa = PEM_read_bio_RSA_PUBKEY(keybio, &rsa, NULL, NULL);
+When I debug my application it shows me something like this:
+
+rsa { padding = ???, n = ??? , ...} 
+rsa->n <unable to read from memory> and so on for all rsa fields.
+My file is valid and the key is generated respecting PKCS#1 format. I parsed it with an asn1 parser.
+Your code looks fine. Try this input:
+
+-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1IHYYTavz9PQRxpcyO7J
+m0dtiIjNUvW3coLQQKhq+wySTTN1cwm2zYTw0FSfLDPOtOBNXFwKF9wykiyHS2uU
+D8vIU+T/fvlcADYTtZqdC5AoBWlSuhp0xqqtHmNUEjGa4FpRmKusL8s5/cuAfNRV
+NVSxA3JCN3kYrT9Q1qBN+XbOQn+h7gPQU3ICmG7L1R/CwIsq/wwUbq+NeY0TMvz5
+LM6AIS+GCV0UeJVm6UN6GDBCOHk02XuplyhkbCsNhq+HTfhHVeE1s7NcIavmgvqm
+EtlIcTGemW9tXs5/REZUv+SDpR6RLUKhwuij/Ft5Pe9b7cH3wXqNmOBhJ3F/ht2C
+swIDAQAB
+-----END PUBLIC KEY-----
+Compare this to what you see with your asn1 parser:
+
+$ openssl asn1parse -in public.pem
+    0:d=0  hl=4 l= 290 cons: SEQUENCE          
+    4:d=1  hl=2 l=  13 cons: SEQUENCE          
+    6:d=2  hl=2 l=   9 prim: OBJECT            :rsaEncryption
+   17:d=2  hl=2 l=   0 prim: NULL              
+   19:d=1  hl=4 l= 271 prim: BIT STRING
