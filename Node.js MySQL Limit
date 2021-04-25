@@ -1,0 +1,207 @@
+
+
+Node.js MySQL Limit
+Limit the Result
+You can limit the number of records returned from the query, by using the "LIMIT" statement:
+
+Example
+Select the 5 first records in the "customers" table:
+
+var mysql = require('mysql');
+
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "yourusername",
+  password: "yourpassword",
+  database: "mydb"
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+  var sql = "SELECT * FROM customers LIMIT 5";
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log(result);
+  });
+});
+Save the code above in a file called "demo_db_limit.js" and run the file:
+
+Run "demo_db_limit.js"
+
+C:\Users\Your Name>node demo_db_limit.js
+Which will give you this result:
+
+[
+  { id: 1, name: 'John', address: 'Highway 71'},
+  { id: 2, name: 'Peter', address: 'Lowstreet 4'},
+  { id: 3, name: 'Amy', address: 'Apple st 652'},
+  { id: 4, name: 'Hannah', address: 'Mountain 21'},
+  { id: 5, name: 'Michael', address: 'Valley 345'}
+]
+ADVERTISEMENT
+
+
+Start From Another Position
+If you want to return five records, starting from the third record, you can use the "OFFSET" keyword:
+
+Example
+Start from position 3, and return the next 5 records:
+
+var mysql = require('mysql');
+
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "yourusername",
+  password: "yourpassword",
+  database: "mydb"
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+  var sql = "SELECT * FROM customers LIMIT 5 OFFSET 2";
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log(result);
+  });
+});
+Note: "OFFSET 2", means starting from the third position, not the second!
+
+Save the code above in a file called "demo_db_offset.js" and run the file:
+
+Run "demo_db_offset.js"
+
+C:\Users\Your Name>node demo_db_offset.js
+Which will give you this result:
+
+[
+  { id: 3, name: 'Amy', address: 'Apple st 652'},
+  { id: 4, name: 'Hannah', address: 'Mountain 21'},
+  { id: 5, name: 'Michael', address: 'Valley 345'},
+  { id: 6, name: 'Sandy', address: 'Ocean blvd 2'},
+  { id: 7, name: 'Betty', address: 'Green Grass 1'}
+]
+Shorter Syntax
+You can also write your SQL statement like this "LIMIT 2, 5" which returns the same as the offset example above:
+
+Example
+Start from position 3, and return the next 5 records:
+
+var mysql = require('mysql');
+
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "yourusername",
+  password: "yourpassword",
+  database: "mydb"
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+  var sql = "SELECT * FROM customers LIMIT 2, 5";
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log(result);
+  });
+});
+Note: The numbers are reversed: "LIMIT 2, 5" is the same as "LIMIT 5 OFFSET 2"
+
+
+ADVERTISEMENT
+
+
+COLOR PICKER
+colorpicker
+LIKE US
+  
+Get certified
+by completing
+a course today!
+
+w
+3
+s
+c
+h
+o
+o
+l
+s
+C
+E
+R
+T
+I
+F
+I
+E
+D
+.
+2
+0
+2
+1
+CODE GAME
+Code Game
+
+Certificates
+ADVERTISEMENT
+
+
+Top Tutorials
+HTML Tutorial
+CSS Tutorial
+JavaScript Tutorial
+How To Tutorial
+SQL Tutorial
+Python Tutorial
+W3.CSS Tutorial
+Bootstrap Tutorial
+PHP Tutorial
+Java Tutorial
+C++ Tutorial
+jQuery Tutorial
+Top References
+HTML Reference
+CSS Reference
+JavaScript Reference
+SQL Reference
+Python Reference
+W3.CSS Reference
+Bootstrap Reference
+PHP Reference
+HTML Colors
+Java Reference
+Angular Reference
+jQuery Reference
+Top Examples
+HTML Examples
+CSS Examples
+JavaScript Examples
+How To Examples
+SQL Examples
+Python Examples
+W3.CSS Examples
+Bootstrap Examples
+PHP Examples
+Java Examples
+XML Examples
+jQuery Examples
+Web Courses
+HTML Course
+CSS Course
+JavaScript Course
+Front End Course
+SQL Course
+Python Course
+PHP Course
+jQuery Course
+Java Course
+C++ Course
+C# Course
+XML Course
+W3Schools is optimized for learning and training. Examples might be simplified to improve reading and learning. Tutorials, references, and examples are constantly reviewed to avoid errors, but we cannot warrant full correctness of all content. While using W3Schools, you agree to have read and accepted our terms of use, cookie and privacy policy.
+
+Copyright 1999-2021 by Refsnes Data. All Rights Reserved.
+W3Schools is Powered by W3.CSS.
+
+
