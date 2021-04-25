@@ -1,0 +1,13 @@
+was considering adding 8.8.8.8 to the end of my adapter's list of DNS servers as a backup in case everything fails, when it occurred to me that I don't really know how secondary and tertiary DNS servers are treated.
+
+Under what conditions is the next DNS server used?
+Will the next server be checked if the name isn't resolved?
+Can I configure my machine to query multiple servers if a name is not resolved?
+I'm also worried that by adding a DNS server not on my intranet, I may not be able to resolve local names.
+
+If the first DNS server fails, how long will the secondary DNS server be used?
+When my machine checks to see if the primary DNS server is up, does it stall my current DNS query?
+How do multiple DNS servers affect performance? If I have four DNS servers on my adapter's list and three of them are dead, will it wait for three timeouts before getting an answer?
+I'm not sure if this question is OS specific either. Do different operating systems treat this differently?
+
+My goal is to append 8.8.8.8 to the DNS servers on top of what DHCP hands out with a script. I keep running in to stupid DNS problems where my machines wind up with a bogus/unreachable/simply no DNS server due to errors in DHCP configuration that I have no control over. I'm getting sick of it, but I'm wondering if adding this fail safe would cause more problems than it solves.
