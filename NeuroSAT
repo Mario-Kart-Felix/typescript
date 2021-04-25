@@ -1,0 +1,22 @@
+We train a simplified NeuroSAT architecture to directly predict the unsatisfiable cores of real problems, and modify MiniSat to periodically replace its variable activity scores with NeuroSAT's prediction of how likely they are to appear in an unsatisfiable core. Our modified MiniSat solves 10% more problems on SAT-COMP 2018 than the original does. Although MiniSat is no longer considered a state-of-the-art solver, our results nonetheless demonstrate the potential for NeuroSAT (and in particular, NeuroCore) to provide useful guidance to CDCL solvers on real problems.
+
+More information can be found in the paper https://arxiv.org/abs/1903.04671.
+
+Overview of repository
+solver/: pybind11 module wrapping Z3, for generating training data.
+python/gen_data.py: ray script to generate training data.
+python/neurosat.py: simplified reimplementation of NeuroSAT.
+python/train.py: distributed tensorflow script to train NeuroCore.
+hybrids/glucose/: code to extend glucose with NeuroCore.
+python/evaluate_cdcl.py: ray script for evaluating solvers on benchmarks.
+weights/: the trained weights used for the experiments in the paper.
+Dependencies
+There are several dependencies. For now, we list the ones that cannot be easily installed with apt-get or pip3:
+
+z3 (we used commit 773c61369480b6f031eb8fa98a7eb24bd52c7070)
+drat-trim
+eigen
+pybind11
+minisat
+grpc
+The code also uses a MariaDB database and an Azure storage account. Replace the fake credentials in auth.json.
