@@ -1,0 +1,257 @@
+Random numbers are used in many machine learning algorithms. For example, a common task is to select a random row of a matrix. In C# the code might resemble:
+
+C#
+
+Copy
+double[][] matrix = new double[50][];  // 50 rows
+matrix = LoadData("C:\\Somewhere\\SomeFile.txt");
+int lo = 0;
+int hi = 50;
+Random rnd = new Random(0);  // Create generator, seed = 0
+x = rnd.NextDouble();  // [0.0, 3.0)
+int randomRow = (int)((hi - lo) * x + lo);  // [0, 19]
+// Do something with randomRow
+In this article I’ll show you how to generate random numbers using four different algorithms: the Lehmer algorithm, the linear congruential algorithm, the Wichmann-Hill algorithm and the lagged Fibonacci algorithm.
+
+But why go to the trouble of creating your own random number generator (RNG) when the Microsoft .NET Framework already has an effective and easy-to-use Random class? There are two scenarios where you might want to create your own RNG. First, because different programming languages have different built-in random number generation algorithms, if you’re writing code you want to port to multiple languages, you can write your own RNG so you can implement it across different languages. Second, some languages, notably R, have only a global RNG, so if you want to create multiple generators you must write your own RNG.
+
+A good way to see where this article is headed is to take a look at the demo program in Figure 1. The demo program begins by creating a very simple RNG using the Lehmer algorithm. Then the RNG is used to generate 1,000 random integers between 0 and 9 inclusive. Behind the scenes, the count of each generated integer is recorded, then the demo displays the counts. This process is repeated for the linear congruential algorithm, the Wichmann-Hill algorithm and the lagged Fibonacci algorithm.
+
+Lightweight Random Number Generation Demo
+Figure 1 Lightweight Random Number Generation Demo
+
+This article assumes you have at least intermediate programming skills, but doesn’t assume you know anything about random number generation. The demo code is written in C#, but because one of the main scenarios to use custom random number generation is when writing portable code, the demo code is designed to be easily translatable to other languages.
+
+The Lehmer Algorithm
+The simplest reasonable random number generation technique is the Lehmer algorithm. (I use the term “random number generation” rather than the more accurate “pseudo-random number generation” for simplicity.) Expressed symbolically, the Lehmer algorithm is:
+
+C#
+
+Copy
+X(i) = a * X(i-1) mod m
+In words, “the new random number is the old random number times a constant a, modulo a constant m.” For example, suppose at some point the current random number is 104, and a = 3, and m = 100. Then the new random number would be 3 * 104 mod 100 = 312 mod 100 = 12. Simple, but there are many tricky implementation details.
+
+To create the demo program, I launched Visual Studio and created a new C# console application project named RandomNumbers. The demo program has no significant .NET dependencies so any version of Visual Studio will work.
+
+After the template code loaded, in the Solution Explorer window I right-clicked on file Program.cs and renamed it to the more descriptive RandomNumbersProgram.cs and Visual Studio then automatically renamed class Program for me. At the top of the code in the editor window I deleted all the using statements except for the ones referencing the top-level System and the Collections.Generic namespaces.
+
+Next, I added a class named LehmerRng to implement the Lehmer RNG algorithm. The code is shown in Figure 2. The 1988 version of the Lehmer algorithm uses a = 16807 and m = 2147483647 (which is int.MaxValue). A later, 1993 version of Lehmer suggests a = 48271 as a slightly superior alternative. These values come from math theory. The demo code is based on the famous paper, “Random Number Generators: Good Ones Are Hard to Find,” by S. K. Park and K. W. Miller.
+
+Figure 2 The Lehmer Algorithm Implementation
+
+C#
+
+Copy
+public class LehmerRng
+{
+  private const int a = 16807;
+  private const int m = 2147483647;
+  private const int q = 127773;
+  private const int r = 2836;
+  private int seed;
+  public LehmerRng(int seed)
+  {
+    if (seed <= 0 || seed == int.MaxValue)
+      throw new Exception("Bad seed");
+    this.seed = seed;
+  }
+  public double Next()
+  {
+    int hi = seed / q;
+    int lo = seed % q;
+    seed = (a * lo) - (r * hi);
+    if (seed <= 0)
+      seed = seed + m;
+    return (seed * 1.0) / m;
+  }
+}
+An implementation problem is avoiding arithmetic overflow. The Lehmer algorithm uses a clever algebra trick. The value of q is m / a (integer division) and the value of r is m % a (m modulo a).
+
+When initializing the Lehmer RNG with a seed value, you can use any integer in the range [1, int.MaxValue - 1]. Many RNGs have a no-parameter constructor that grabs the system date-time and converts it to an integer and uses that as the seed.
+
+The Lehmer RNG is called in the Main method of the demo program, like so:
+
+C#
+
+Copy
+int hi = 10;
+int lo = 0;
+int[] counts = new int[10];
+LehmerRng lehmer = new LehmerRng(1);
+for (int i = 0; i < 1000; ++i) {
+  double x = lehmer.Next();
+  int ri = (int)((hi - lo) * x + lo); // 0 to 9
+  ++counts[ri];
+}
+Each call to the Next method returns a value in [0.0, 1.0)—greater than or equal to 0.0 and strictly less than 1.0. The pattern (int)(hi - lo) * Next + lo) will return an integer in the range [lo, hi-1].
+
+The Lehmer algorithm is reasonably effective and is my usual technique of choice for simple scenarios. However, note that none of the algorithms presented in this article are cryptographically secure and they should be used only in situations where statistical rigor isn’t required.
+
+The Wichmann-Hill Algorithm
+The Wichmann-Hill algorithm dates from 1982. The idea of Wichmann-Hill is to generate three preliminary results and then combine those results into a single, final result. The code that implements Wichmann-Hill is presented in Figure 3. The demo code is based on the paper, “Algorithm AS 183: An Efficient and Portable Pseudo-­Random Number Generator,” by B. A. Wichmann and I. D. Hill.
+
+Figure 3 Wichmann-Hill Algorithm Implementation
+
+C#
+
+Copy
+public WichmannRng(int seed)
+{
+  if (seed <= 0 || seed > 30000)
+    throw new Exception("Bad seed");
+  s1 = seed;
+  s2 = seed + 1;
+  s3 = seed + 2;
+}
+
+  public double Next()
+  {
+    s1 = 171 * (s1 % 177) - 2 * (s1 / 177);
+    if (s1 < 0) { s1 += 30269; }
+    s2 = 172 * (s2 % 176) - 35 * (s2 / 176);
+    if (s2 < 0) { s2 += 30307; }
+    s3 = 170 * (s3 % 178) - 63 * (s3 / 178);
+    if (s3 < 0) { s3 += 30323; }
+    double r = (s1 * 1.0) / 30269 + (s2 * 1.0) / 30307 + (s3 * 1.0) / 30323;
+    return r - Math.Truncate(r);  // orig uses % 1.0
+  }
+}
+Because the Wichmann-Hill algorithm uses three different generating equations, it requires three seed values. The three m values in Wichmann-Hill are 30269, 30307 and 30323, so you need three seed values in the range [1, 30000]. You could write a constructor that requires three values, but that’s a somewhat annoying programming interface. The demo uses a single seed parameter value to generate the three working seeds.
+
+Calling the Wichmann-Hill RNG uses the same pattern as the other demo RNGs:
+
+C#
+
+Copy
+WichmannRng wich = new WichmannRng(1);
+for (int i = 0; i < 1000; ++i) {
+  double x = wich.Next();
+  int ri = (int)((hi - lo) * x + lo); // 0 to 9
+  ++counts[ri];
+}
+The Wichmann-Hill algorithm is only marginally more difficult to implement than the Lehmer algorithm. An advantage of Wichmann-Hill over Lehmer is that Wichmann-Hill generates a longer pattern (more than 6,000,000,000,000 values) before beginning to repeat itself.
+
+The Linear Congruential Algorithm
+As it turns out, both the Lehmer algorithm and the Wichmann-Hill algorithm can be considered special cases of what’s called the linear congruential (LC) algorithm. Expressed as an equation, LC is:
+
+C#
+
+Copy
+X(i) = (a * X(i-1) + c) mod m
+This is exactly like the Lehmer algorithm with the inclusion of an additional constant, c. Adding c gives the general LC algorithm slightly better statistical properties than the Lehmer algorithm. The demo implementation of the LC algorithm is presented in Figure 4. The code is based on the Portable Operating System Interface (POSIX) standard.
+
+Figure 4 Linear Congruential Algorithm Implementation
+
+C#
+
+Copy
+public class LinearConRng
+{
+  private const long a = 25214903917;
+  private const long c = 11;
+  private long seed;
+  public LinearConRng(long seed)
+  {
+    if (seed < 0)
+      throw new Exception("Bad seed");
+    this.seed = seed;
+  }
+  private int next(int bits) // helper
+  {
+    seed = (seed * a + c) & ((1L << 48) - 1);
+    return (int)(seed >> (48 - bits));
+  }
+  public double Next()
+  {
+    return (((long)next(26) << 27) + next(27)) / (double)(1L << 53);
+  }
+}
+The LC algorithm uses several bit operations. The idea here is that instead of working with type integer (32 bits), the basic math calculations are done using type long (64 bits). When finished, 32 of those bits, from positions 16 through 47 inclusive, are extracted and converted to an integer. This approach gives better results than taking either the low order 32 bits or the high order 32 bits, at the expense of some coding complexity.
+
+The demo calls the LC random number generator, like so:
+
+C#
+
+Copy
+LinearConRng lincon = new LinearConRng(0);
+for (int i = 0; i < 1000; ++i) {
+  double x = lincon.Next();
+  int ri = (int)((hi - lo) * x + lo); // 0 to 9
+  ++counts[ri];
+}
+Notice that unlike the Lehmer and Wichmann-Hill generators, the LC generator can accept a seed value of 0. The demo LC constructor copies the input seed parameter value directly to the class member seed variable. Many common LC implementations perform a preliminary manipulation of the input seed in order to avoid emitting a well-known series of starting values.
+
+The Lagged Fibonacci Algorithm
+The lagged Fibonacci algorithm, expressed as an equation, is:
+
+C#
+
+Copy
+X(i) = X(i-7) + X(i-10) mod m
+In words, the new random number is the random number generated 7 times ago, plus the random number generated 10 times ago, modulo some large value m. The values (7, 10) can be changed, as I’ll explain shortly.
+
+Suppose at some point in time, the sequence of generated random values is:
+
+C#
+
+Copy
+... 123  072  409  660  915  358  224  707  834  561  ??
+where 561 is the most recently generated value. If m = 100, then the next random number would be:
+
+C#
+
+Copy
+(660 + 123) % 100 = 783 % 100 = 83
+Notice that at any point you always need the 10 most recently generated values. So, the key task with lagged Fibonacci is to generate initial values to get the process started. The demo implementation of lagged Fibonacci is presented in Figure 5.
+
+Figure 5 Lagged Fibonacci Implementation
+
+C#
+
+Copy
+public class LaggedFibRng
+{
+  private const int k = 10; // Largest magnitude"-index"
+  private const int j = 7; // Other "-index"
+  private const int m = 2147483647;  // 2^31 - 1 = maxint
+  private List<int> vals = null;
+  private int seed;
+  public LaggedFibRng(int seed)
+  {
+    vals = new List<int>();
+    for (int i = 0; i < k + 1; ++i)
+      vals.Add(seed);
+    if (seed % 2 == 0) vals[0] = 11;
+    // Burn some values away
+    for (int ct = 0; ct < 1000; ++ct) {
+      double dummy = this.Next();
+    }
+  }  // ctor
+  public double Next()
+  {
+    // (a + b) mod n = [(a mod n) + (b mod n)] mod n
+    int left = vals[0] % m;    // [x-big]
+    int right = vals[k - j] % m; // [x-other]
+    long sum = (long)left + (long)right;  // prevent overflow
+    seed = (int)(sum % m);  // Because m is int, result has int range
+    vals.Insert(k + 1, seed);  // Add new val at end
+    vals.RemoveAt(0);  // Delete now irrelevant [0] val
+    return (1.0 * seed) / m;
+  }
+}
+The demo code uses the X(i-7) and X(i-10) previous random numbers to generate the next random number. The values (7, 10) are usually called (j, k) in the research literature on this topic. There are other (j, k) pairs you can use for lagged Fibonacci. A few of the values recommended by the well-known “Art of Computer Programming” (Addison-Wesley, 1968) are (24,55), (38,89), (37,100), (30,127), (83,258), (107,378).
+
+To initialize a (j, k) lagged Fibonacci RNG, you must prepopulate a list with k values. There are several ways to do this. However, it’s required that at least one of the initial k values be odd. The demo uses the crude technique of copying the seed parameter value as all k initial values, then burning away the first 1,000 generated values. If the initial seed parameter value is even, then the first of the k values is set to 11 (an arbitrary odd number).
+
+To prevent arithmetic overflow, the Next method uses type long for calculations and the mathematical property that (a + b) mod n = [(a mod n) + (b mod n)] mod n.
+
+Wrapping Up
+Let me emphasize that the four RNGs presented in this article are intended only for non-critical scenarios. That said, I did run the four RNGs through a set of well-known baseline tests for randomness, and they did pass those tests. Even so, RNGs are notoriously tricky and time and time again standard RNGs have been found to be defective, sometimes only after they’ve been in use for years. For example, in the 1960s IBM distributed a linear congruential algorithm implementation called RANDU that has incredibly poor properties. And, there are research reports that Microsoft Excel 2008 had a horrendously flawed Wichmann-Hill implementation.
+
+The current state of the art in random number generation is an algorithm named Fortuna (after the Roman goddess of chance). The Fortuna algorithm was published in 2003 and is based on mathematical entropy plus sophisticated cryptographic techniques such as the Advanced Encryption System.
+
+Dr. James McCaffrey works for Microsoft Research in Redmond, Wash. He has worked on several Microsoft products including Internet Explorer and Bing. Dr. McCaffrey can be reached at jammc@microsoft.com.
+
+Thanks to the following Microsoft technical experts who reviewed this article: Chris Lee and Kirk Olynyk
+
+Discuss this article in the MSDN Magazine forum
