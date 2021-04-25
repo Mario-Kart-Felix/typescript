@@ -1,0 +1,13 @@
+You are not logged in. Your edit will be placed in a queue until it is peer reviewed.
+
+We welcome edits that make the post easier to understand and more valuable for readers. Because community members review edits, please try to make the post substantially better than how you found it, for example, by fixing grammar or adding additional resources and hyperlinks.
+
+Rev
+
+DMGregory - Sep 16 '17 at 13:54 - Replacing update meta-tag with one specific to deploying game updates,
+
+Title
+What Is A Good Way To Make A Self Updating Game? (Python)
+Body
+ Add picture
+I've been making games and I have always had a problem if I wanted to sell a game. People would have to re-buy games to get the updated version. Does anyone have any ideas on how to make a self updating game? (In python 5.)
