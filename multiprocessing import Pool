@@ -1,0 +1,44 @@
+I know you mentioned that the Pool.map approach doesn't make much sense to you. The map is just an easy way to give it a source of work, and a callable to apply to each of the items. The func for the map could be any entry point to do the actual work on the given arg.
+
+If that doesn't seem right for you, I have a pretty detailed answer over here about using a Producer-Consumer pattern: https://stackoverflow.com/a/11196615/496445
+
+Essentially, you create a Queue, and start N number of workers. Then you either feed the queue from the main thread, or create a Producer process that feeds the queue. The workers just keep taking work from the queue and there will never be more concurrent work happening than the number of processes you have started.
+
+You also have the option of putting a limit on the queue, so that it blocks the producer when there is already too much outstanding work, if you need to put constraints also on the speed and resources that the producer consumes.
+
+The work function that gets called can do anything you want. This can be a wrapper around some system command, or it can import your python lib and run the main routine. There are specific process management systems out there which let you set up configs to run your arbitrary executables under limited resources, but this is just a basic python approach to doing it.
+
+Snippets from that other answer of mine:
+
+Basic Pool:
+
+from multiprocessing import Pool
+
+def do_work(val):
+    # could instantiate some other library class,
+    # call out to the file system,
+    # or do something simple right here.
+    return "FOO: %s" % val
+
+pool = Pool(4)
+work = get_work_args()
+results = pool.map(do_work, work)
+Using a process manager and producer
+
+from multiprocessing import Process, Manager
+import time
+import itertools
+
+def do_work(in_queue, out_list):
+    while True:
+        item = in_queue.get()
+
+        # exit signal 
+        if item == None:
+            return
+
+        # fake work
+        time.sleep(.5)
+        result = item
+
+        out_list.append(result)
