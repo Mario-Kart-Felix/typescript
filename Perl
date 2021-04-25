@@ -1,0 +1,3 @@
+The Perl package is in /usr/bin and is an older version (5.12.4). The current stable release appears to be 5.14.2.
+
+How do I update this version? Root access is required, and I do not want to compile new binaries to install in a directory that is in my path.
