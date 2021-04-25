@@ -1,0 +1,7 @@
+There is a .gitattributes file in the project
+
+# Auto detect text files and perform EOL normalization
+* text=auto
+This has higher priority than core.autocrlf.
+
+See http://git-scm.com/docs/gitattributes
