@@ -1,0 +1,89 @@
+We found a way for you to contribute to the project! Looks like shanes-awesome-nodejs-module is missing a security policy.
+
+You can connect your project's repository to Snyk to stay up to date on security alerts and receive automatic fix pull requests.
+
+# Install the Snyk CLI and test your project
+npm i snyk -g && snyk test shanes-awesome-nodejs-module 
+Keep your project free of vulnerabilities with Snyk
+Maintenance
+INACTIVE
+COMMIT FREQUENCY
+UNAVAILABLE COMMIT DATA
+OPEN ISSUES
+?
+OPEN PR
+?
+LAST RELEASE
+5 years ago
+LAST COMMIT
+unknown
+Further analysis of the maintenance status of shanes-awesome-nodejs-module based on released npm versions cadence, the repository activity, and other data points determined that its maintenance is Inactive.
+
+An important project maintenance signal to consider for shanes-awesome-nodejs-module is that it hasn't seen any new versions released to npm in the past 12 months, and could be considered as a discontinued project, or that which receives low attention from its maintainers.
+
+In the past month we didn't find any pull request activity or change in issues status has been detected for the GitHub repository.
+
+Community
+LIMITED
+README.MD
+No
+CONTRIBUTING.MD
+No
+CODE OF CONDUCT
+No
+CONTRIBUTORS
+0
+FUNDING
+No
+This project has seen only 10 or less contributors.
+
+EMBED PACKAGE HEALTH SCORE BADGE
+package health
+package health
+34/100
+34/100
+Copy markdown
+Copy Markdown
+Package
+NODE.JS COMPATIBILITY
+not defined
+AGE
+5 years
+DEPENDENCIES
+0 Direct
+VERSIONS
+3
+INSTALL SIZE
+0 B
+DIST-TAGS
+1
+# OF FILES
+0
+MAINTAINERS
+1
+TS TYPINGS
+No
+shanes-awesome-nodejs-module has more than a single and default latest tag published for the npm package. This means, there may be other tags available for this package, such as next to indicate future releases, or stable to indicate stable releases.
+
+Readme
+Versions 
+5
+Dependencies
+FAQs
+ERROR: No README data found!
+
+Last updated on 21 April-2021, at 02:42 (UTC).
+Trusted. Loved. Widely Adopted.
+Snyk: Security, Built for Developers.
+
+
+
+
+
+TRACK OUR DEVELOPMENT
+
+
+
+Snyk|Open Source Security Platform
+© 2021 Snyk Ltd.
+
