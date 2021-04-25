@@ -1,0 +1,7 @@
+I'd like to run multiple instances of program.py simultaneously, while limiting the number of instances running at the same time (e.g. to the number of CPU cores available on my system). For example, if I have 10 cores and have to do 1000 runs of program.py in total, only 10 instances will be created and running at any given time.
+
+I've tried using the multiprocessing module, multithreading, and using queues, but there's nothing that seemed to me to lend itself to an easy implementation. The biggest problem I have is finding a way to limit the number of processes running simultaneously. This is important because if I create 1000 processes at once, it becomes equivalent to a fork bomb. I don't need the results returned from the processes programmatically (they output to disk), and the processes all run independently of each other.
+
+Can anyone please give me suggestions or an example of how I could implement this in python, or even bash? I'd post the code I've written so far using queues, but it doesn't work as intended and might already be down the wrong path.
+
+Many thanks.
