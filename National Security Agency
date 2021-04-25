@@ -1,0 +1,9 @@
+The National Security Agency took over responsibility for all U.S. Government encryption systems when it was formed in 1952. The technical details of most NSA-approved systems are still classified, but much more about its early systems have become known and its most modern systems share at least some features with commercial products.
+
+Rotor machines from the 1940s and 1950s were mechanical marvels. The first generation electronic systems were quirky devices with cantankerous punched card readers for loading keys and failure-prone, tricky-to-maintain vacuum tube circuitry. Late 20th century systems are just black boxes, often literally. In fact they are called blackers in NSA parlance because they convert plaintext classified signals (red) into encrypted unclassified ciphertext signals (black). They typically have electrical connectors for the red signals, the black signals, electrical power, and a port for loading keys. Controls can be limited to selecting between key fill, normal operation, and diagnostic modes and an all important zeroize button that erases classified information including keys and perhaps the encryption algorithms. 21st century systems often contain all the sensitive cryptographic functions on a single, tamper-resistant integrated circuit that supports multiple algorithms and allows over-the-air or network re keying, so that a single hand-held field radio, such as the AN/PRC-148 or AN/PRC-152, can interoperate with most current NSA cryptosystems.
+
+Security factors	
+Five generations of NSA encryption	
+NSA encryption by type of application	
+References	
+Sources
