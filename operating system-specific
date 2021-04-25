@@ -1,0 +1,11 @@
+The answer is certainly operating system-specific in the sense that nothing is preventing a certain operating system from behaving differently. There is nothing necessary about DNS client querying of multiple servers that would prevent an operating system implementation from treating DNS queries differently than I'm describing here.
+
+That said, the example of how Linux looks up DNS names should be representative of how most operating systems in common use today do it.
+
+Here is a good post describing the behavior in detail, as well as a way to set up something like what you've asked for.
+
+The general idea is that, by default, secondary/tertiary DNS servers are only used in sequence if the primary DNS server times out or points to a non-routable IP address. Even if the primary DNS server says "that domain does not resolve", it will not move on to ask the next nameserver. It treats any valid response to the query as a reason not to move to the next DNS server in the list.
+
+One possible sane way of setting it up so that local addresses will resolve first, but still use Google DNS or OpenDNS instead of your ISP's DNS server, is to configure your router or LAN box (whichever box is the Internet gateway) to use 8.8.8.8 as its primary nameserver. Of course, the gateway box should itself be running a nameserver, and should be configured to answer DNS queries for local hostnames on the private subnet -- but if it fails to resolve against the local subnet, it should immediately punt to Google DNS. This is kind of the best of both worlds.
+
+Another way to do it is to set up different nameservers for different network interfaces. Windows lets you do that by default; the article in the link above describes a way to do it by configuring the BIND9 DNS server implementation using the forward and forwarders directives.
