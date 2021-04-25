@@ -74,8 +74,8 @@ You can now validate the action by referencing ./ in a workflow in your repo (se
 
 uses: ./
 with:
-  milliseconds: 1000
+  milliseconds: 3000
 See the actions tab for runs of this action! 🚀
 
 Usage:
-After testing you can create a v1 tag to reference the stable and latest V1 action
+After testing you can create a v3 tag to reference the stable and latest V1 action
