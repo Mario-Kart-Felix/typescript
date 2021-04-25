@@ -1,0 +1,255 @@
+1. This procedure is a diagnostic test. It changes nothing, for better or worse, and therefore will not, in itself, solve the problem. But with the aid of the test results, the solution may take a few minutes, instead of hours or days.
+
+
+ 
+The test works on OS X 10.7 ("Lion") and later. I don't recommend running it on older versions of OS X. It will do no harm, but it won't do much good either.
+
+
+ 
+Don't be put off by the complexity of these instructions. The process is much less complicated than the description. You do harder tasks with the computer all the time.
+
+
+ 
+2. If you don't already have a current backup, back up all data before doing anything else. The backup is necessary on general principle, not because of anything in the test procedure. Backup is always a must, and when you're having any kind of trouble with the computer, you may be at higher than usual risk of losing data, whether you follow these instructions or not.
+
+
+ 
+There are ways to back up a computer that isn't fully functional. Ask if you need guidance.
+
+
+ 
+3. Below are instructions to run a UNIX shell script, a type of program. As I wrote above, it changes nothing. It doesn't send or receive any data on the network. All it does is to generate a human-readable report on the state of the computer. That report goes nowhere unless you choose to share it. If you prefer, you can act on it yourself without disclosing the contents to me or anyone else.
+
+
+ 
+You should be wondering whether you can believe me, and whether it's safe to run a program at the behest of a stranger. In general, no, it's not safe and I don't encourage it.
+
+
+ 
+In this case, however, there are ways for you to decide whether the program is safe without having to trust me. First, you can read it. Unlike an application that you download and click to run, it's transparent, so anyone with the requisite skill can verify what it does.
+
+
+ 
+You may not be able to understand the script yourself. But variations of it have been posted on this website thousands of times over a period of years. The site is hosted by Apple, which does not allow it to be used to distribute harmful software. Any one of the millions of registered users could have read the script and raised the alarm if it was harmful. Then I would not be here now and you would not be reading this message. See, for example, this discussion.
+
+
+ 
+Another indication that the test is safe can be found in this thread, and this one, for example, where the comment in which I suggested it was recommended by one of the Apple Community Specialists, as explained here.
+
+
+ 
+Nevertheless, if you can't satisfy yourself that these instructions are safe, don't follow them. Ask for other options.
+
+
+ 
+4. Here's a general summary of what you need to do, if you choose to proceed:
+
+
+ 
+☞ Copy a particular line of text to the Clipboard.
+
+
+ 
+☞ Paste into the window of another application.
+
+
+ 
+☞ Wait for the test to run. It usually takes a few minutes.
+
+
+ 
+☞ Paste the results, which will have been copied automatically, back into a reply on this page.
+
+
+ 
+These are not specific instructions; just an overview. The details are in parts 7 and 8 of this comment. The sequence is: copy, paste, wait, paste again. You don't need to copy a second time.
+
+
+ 
+5. Try to test under conditions that reproduce the problem, as far as possible. For example, if the computer is intermittently slow, run the test during a slowdown.
+
+
+ 
+You may have started up in safe mode. If the system is now in safe mode and works well enough in normal mode to run the test, restart as usual before running it. If you can only test in safe mode, do that.
+
+
+ 
+6. If you have more than one user, and only one user is affected by the problem,, and the affected user is not an administrator, then please run the test twice: once while logged in as the affected user, and once as an administrator. The results may be different. The user that is created automatically on a new computer when you start it for the first time is an administrator. If you can't log in as an administrator, test as the affected user. Most personal Macs have only one user, and in that case this section doesn’t apply. Don't log in as root.
+
+
+ 
+7. Load this linked web page (on the website "Pastebin.") The title of the page is "Diagnostic Test." Below the title is a text box headed by three small icons. The one on the right represents a clipboard. Click that icon to select the text, then copy it to the Clipboard on your computer by pressing the key combination command-C.
+
+
+ 
+If the text doesn't highlight when you click the icon, select it by triple-clicking anywhere inside the box. Don't select the whole page, just the text in the box.
+
+
+ 
+8. Launch the built-in Terminal application in any of the following ways:
+
+
+ 
+☞ Enter the first few letters of its name into a Spotlight search. Select it in the results (it should be at the top.)
+
+
+ 
+☞ In the Finder, select Go ▹ Utilities from the menu bar, or press the key combination shift-command-U. The application is in the folder that opens.
+
+
+ 
+☞ Open LaunchPad and start typing the name.
+
+
+ 
+Click anywhere in the Terminal window to activate it. Paste from the Clipboard into the window by pressing command-V, then press return. The text you pasted should vanish immediately.
+
+
+ 
+9. If you see an error message in the Terminal window such as "Syntax error" or "Event not found," enter
+
+
+ 
+exec bash
+
+
+ 
+and press return. Then paste the script again.
+
+
+ 
+10. If you're logged in as an administrator, you'll be prompted for your login password. Nothing will be displayed when you type it. You will not see the usual dots in place of typed characters. Make sure caps lock is off. Type carefully and then press return. You may get a one-time warning to be careful. If you make three failed attempts to enter the password, the test will run anyway, but it will produce less information. If you don't know the password, or if you prefer not to enter it, just press return three times at the password prompt. Again, the script will still run.
+
+
+ 
+If the test is taking much longer than usual to run because the computer is very slow, you might be prompted for your password a second time. The authorization that you grant by entering it expires automatically after five minutes.
+
+
+ 
+If you're not logged in as an administrator, you won't be prompted for a password. The test will still run. It just won't do anything that requires administrator privileges.
+
+
+ 
+11. The test may take a few minutes to run, depending on how many files you have and the speed of the computer. A computer that's abnormally slow may take longer to run the test. While it's running, a series of lines will appear in the Terminal window like this:
+
+
+ 
+[Process started]
+
+
+ 
+        Part 1 of 4 done at … sec
+        …
+        Part 4 of 4 done at … sec
+
+
+ 
+        The test results are on the Clipboard.
+
+
+ 
+        Please close this window.
+
+
+ 
+[Process completed]
+
+
+ 
+The intervals between parts won't be exactly equal, but they give a rough indication of progress.
+
+
+ 
+Wait for the final message "Process completed" to appear. If you don't see it within about 15 minutes, the test probably won't complete in a reasonable time. In that case, press the key combination control-C or command-period to stop it. Then go to the next step. You'll have incomplete results, but still something. If you close the Terminal window while the test is still running, the partial results won't be saved and you'll have to start over.
+
+
+ 
+12. When the test is complete, or if you stopped it because it was taking too long, quit Terminal. The results will have been saved to the Clipboard automatically. They are not shown in the Terminal window. Please don't copy anything from there. All you have to do is start a reply to this comment and then paste by pressing command-V again.
+
+
+ 
+At the top of the results, there will be a line that begins with the words "Start time." If you don't see that, but instead see a mass of gibberish, you didn't wait for the "Process completed" message to appear in the Terminal window. Please wait for it and try again.
+
+
+ 
+If any private information, such as your name or email address, appears in the results, anonymize it before posting. Usually that won't be necessary.
+
+
+ 
+13. When you post the results, you might see an error message on the web page: "You have included content in your post that is not permitted," or "The message contains invalid characters." That's a bug in the software that runs this website. Please post the test results on Pastebin, then post a link here to the page you created.
+
+
+ 
+If you have an account on Pastebin, please don't select Private from the Paste Exposure menu on the page, because then no one but you will be able to see it.
+
+
+ 
+14. This is a public forum, and others may give you advice based on the results of the test. They speak for themselves, not for me. The test itself is harmless, but whatever else you're told to do may not be. For others who choose to run it, I don't recommend that you post the test results on this website unless I asked you to.
+
+
+ 
+______________________________________________________________
+
+
+ 
+Copyright © 2014, 2015 by Linc Davis. As the sole author of this work (including the referenced "Diagnostic Test"), I reserve all rights to it except as provided in the Use Agreement for the Apple Support Communities website ("ASC"). Readers of ASC may copy it for their own personal use. Neither the whole nor any part may be redistributed.
+
+
+Less
+Dec 3, 2015 6:59 AM
+
+Reply Helpful (1) Thread reply - more options
+User profile for user: funguss88funguss88
+funguss88
+User level:Level 1
+In response to Linc Davis
+
+Thanks Link Davis!
+
+
+
+Here you say:
+
+"There are ways to back up a computer that isn't fully functional. Ask if you need guidance."
+
+What's the best for backing up in my situation? Due to my iMac being very unresponsive, I'm wondering if there's a better way... I've got a Macbook Pro with no free storage space at present... Can I run the iMac through the Macbook and back up/clone the iMac hard drive to an external drive?
+
+
+
+Any help on this would be great,
+
+Cheers
+
+
+More
+Dec 3, 2015 7:40 AM
+
+Reply Helpful (1) Thread reply - more options
+User profile for user: Linc DavisLinc Davis
+Linc Davis
+User level:Level 10
+In response to funguss88
+
+Try this first:
+
+Use Time Machine to back up or restore your Mac - Apple Support
+
+If it doesn't work, see below.
+
+There are several ways to back up a Mac that is not fully functional. You need an external hard drive or other storage device to hold the data.
+
+1. Start up from the Recovery partition, from Internet Recovery, or from a local Time Machine backup volume (option key at startup.) Launch Disk Utility and follow the instructions in this support article, under “Instructions for backing up to an external hard disk via Disk Utility.” The article refers to starting up from a DVD, but the procedure in Recovery mode is the same. You don't need a DVD if you're running OS X 10.7 or later.
+
+If you use FileVault 2, then you must first unlock the startup volume. Select its icon ("Macintosh HD," unless you gave it a different name.) It will be nested below another disk icon, usually with the same name. Click the Unlock button in the toolbar. Enter your login password when prompted.
+
+2. If Method 1 fails because of disk errors, then you may be able to salvage some of your files by copying them in the Finder. If you already have an external drive with OS X installed, start up from it. Otherwise, if you have Internet access, follow the instructions on this page to prepare the external drive and install OS X on it. You'll use the Recovery installer, rather than downloading it from the App Store.
+
+3. If you have access to a working Mac, and both it and the non-working Mac have FireWire or Thunderbolt ports, start the non-working Mac in target disk mode. A Retina MacBook (from 2015 or later) with a USB-C port can also be started in target disk mode and connected to another Mac using a USB cable and an adapter.
+
+Use the working Mac to copy the data to another drive.
+
+This technique won't work with USB (except on a Retina MacBook), Ethernet, Wi-Fi, or Bluetooth. Note that a Retina MacBook Pro (with Thunderbolt) is different from a Retina MacBook, and it can't be connected to another Mac via USB in target disk mode.
+
+4. If the internal drive of the non-working Mac is user-replaceable, remove it and mount it in an external enclosure or drive dock. Use another Mac to copy the data.
+
+
