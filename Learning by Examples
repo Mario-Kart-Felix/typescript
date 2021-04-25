@@ -1,0 +1,29 @@
+Learning by Examples
+Our "Show Node.js" tool makes it easy to learn Node.js, it shows both the code and the result.
+
+Example
+var http = require('http');
+
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end('Hello World!');
+}).listen(8080);
+Click on the "Run example" button to see how it works.
+
+Examples Running in the Command Line Interface
+In this tutorial there will be some examples that are better explained by displaying the result in the command line interface.
+
+When this happens, The "Show Node.js" tool will show the result in a black screen on the right:
+
+Example
+console.log('This example is different!');
+console.log('The result is displayed in the Command Line Interface');
+Click on the "Run example" button to see how it works.
+
+Node.js Reference
+Node.js has a set of built-in modules.
+
+Built-in Modules
+
+Download Node.js
+Download Node.js from the official Node.js web site: https://nodejs.org
