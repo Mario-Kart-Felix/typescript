@@ -1,0 +1,35 @@
+The very concept of Encryption raises a lot of questions to a person who has never had much to do with cybersecurity. Naturally, when you hear the term “military-grade encryption”, it gets even more confusing. But if you’re familiar with encrypted services, you might have heard this term a lot, especially in the context of various VPN services.
+
+Contents
+
+What is military-grade encryption?
+Has AES ever been cracked?
+How long will the AES last?
+Do you need military-grade security?
+Military-grade or AES-256?
+Some cybersecurity experts may call this phrase a marketing gimmick. Others may argue that it conveys difficult concepts in an easy-to-understand way. But what does military-grade encryption really mean?
+
+What is military-grade encryption?
+Military-grade encryption refers to AES (Advanced Encryption Standard) with 256-bit keys. In 2001, AES was announced as the new standard for information security by the National Institute of Standards and Technology (NIST), a unit of the US Commerce Department.
+
+Traditionally, military-grade encryption uses a key size equal to or greater than 128 bits. The US government specifies that AES-128 is used for secret (unclassified) information and AES-256 for top secret (classified) information. If an entity handles information on both levels, it usually adopts AES-256 as its standard.
+
+To a person who is not particularly tech-savvy, these letters and numbers won't mean much. In an attempt to bring encryption to the masses, security companies started to look for a term that describes the highest-level security with less jargon. As AES is used by the US government to secure classified information and by the NSA to protect national security data, the term “military-grade” seemed suitable.
+
+Has AES ever been cracked?
+The AES-256 block cipher hasn't been cracked yet, but there have been various attempts against AES keys. The first key-recovery attack on full AES was published in 2011 by Andrey Bogdanov, Dmitry Khovratovich, and Christian Rechberger. They used the biclique attack, which is faster than a brute force attack by a factor of about four. However, it was a minor success. The 126-bit key is not widely used, as the lowest key in AES encryption contains 128 bits.
+
+And it would still take billions of years to brute force the 126-bit key to crack it. That’s why this attempt doesn't spell danger for information encrypted with the AES. There is no known practical attack that would allow someone to access AES-encrypted data if encryption is implemented correctly.
+
+How long will the AES last?
+According to NIST, no one can be sure how long the AES or any other cryptographic algorithm will remain secure. However, NIST's Data Encryption Standard (known as DES) was a US government standard for approximately 20 years before it became hackable. The AES supports significantly larger key sizes than what DES supports. Barring any attacks against AES that are faster than key exhaustion, and even with future advances in technology, AES has the potential to remain secure well beyond 20 years.
+
+Do you need military-grade security?
+Many skeptics would say that you don't need it as other encryption algorithms would do a good job too. However, no industry or service is immune to attacks. And services that store sensitive information, such as passwords or financial data, should not apply anything less than the recommended standard.
+
+Back when the NIST presented this standard to the public in 2001, they already expected that the private sector would widely adopt it. They saw and still see it as a benefit to millions of consumers and businesses for protecting their sensitive information.
+
+So yes, if you want to show that you care about your users and their personal data, you must use the best encryption there is.
+
+Military-grade or AES-256?
+It's down to a personal choice. If you're a tech-savvy person, you may prefer the proper technical terms. But translating complex technological ideas into everyday language can be challenging. Therefore, you sometimes need to use popular terms to illustrate your message, so it reaches the user. If the term “military-grade” helps to close the communication gap, there’s no harm in using it.
