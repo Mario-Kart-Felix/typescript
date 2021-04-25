@@ -1,0 +1,9 @@
+When I clone a repository that uses LF line endings using msysgit on OsX, the checked out files have somehow the CRLF line endings even though my core.autocrlf is set to false. Why is that?
+
+Example:
+
+> git config core.autocrlf
+false
+
+> git clone https://github.com/wp-cli/wp-cli.git wp-cli
+The checked out files have CRLF line endings even though they have LF in the repository itself.
