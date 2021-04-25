@@ -1,0 +1,238 @@
+#LogRocket Blog
+BLOG
+What is Deno and how is it different from Node.js?
+January 14, 2021  6 min read 
+
+Deno vs. Node: What Is Deno and How Is It Different From Node.js?
+Editor’s note: This guide was last updated in March 2021 to reflect changes introduced in the most Deno release, Deno v1.7.0, and to include an updated Deno vs. Node.js performance comparison.
+
+Ryan Dahl, creator of Node.js, officially released Deno in May 2018. This new runtime for JavaScript was designed to fix a long list of inherent problems in Node.js.
+
+Don’t get me wrong: Node is a great server-side JavaScript runtime in its own right, mostly due to its vast ecosystem and the usage of JavaScript. However, Dahl admitted at the 2018 JSConf EU that there are a few things he should have thought about more — security, modules, and dependencies, to name a few.
+
+
+
+In his defense, it’s not like he could envision how much the platform would grow in such a short period of time. Also, back in 2009, JavaScript was still this weird little language that everyone made fun of, and many of its features weren’t there yet.
+
+What is Deno?
+Deno is a secure TypeScript runtime built on V8, the Google runtime engine for JavaScript.
+
+Deno was built with:
+
+Rust (Deno’s core was written in Rust, Node’s in C++)
+Tokio (the event loop written in Rust)
+TypeScript (Deno supports both JavaScript and TypeScript out of the box)
+V8 (Google’s JavaScript runtime used in Chrome and Node, among others)
+
+
+Why use Deno?
+Deno’s features are designed to improve upon the capabilities of Node.js. Let’s take a closer look at some of the main features that make Deno a compelling alternative to Node.
+
+Security (permissions) in Deno
+Among the most important of Deno’s features is its focus on security.
+
+As opposed to Node.js, Deno by default executes the code in a sandbox, which means that runtime has no access to:
+
+The file system
+The network
+Execution of other scripts
+The environment variables
+Let’s take a look at how the permission system works.
+
+(async () => {
+ const encoder = new TextEncoder();
+ const data = encoder.encode('Hello world\n');
+
+ await Deno.writeFile('hello.txt', data);
+ await Deno.writeFile('hello2.txt', data);
+})();
+The script creates two text files called hello.txt and hello2.txt with a Hello world message within. The code is being executed inside a sandbox, so it has no access to the file system.
+
+Also note that we are using the Deno namespace instead of the fs module, as we would in Node.js. The Deno namespace provides many fundamental helper functions. By using the namespace, we are losing the browser compatibility, which will be discussed later on.
+
+When we run it by executing:
+
+deno run write-hello.ts
+We are prompted with the following:
+
+⚠️Deno requests write access to "/Users/user/folder/hello.txt". Grant? [a/y/n/d (a = allow always, y = allow once, n = deny once, d = deny always)]
+We are actually prompted twice since each call from the sandbox must ask for permission. Of course, if we chose the allow always option, we would only get asked once.
+
+If we choose the deny option, the PermissionDenied error will be thrown, and the process will be terminated since we don’t have any error-handling logic.
+
+If we execute the script with the following command:
+
+deno run --allow-write write-hello.ts
+There are no prompts and both files are created.
+
+Aside from the --allow-write flag for the file system, there are also --allow-net, --allow-env, and --allow-run flags to enable network requests, access the environment, and for running subprocesses, respectively.
+
+Deno modules
+Deno, just like browsers, loads modules by URLs. Many people got confused at first when they saw an import statement with a URL on the server side, but it actually makes sense — just bear with me:
+
+import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
+What’s the big deal with importing packages by their URLs, you may ask? The answer is simple: by using URLs, Deno packages can be distributed without a centralized registry such as npm, which recently has had a lot of problems, all of them explained here.
+
+By importing code via URL, we make it possible for package creators to host their code wherever they see fit — decentralization at its finest. No more package.json and node_modules.
+
+When we start the application, Deno downloads all the imported modules and caches them. Once they are cached, Deno will not download them again until we specifically ask for it with the --reload flag.
+
+There are a few important questions to be asked here:
+
+What if a website goes down?
+Since it’s not a centralized registry, the website that hosts the module may be taken down for many reasons. Depending on its being up during development — or, even worse, during production — is risky.
+
+As we mentioned before, Deno caches the downloaded modules. Since the cache is stored on our local disk, the creators of Deno recommend checking it in our version control system (i.e., git) and keeping it in the repository. This way, even when the website goes down, all the developers retain access to the downloaded version.
+
+Deno stores the cache in the directory specified under the $DENO_DIR environmental variable. If we don’t set the variable ourselves, it will be set to the system’s default cache directory. We can set the $DENO_DIR somewhere in our local repository and check it into the version control system.
+
+Do I have to import it by the URL all the time?
+Constantly typing URLs would be very tedious. Thankfully, Deno presents us with two options to avoid doing that.
+
+The first option is to re-export the imported module from a local file, like so:
+
+export { test, assertEquals } from "https://deno.land/std/testing/mod.ts";
+Let’s say the file above is called local-test-utils.ts. Now, if we want to again make use of either test or assertEquals functions, we can just reference it like this:
+
+import { test, assertEquals } from './local-test-utils.ts';
+So it doesn’t really matter if it’s loaded from a URL or not.
+
+The second option is to create an imports map, which we specify in a JSON file:
+
+{
+   "imports": {
+      "http/": "https://deno.land/std/http/"
+   }
+}
+And then import it as such:
+
+import { serve } from "http/server.ts";
+In order for it to work, we have to tell Deno about the imports map by including the --importmap flag:
+
+deno run --importmap=import_map.json hello_server.ts
+Package versioning in Deno
+Versioning has to be supported by the package provider, but from the client side it comes down to just setting the version number in the URL like so:
+
+https://unpkg.com/liltest@0.0.5/dist/liltest.js
+Deno browser compatibility
+Deno aims to be browser-compatible. Technically speaking, when using the ES modules, we don’t have to use any build tools like webpack to make our application ready to use in a browser.
+
+However, tools like Babel will transpile the code to the ES5 version of JavaScript, and as a result, the code can be run even in older browsers that don’t support all the newest features of the language. But that also comes at the price of including a lot of unnecessary code in the final file and bloating the output file.
+
+It is up to us to decide what our main goal is and choose accordingly.
+
+Deno supports TypeScript out of the box
+Deno makes it easy to use TypeScript without the need for any config files. Still, it is possible to write programs in plain JavaScript and execute them with Deno without any trouble.
+
+Is Deno production-ready?
+Deno has been steadily growing for quite some time now. Deno v1.0 was officially released on May 13 to much fanfare and has been growing steadily ever since.
+
+The most recent stable release at the time of writing is Deno v1.7.0, published on Jan. 19, 2021. The latest version of Deno features improved compilation and data URL capabilities. Highlights of the new release include the ability to cross-compile from anything in stable, supported architecture (including Windows x64, MacOS x64, and Linux x64) with deno compile. In addition, deno compile now generates binaries that are 40–60 percent smaller than those generated by Deno v. 1.6, as well as binaries that have built-in CA certificates, custom V8 flags, locked-down permissions, and more.
+
+Other notable features in Deno v.1.7 include support for data URLs, support for formatting Markdown files with deno fmt, and a --location flag to set document location for scripts. Learn more about the most recent updates to Deno.
+
+With its decentralized approach, Deno takes the necessary step of freeing the JavaScript ecosystem from the centralized package registry that is npm.
+
+Deno vs. Node.js: Performance
+Comparing the performance of Node.js and Deno is hard due to Deno’s relatively young age. Most of the available benchmarks are very simple, such as logging a message to the console, so we can’t just assume that the performance will stay the same as the application grows.
+
+One thing we know for sure is that both Node.js and Deno use the same JavaScript engine, Google’s V8, so there won’t be any difference in performance when it comes to running the JavaScript itself.
+
+The only difference that could potentially impact performance is the fact that Deno is built on Rust and Node.js on C++. Deno’s team publishes a set of benchmarks for each release that presents Deno’s performance, in many cases in comparison to Node. As of March 2021, it seems that Node.js performs better when it comes to HTTP throughput and Deno when it comes to lower latency. Overall, the performance is very similar.
+
+A common misconception about Deno’s first-class TypeScript support is that it somehow affects runtime performance due to type checking. I couldn’t find where that misconception originated, but, as anyone who knows the first thing about how TypeScript works will tell you, TypeScript only checks types during transpilation. Therefore, there’s no way it could negatively impact any kind of runtime performance. Once we use the bundle command, the output is a single JavaScript file.
+
+All in all, both runtimes are extremely fast and make use of heavy optimizations to deliver the best possible performance. I don’t think either Deno or Node.js will be able to significantly outperform the other.
+
+Should you use Deno instead of Node.js?
+Deno’s goal is not to be a Node replacement, but an alternative. I would say that the majority of developers are happy with the way Node.js is evolving and aren’t really looking to switch things up.
+
+Deno’s focus on security and the possibility of bundling the entire codebase into a single file presents a great opportunity for Deno to become the go-to tool for JavaScript developers when it comes to creating utility scripts that may have otherwise been written in languages such as Bash or Python.
+
+If you’re trying to decide which one to choose, I would stick with Node. It is mature and stable, so there won’t be any unexpected behaviors that could negatively impact the development of an application.
+
+200’s only  Monitor failed and slow network requests in production
+Deploying a Node-based web app or website is the easy part. Making sure your Node instance continues to serve resources to your app is where things get tougher. If you’re interested in ensuring requests to the backend or third party services are successful, try LogRocket. LogRocket Network Request Monitoringhttps://logrocket.com/signup/
+LogRocket is like a DVR for web apps, recording literally everything that happens on your site. Instead of guessing why problems happen, you can aggregate and report on problematic network requests to quickly understand the root cause.
+
+LogRocket instruments your app to record baseline performance timings such as page load time, time to first byte, slow network requests, and also logs Redux, NgRx, and Vuex actions/state. Start monitoring for free.
+Share this:
+TwitterRedditLinkedInFacebook
+
+Maciej Cieślar 
+A JavaScript developer and a blogger @ https://www.mcieslar.com/
+#deno #node
+« Electron-forge vs. electron-react-boilerplate
+How and why to use React Frontload »
+Project Fugu: 5 new APIs to try out in…
+Linda Ikechukwu
+Apr 23, 2021  7 min read
+Introduction to form validation in Flutter
+Eshiet Ekemini
+Apr 23, 2021  7 min read
+An introduction to profiling a Rust web application
+Mario Zupan
+Apr 23, 2021  11 min read
+13 Replies to “What is Deno and how is it different from…”
+ Tri Rumekso Anggie Wibowo Says:
+July 9, 2019 at 9:30 pm
+Why should people commit the modules into their repo? Man, it’s a waste of space. I had hoped Node.js creators will follow Go creators in terms of managing package.
+
+ Alastair Lockie Says:
+July 11, 2019 at 12:53 pm
+Yes would it be possible to get a citation for the Deno team recommending storing the cache in the project directory?
+
+ Maciej Cieślar Says:
+July 11, 2019 at 3:18 pm
+@alastair
+“Relying on external servers is convenient for development but brittle in production. Production software should always bundle its dependencies. In Deno this is done by checking the $DENO_DIR into your source control system, and specifying that path as the $DENO_DIR environmental variable at runtime.”
+
+ Alastair Lockie Says:
+July 12, 2019 at 4:14 am
+@Maciej thanks for the reply; I more meant a link to wherever the Deno team recommended storing the cache in the project directory *over* the system’s default cache directory.
+
+Great article on the whole btw, really interesting stuff.
+
+ Jhadesdev Says:
+July 12, 2019 at 7:57 am
+This is very surprising, it’s like asking to check-in node_modules to avoid dependency issues. Which actually would avoid a ton of issues but it makes the git repository huge and hard to use.
+
+There are typically tens of thousands of files in node_modules, that’s why we avoid to commit this folder. I wonder how this will work in practice, I actually wouldn’t mind taking longer to clone a repo if it ensures that no-one will run into versioning issues in the project, due to different machines having installed different versions of some library.
+
+ Lazar Otasevic Says:
+February 5, 2020 at 10:19 am
+i always push my modules, recommendation to ignore modules was wrong all the way
+
+ Damian Says:
+July 13, 2019 at 7:05 pm
+I don’t understand these complaints. How is bundling dependencies and cloning them later any different than doing an `npm install`? You have to download these files one way or another…
+
+ Carl Johnson Says:
+July 23, 2019 at 2:35 am
+I guess the difference will be that in npm you are downloading a lot of garbage with every package like readme files etc. In deno on the other hand you will be caching nothing more than minified javascript.
+
+ George Says:
+July 31, 2019 at 4:28 pm
+Well, a package represents a artifact, while a repo should only hold source code and configs.
+
+ Example850073467 Says:
+September 20, 2019 at 4:01 pm
+We don’t like package.json, that’s why we are using map JSON file …., We don’t like node_modules, that’s why we are using folder with a different name and store packages in our own repo …,
+
+ Lazar Otasevic Says:
+February 5, 2020 at 10:17 am
+because module is code, it’s normal to push all the code to the repo and not rely on third party tools to do it for you each time on the client
+
+ JOHN PETER PARLATO Says:
+June 8, 2020 at 12:51 pm
+I just wonder if allowing ‘anyone’ to publish from their own site, code that I’m going to use, is defeating the contention that Deno is improving security. I don’t know what npm does to ensure the code they host is not destructive or poorly written, but the downloading from npm site for me seems to provide a better way to do some type of inspection and validating of the code for the developer. If npm does nothing, then at least you can look at the popularity of the npm packages based on downloads. If anyone can publish from their own site, how can we even know the popularity of that code – who will track that?
+
+ Niall Carroll Says:
+August 31, 2020 at 3:16 pm
+Simple, Dont trust people who publish to their own sites, instead…
+
+#https://deno.land/x
+
+It tracks populatity
+
+
