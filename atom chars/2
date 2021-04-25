@@ -1,0 +1,38 @@
+• atom chars/2
+This predicate is now ISO compliant and thus generates a list of one-character atoms. The
+behaviour of the old predicate is available in the —also ISO compliant— atom codes/2
+predicate. Safest repair is a replacement of all atom chars into atom codes. If you do not
+want to change any souce-code, you might want to use
+user:goal_expansion(atom_chars(A,B), atom_codes(A,B)).
+• number chars/2
+Same applies for number chars/2 and number codes/2.
+• feature/2, set feature/2
+These are replaced by the ISO compliant current prolog flag/2 and
+set prolog flag/2. The library library(backcomp) provides definitions for
+feature/2 and set feature/2, so no source has to be updated.
+• Accessing command-line arguments
+This used to be provided by the undocumented ’$argv’/1 and Quintus compatible library
+unix/1. Now there is also documented current prolog flag(argv, Argv).
+• dup stream/2
+Has been deleted. New stream-aliases can deal with most of the problems for which
+dup stream/2 was designed and dup/2 from the clib package can with most others.
+• op/3
+Operators are now local to modules. This implies any modification of the operator-table does
+not influence other modules. This is consistent with the proposed ISO behaviour and a necessity
+to have any usable handling of operators in a multi-threaded environment.
+• set prolog flag(character escapes, Bool)
+This prolog flag is now an interface to changing attributes on the current source-module, effec-
+tively making this flag module-local as well. This is required for consistent handling of sources
+written with ISO (obligatory) character-escape sequences together with old Edinburgh code.
+• current stream/3 and stream position
+These predicates have been moved to library(quintus).
+1.6.12 Version 3.4 Release Notes
+The 3.4 release is a consolidation release. It consolidates the improvements and standard conformance
+of the 3.3 releases. This version is closely compatible with the 3.3 version except for one important
+change:
+• Argument order in select/3
+The list-processing predicate select/3 somehow got into a very early version of SWI-Prolog
+with the wrong argument order. This has been fixed in 3.4.0. The correct order is select(?Elem,
+?List, ?Rest).
+As select/3 has no error conditions, runtime checking cannot be done. To simplify debug-
+ging, the library module library(checkselect) will print references to select/3 in your
