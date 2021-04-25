@@ -1,0 +1,34 @@
+(These are the people who did the hard stuff)
+
+This project was originally inspired by:
+
+smbmap
+CredCrack
+smbexec
+Unintentional contributors:
+
+The Empire project
+@T-S-A's smbspider script
+@ConsciousHacker's partial Python port of Invoke-obfuscation from the GreatSCT project
+This repository contains the following repositories as submodules:
+
+Impacket
+Pypsrp
+Pywerview
+PowerSploit
+Invoke-Obfuscation
+Invoke-Vnc
+Mimikittenz
+NetRipper
+RandomPS-Scripts
+SessionGopher
+Mimipenguin
+RID-Hijacking
+Documentation, Tutorials, Examples
+See the project's wiki for documentation and usage examples
+
+Installation
+Please see the installation wiki page here or the GitBook
+
+To do
+0wn everything
