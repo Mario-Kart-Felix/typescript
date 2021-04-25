@@ -1,0 +1,1 @@
+A Multi-DNS architecture is one that utilizes authoritative DNS nameservers from two or more providers. Most, if not all DNS service providers, use multiple nameservers for high availability and redundancy, allowing them to mitigate most issues without clients even being aware
