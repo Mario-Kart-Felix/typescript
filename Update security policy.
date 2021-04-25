@@ -1,0 +1,97 @@
+
+@Dev
+
+Update a single property of local JSON file using put call in Angular 8
+javascript angular typescript angular-httpclient
+I want to update my JSON file which I have placed in my assets folder, so If I am updating just one property of my JSON object so it should update that property only, without affecting any other properties value:
+
+Let the sample code be :
+
+loginInterface.ts
+
+export interface loginModel {
+    Email: string;
+    Password: string;
+}
+login.component.ts
+
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http'
+import { loginModel } from './loginModel'
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
+})
+export class LoginComponent implements OnInit {
+
+
+  private _jsonURL = 'assets/Login.json';
+  private login: Array<loginModel>;
+
+constructor(
+    private http: HttpClient) {
+    this.login = new Array<loginModel>();
+  }
+ngOnInit() {
+    this.getLoginData();
+  }
+
+  getLoginData() {
+    this.http.get<loginModel[]>(this._jsonURL).subscribe(data => {
+      this.login = data;
+      console.log(this.login);
+      return this.login;
+    });
+  }
+
+UpdateLoginData() {
+// How to proceed on this one??
+  }
+}
+login.component.html
+
+<div *ngFor = "let log of login">
+    {{log.Email}} 
+    <input [ngModel]="log.Password">
+</div>
+<button (click)="UpdateLoginData()">Update</button>
+This is just an example.
+
+So if I am changing password at one place and clicking on update button , then it should update password of that specific Email only and I don't want to replace the whole file with new JSON object just for updating a single value, is this possible?
+
+
+
+halfer
+18.8k●1212 gold badges●7979 silver badges●158158 bronze badges
+Did you find a way to replace whole file with new JSON object ? – Darshana Sep 12 '20 at 10:59
+Add a comment
+
+
+You can't do any file operation using just angular framework. You need server side implementation to achieve this. If you are not familiar with server side programming you can try using in memory angular database api.
+
+#https://www.npmjs.com/package/angular-in-memory-web-api
+
+
+
+
+805●11 gold badge●33 silver badges●1313 bronze badges
+Can you let me know whether I can use this plugin only for development. Will it cause any trouble if I use in production? – Darshana Sep 18 '20 at 6:53
+@Darshana Sure you can use this plugin for development. But remember if you are using it for production your database will not be secure and you can't store large dataset into this in memory web api. In memory web api is just to simulate the backend REST API. – prathameshk73 Sep 18 '20 at 7:05 
+
+Share Improve this answer Follow
+answered
+Dec 8 '19 at 13:38
+
+
+83●55 bronze badges
+Can you please let me know how can I update local JSON using backend call ? – Darshana Sep 18 '20 at 6:47 
+
+No! You cannot change a file’s content using Angular. It is a file I/O operation that is handled by a backend framework/language (for example Node.JS) having file system API. You can create a RESTful API to modify the contents of the file and make an HTTP call from Angular.
+1,096●99 silver badges●1919 bronze badges edited
+Dec 8 '2005 at 13:56
+
+
+
