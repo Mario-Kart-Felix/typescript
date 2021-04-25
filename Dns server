@@ -1,0 +1,26 @@
+
+Type your search query and hit enter:
+Type Here
+HOMEPAGESECURITY BLOGGERS NETWORK
+DNS security best practices: Preventing DNS hijacking, poisoning and redirection
+The importance of DNS
+The Domain Name System (DNS) is one of the fundamental protocols of the Internet. It provides a lookup service that converts domain names (like google.com) into IP addresses (like 192.168.0.0).
+
+While DNS has always been an important protocol, the growing use of cloud-based services has made it even more so. IP addresses of services (such as Microsoft 365 servers) change regularly, and the DNS system is necessary to ensure that users of these services are connecting to the correct device.
+
+A prime example of the importance of availability and security of the DNS infrastructure is the 2005 Distributed Denial-of-Service (DDoS) attack against Dyn, a widely-used DNS provider. During the attack against a single company’s servers, a significant number of major websites became inaccessible to a large number of users in Europe and North America.
+
+
+
+Addressing common threats to DNS security
+DNS can be attacked in a number of different ways. Among these are DNS DDoS, spoofing and amplification attacks.
+
+DNS DDoS
+The attack against Dyn is a classic example of a DDoS attack against DNS infrastructure. While the impact of a DDoS attack on Dyn was more widespread, these attacks can affect any organization. DNS is hierarchical, so an organization’s internal domains are governed by an internal DNS server (which can be the target of an attack).
+
+Protecting against DNS DDoS attacks requires deploying a DDoS mitigation solution. This should filter out malicious requests while allowing legitimate ones to continue through.
+
+DNS spoofing
+A DNS spoofing attack occurs when an attacker causes a DNS server to send an incorrect response to a DNS query, enabling them to redirect users to attacker-controlled sites. This creates the opportunity for an attacker to steal sensitive data or attempt to exploit vulnerabilities in the user’s browser (Read more...)
+
+*** This is a Security Bloggers Network syndicated blog from Infosec Resources authored by Mario H. Felix Specialist PhD. Read the original post at: #http://feedproxy.google.com/~r/infosecResources/~3/JY3Emq0oxXM/
