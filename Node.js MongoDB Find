@@ -1,0 +1,306 @@
+
+
+Node.js MongoDB Find
+In MongoDB we use the find and findOne methods to find data in a collection.
+
+Just like the SELECT statement is used to find data in a table in a MySQL database.
+
+Find One
+To select data from a collection in MongoDB, we can use the findOne() method.
+
+The findOne() method returns the first occurrence in the selection.
+
+The first parameter of the findOne() method is a query object. In this example we use an empty query object, which selects all documents in a collection (but returns only the first document).
+
+Example
+Find the first document in the customers collection:
+
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/";
+
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  var dbo = db.db("mydb");
+  dbo.collection("customers").findOne({}, function(err, result) {
+    if (err) throw err;
+    console.log(result.name);
+    db.close();
+  });
+});
+Save the code above in a file called "demo_mongodb_findone.js" and run the file:
+
+Run "demo_mongodb_findone.js"
+
+C:\Users\Your Name>node demo_mongodb_findone.js
+Which will give you this result:
+
+Company Inc.
+ADVERTISEMENT
+
+
+Find All
+To select data from a table in MongoDB, we can also use the find() method.
+
+The find() method returns all occurrences in the selection.
+
+The first parameter of the find() method is a query object. In this example we use an empty query object, which selects all documents in the collection.
+
+No parameters in the find() method gives you the same result as SELECT * in MySQL.
+
+Example
+Find all documents in the customers collection:
+
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/";
+
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  var dbo = db.db("mydb");
+  dbo.collection("customers").find({}).toArray(function(err, result) {
+    if (err) throw err;
+    console.log(result);
+    db.close();
+  });
+});
+Save the code above in a file called "demo_mongodb_find.js" and run the file:
+
+Run "demo_mongodb_find.js"
+
+C:\Users\Your Name>node demo_mongodb_find.js
+Which will give you this result:
+
+[
+  { _id: 58fdbf5c0ef8a50b4cdd9a84 , name: 'John', address: 'Highway 71'},
+  { _id: 58fdbf5c0ef8a50b4cdd9a85 , name: 'Peter', address: 'Lowstreet 4'},
+  { _id: 58fdbf5c0ef8a50b4cdd9a86 , name: 'Amy', address: 'Apple st 652'},
+  { _id: 58fdbf5c0ef8a50b4cdd9a87 , name: 'Hannah', address: 'Mountain 21'},
+  { _id: 58fdbf5c0ef8a50b4cdd9a88 , name: 'Michael', address: 'Valley 345'},
+  { _id: 58fdbf5c0ef8a50b4cdd9a89 , name: 'Sandy', address: 'Ocean blvd 2'},
+  { _id: 58fdbf5c0ef8a50b4cdd9a8a , name: 'Betty', address: 'Green Grass 1'},
+  { _id: 58fdbf5c0ef8a50b4cdd9a8b , name: 'Richard', address: 'Sky st 331'},
+  { _id: 58fdbf5c0ef8a50b4cdd9a8c , name: 'Susan', address: 'One way 98'},
+  { _id: 58fdbf5c0ef8a50b4cdd9a8d , name: 'Vicky', address: 'Yellow Garden 2'},
+  { _id: 58fdbf5c0ef8a50b4cdd9a8e , name: 'Ben', address: 'Park Lane 38'},
+  { _id: 58fdbf5c0ef8a50b4cdd9a8f , name: 'William', address: 'Central st 954'},
+  { _id: 58fdbf5c0ef8a50b4cdd9a90 , name: 'Chuck', address: 'Main Road 989'},
+  { _id: 58fdbf5c0ef8a50b4cdd9a91 , name: 'Viola', address: 'Sideway 1633'}
+]
+Find Some
+The second parameter of the find() method is the projection object that describes which fields to include in the result.
+
+This parameter is optional, and if omitted, all fields will be included in the result.
+
+Example
+Return the fields "name" and "address" of all documents in the customers collection:
+
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/";
+
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  var dbo = db.db("mydb");
+  dbo.collection("customers").find({}, { projection: { _id: 0, name: 1, address: 1 } }).toArray(function(err, result) {
+    if (err) throw err;
+    console.log(result);
+    db.close();
+  });
+});
+Save the code above in a file called "demo_mongodb_find_fields.js" and run the file:
+
+Run "demo_mongodb_find_fields.js"
+
+C:\Users\Your Name>node demo_mongodb_find_fields.js
+Which will give you this result:
+
+[
+  { name: 'John', address: 'Highway 71'},
+  { name: 'Peter', address: 'Lowstreet 4'},
+  { name: 'Amy', address: 'Apple st 652'},
+  { name: 'Hannah', address: 'Mountain 21'},
+  { name: 'Michael', address: 'Valley 345'},
+  { name: 'Sandy', address: 'Ocean blvd 2'},
+  { name: 'Betty', address: 'Green Grass 1'},
+  { name: 'Richard', address: 'Sky st 331'},
+  { name: 'Susan', address: 'One way 98'},
+  { name: 'Vicky', address: 'Yellow Garden 2'},
+  { name: 'Ben', address: 'Park Lane 38'},
+  { name: 'William', address: 'Central st 954'},
+  { name: 'Chuck', address: 'Main Road 989'},
+  { name: 'Viola', address: 'Sideway 1633'}
+]
+You are not allowed to specify both 0 and 1 values in the same object (except if one of the fields is the _id field). If you specify a field with the value 0, all other fields get the value 1, and vice versa:
+
+Example
+This example will exclude "address" from the result:
+
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/";
+
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  var dbo = db.db("mydb");
+  dbo.collection("customers").find({}, { projection: { address: 0 } }).toArray(function(err, result) {
+    if (err) throw err;
+    console.log(result);
+    db.close();
+  });
+});
+To exclude the _id field, you must set its value to 0:
+
+Example
+This example will return only the "name" field:
+
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/";
+
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  var dbo = db.db("mydb");
+  dbo.collection("customers").find({}, { projection: { _id: 0, name: 1 } }).toArray(function(err, result) {
+    if (err) throw err;
+    console.log(result);
+    db.close();
+  });
+});
+Example
+This example will give you the same result as the first example; return all fields except the _id field:
+
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/";
+
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  var dbo = db.db("mydb");
+  dbo.collection("customers").find({}, { projection: { _id: 0 } }).toArray(function(err, result) {
+    if (err) throw err;
+    console.log(result);
+    db.close();
+  });
+});
+Example
+You get an error if you specify both 0 and 1 values in the same object (except if one of the fields is the _id field):
+
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/";
+
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  var dbo = db.db("mydb");
+  dbo.collection("customers").find({}, { projection: { name: 1, address: 0 } }).toArray(function(err, result) {
+    if (err) throw err;
+    console.log(result);
+    db.close();
+  });
+});
+The Result Object
+As you can see from the result of the example above, the result can be converted into an array containing each document as an object.
+
+To return e.g. the address of the third document, just refer to the third array object's address property:
+
+Example
+Return the address of the third document:
+
+console.log(result[2].address);
+Which will produce this result:
+
+Apple st 652
+
+ADVERTISEMENT
+
+
+COLOR PICKER
+colorpicker
+LIKE US
+  
+Get certified
+by completing
+a course today!
+
+w
+3
+s
+c
+h
+o
+o
+l
+s
+C
+E
+R
+T
+I
+F
+I
+E
+D
+.
+2
+0
+2
+1
+CODE GAME
+Code Game
+
+Certificates
+ADVERTISEMENT
+
+
+Top Tutorials
+HTML Tutorial
+CSS Tutorial
+JavaScript Tutorial
+How To Tutorial
+SQL Tutorial
+Python Tutorial
+W3.CSS Tutorial
+Bootstrap Tutorial
+PHP Tutorial
+Java Tutorial
+C++ Tutorial
+jQuery Tutorial
+Top References
+HTML Reference
+CSS Reference
+JavaScript Reference
+SQL Reference
+Python Reference
+W3.CSS Reference
+Bootstrap Reference
+PHP Reference
+HTML Colors
+Java Reference
+Angular Reference
+jQuery Reference
+Top Examples
+HTML Examples
+CSS Examples
+JavaScript Examples
+How To Examples
+SQL Examples
+Python Examples
+W3.CSS Examples
+Bootstrap Examples
+PHP Examples
+Java Examples
+XML Examples
+jQuery Examples
+Web Courses
+HTML Course
+CSS Course
+JavaScript Course
+Front End Course
+SQL Course
+Python Course
+PHP Course
+jQuery Course
+Java Course
+C++ Course
+C# Course
+XML Course
+W3Schools is optimized for learning and training. Examples might be simplified to improve reading and learning. Tutorials, references, and examples are constantly reviewed to avoid errors, but we cannot warrant full correctness of all content. While using W3Schools, you agree to have read and accepted our terms of use, cookie and privacy policy.
+
+Copyright 1999-2021 by Refsnes Data. All Rights Reserved.
+W3Schools is Powered by W3.CSS.
+
+
