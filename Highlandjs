@@ -1,0 +1,6 @@
+@AlienDev One more thing that I just know a use for generator, is for backpressure. With nodejs stream you can implement backpressure quite easily with generator.
+And with the help of highlandjs, it become even more easy
+
+[1] nodejs.org/en/docs/guides/backpres...
+[2] nodejs.org/api/stream.html#stream_...
+[3] caolan.github.io/highland/
