@@ -1,0 +1,13 @@
+@AliEnDev code unification 
+n Merged version 
+n all repos/scripts unified 
+n svn repo added 
+n running on all kind of services, stable 
+n tested also running local site + basic jobs 
+n Pending... 
+n put it in CVMFS (happening after OpenSSL stuff, see later) 
+n when done and working, only one version used everywhere 
+n New-vo (local) installation being fixed 
+n db tables / structure differences, initial values, services creation... 
+n rebuild needed 
+n MySQL, lots of modules, perl update, new modules needed, etc.
