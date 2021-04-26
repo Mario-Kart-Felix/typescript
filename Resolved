@@ -1,0 +1,82 @@
+symbols are resolved to one. For example a
+double .. (period) is used when a . (period) is
+desired in the text. infile 'pages.txt' missover; 
+%LET LIBREF=CLASS;
+DATA &LIBREF..CLINICS;
+SET SOMEDATA;
+RUN;
+This will resolve to:
+DATA CLASS.CLINICS;
+SET SOMEDATA;
+RUN;
+A similar result is achieved when more than one
+macro variable is joined to form a single result.
+%LET DSN=CLINICS;
+%LET N=5;
+%LET DSN5=FRED;
+The macro variable &DSN&N resolves to
+CLINICS5, &DSN5 resolves to FRED. The
+&&DSN&N combination first resolves to a
+macro variable (&DSN5) which then resolves to
+a value (FRED) in a second pass. 
+DATA DEFINED MACRO VARIABLES
+It is not unusual to have a set of operations that
+must be performed on a series of data sets,
+variables, or procedures. The control of this
+process can easily be maintained by using
+&&var&i operations. 
+In the following example PROC FSEDIT is to
+be run on each of a series of data sets. The
+names of the data sets are stored in a flat file
+named PAGES.TXT a portion of which looks
+like:
+012_015 
+016_017 
+018 
+These data set names are placed into macro
+variables using the CALL SYMPUT routine in a
+DATA _NULL_ step.
+* Load the names of the data sets; 
+data _null_; 
+length ii $2; 
+ 
+input @1 dsn $8.; 
+i+1; 
+ii = left(put(i,2.)); 
+call symput('n',ii); 
+call symput('dsn'||ii,left(dsn)); 
+ 
+run; 
+The character variable ii assigns a sequential
+number to each data set name. This number then
+becomes a part of the macro variable name. In
+this way &DSN2 is assigned the value of
+016_017. The total number of entries is also
+retained in &N.
+USING && MACRO VARIABLES
+Typically the macro variables created in
+applications such as in the above example will be
+addressed in the form of &&VAR&I where
+VAR is the root portion of the variable name and
+the index number is an integer counter.
+A macro DO loop is often used to process each
+of the macro variables. The code below
+executes a PROC FSEDIT for each data set
+listed in the text file in the previous example. 
+Notice that the loop counts from 1 to &N, the
+total number of entries. This means that if the
+list changes all we have to modify is the list
+itself.
+%do q = 1 %to &n;
+ PROC FSEDIT DATA=dedata.p&&dsn&q mod
+ SCREEN=GLSCN.descn.p&&dsn&q...SCREEN;
+ RUN;
+%end;
+Notice that three periods are required in the
+SCREEN= option because two passes are
+needed to resolve the &&DSN&Q. The first pass
+compresses the three periods to two and the
+second pass compress the two periods to one. 
+For &Q=2 this code resolves to:
+ PROC FSEDIT DATA=dedata.p016_017 mod
+ SCREEN=GLSCN.descn.p016_017.SCREEN
