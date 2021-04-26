@@ -1,0 +1,33 @@
+Patch creating duplicate records EXE-Ifile
+‎08-03-2021 01:22 PM
+Hello,
+
+ 
+
+I'm attempting to update a few fields for a record in a collection using Patch(). The code I have is duplicating the record rather than updating it.  My goal is to update the collection, and once updated, use Patch() to then update the records and fields in the database. At this point however, I can't even get the collection updated and I'm not sure why?
+
+I've tried the following methods of using PATCH() and both methods result in a duplicate record being created.
+
+Patch(PendingEquipmentRequestsCollection, Defaults(PendingEquipmentRequestsCollection),
+    First(Filter(PendingEquipmentRequestsCollection, ID = PendingEquipmentGallery.Selected.ID)),    
+    {IsDeleted: true, ModifiedDate: Now(), ModifiedBy:varCurrentUser.Email}
+);
+Patch(PendingEquipmentRequestsCollection, Defaults(PendingEquipmentRequestsCollection),
+    //First(Filter(PendingEquipmentRequestsCollection, ID = PendingEquipmentGallery.Selected.ID)),    
+    LookUp(PendingEquipmentRequestsCollection, ID = PendingEquipmentGallery.Selected.ID),
+    {IsDeleted: true, ModifiedDate: Now(), ModifiedBy:varCurrentUser.Email}
+);
+If I omit Defaults(PendingEquipmentRequestsCollection) in Patch, nothing happens (no duplicate, but also, no edit of the existing fields).  If I include Defaults(PendingEquipmentRequestsCollection) in Patch then the record is duplicated.  I validated that the Filter / Lookup is returning the correct ID by place this in a label:
+
+First(Filter(PendingEquipmentRequestsCollection, ID = PendingEquipmentGallery.Selected.ID)).ID
+Here is the collection before modification:
+1.png
+
+Here is the form showing the correct ID is selected (which is the PK):
+2.png
+
+After clicking the trash can icon for the selected item, here is the duplicate record appearing in the collection:
+
+3.png
+
+Solved! Go to Solution.
