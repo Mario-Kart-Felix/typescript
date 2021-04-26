@@ -1,0 +1,148 @@
+Generators is a feature you probably won't need every day. Does it mean you may ignore them completely? Not at all! There are code patterns that literally call for generators. Let's look at some examples where generators shine!
+
+1. Traversing nested structures
+Thanks to yield* statement generators are friends with recursion and recursive data structures. Traversing trees with generators looks very natural:
+type TreeNode<T> = {
+    left?: TreeNode<T>,
+    value: T,
+    right?: TreeNode<T>,
+}
+
+function* traverse<T>(root: TreeNode<T>): Generator<T> {
+    if (root.left) {
+        yield* traverse(root.left)
+    }
+    yield root.value
+    if (root.right) {
+        yield* traverse(root.right)
+    }
+}
+Yes, it's that simple! Let's test it:
+const r = {
+    left: {
+        value: 0,
+        right: {
+            value: 1,
+        }
+    },
+    value: 2,
+    right: {
+        value: 3,
+    }
+}
+
+console.log([...traverse(r)])
+// => [ 0, 1, 2, 3 ]
+2. “True” coroutines
+Why quotes around “true”? Because technically any generator is a coroutine: it forks current execution stack. However, when speaking of coroutines devs usually mean something asynchronous, for example, nonblocking IO. So let's write the “real” coroutine that reads files in a dir:
+async function* readFiles() {
+    const promises = (await fs.promises.readdir(__dirname))
+        .map(f => fs.promises.readFile(`${__dirname}/${f}`))
+
+    for (const p of promises) {
+        yield String(await p)
+    }
+}
+What a short and simple code! Let's run it:
+for await (const s of readFiles()) {
+    console.log(s.substr(0, 20))
+}
+// =>
+// const connections: A
+// const d = new Date(1
+// type TreeNode<T> = {
+// const iterable = (()
+// ...
+As seen, in my case current dir is full of source code. Not a surprise 😉
+
+3. Tokenizing
+or any other code with a lot of nested ifs
+yield and yield* allow easily forwarding items optionally produced in nested functions up the stack without writing a lot of conditionals, making your code more declarative. This example is a very simple tokenizer which processes integer sums like 1+44-2. Let's start with types:
+type Token = IntegerToken | OperatorToken
+type IntegerToken = {
+    type: 'integer',
+    val: number,
+}
+type OperatorToken = {
+    type: '+' | '-',
+}
+
+// Helper abstraction over input string
+type Input = {
+    // Yields no more than one token
+    take: (
+        regexp: RegExp,
+        toToken?: (s: string) => Token,
+    ) => Generator<Token>,
+    didProgress: () => boolean,
+}
+
+function* tokenize(input: Input): Generator<Token>
+Now let's implement tokenize:
+function* tokenize(input: Input): Generator<Token> {
+    do {
+        yield* integer(input)
+        yield* operator(input)
+        space(input)
+    } while(input.didProgress())
+}
+
+function* integer(input: Input) {
+    yield* input.take(
+        /^[0-9]+/,
+        s => ({
+            type: 'integer' as const,
+            val: Number(s),
+        }),
+    )
+}
+
+function* operator(input: Input) {
+    yield* input.take(
+        /^[+-]/,
+        s => ({
+            type: s as '+' | '-',
+        }),
+    )
+}
+
+function space(input: Input) {
+    input.take(/^\s+/)
+}
+And, to see the whole picture, let's implement Input:
+class InputImpl implements Input {
+    str: string
+    pos = 0
+    lastCheckedPos = 0
+    constructor(str: string) {
+        this.str = str
+    }
+    * take(regexp: RegExp, toToken: (s: string) => Token) {
+        const m = this.str.substr(this.pos).match(regexp)
+        if (m) {
+            this.pos += m[0].length
+            if (toToken) {
+                yield toToken(m[0])
+            }
+        }
+    }
+    didProgress() {
+        const r = this.pos > this.lastCheckedPos
+        this.lastCheckedPos = this.pos
+        return r
+    }
+}
+Phew! We are finally ready to test it:
+console.log([...tokenize(new InputImpl('1+44-2'))])
+// =>
+// [
+//   { type: 'integer', val: 1 },
+//   { type: '+' },
+//   { type: 'integer', val: 44 },
+//   { type: '-' },
+//   { type: 'integer', val: 2 }
+// ]
+Is it for free?
+Unfortunately, not. Shorter code may reduce bundle size, however, if you have to transpile it to ES5, it will work the other way. If you are of those happy devs who may ship untranspiled ES6+, you may face performance penalties. But again, this doesn't mean you should stay away from the feature! Having clean and simple code may overweight disadvantages. Just be informed.
+
+Thanks for reading this. Do you know other patterns benefitting from generators
