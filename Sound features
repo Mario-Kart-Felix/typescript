@@ -1,0 +1,71 @@
+@AleinDev
+Open in app
+
+
+Open in app
+
+
+The Art of Creating a Mixtape — A Data Science Approach
+Shaham
+Shaham
+
+Mar 6, 2019·9 min read
+
+
+View Prototype of an Interactive Dashboard to Explore your Music Library (Only works on Desktop!)
+Lin Manuel Miranda — the creator of Hamilton — talking about mixtapes is as best an introduction as can be for the purpose of the project I’m about to share with you:
+MIRANDA: I grew up in the time just when cassettes were waning and CDs were growing. And so mixtapes — and not mix CDs, mixtapes — were an important part of the friendship and mating rituals of New York adolescents (laughter). If you were a girl and I wanted you — to show you I like you, I would make you a 90-minute cassette wherein I would show off my tastes. I would play you a musical theater song next to a hip-hop song next to an oldie next to some pop song you maybe never heard, also subliminally telling you how much I like you with all these songs.
+I think I learned more about writing scores for Broadway by making mixtapes in the ’90s than I did in college. You’re learning about rise and fall and energy and tempo shifts. You’re showing off your taste and your references. You’re trying to be witty by — through placement of music you didn’t write. And so it’s no accident that the initial name for my show was “The Hamilton Mixtape.” That’s how I approached writing the score. It was, here’s…
+GROSS: Oh, that’s why you called it that. Oh, OK. I get it.
+MIRANDA: Yeah. It’s, here’s everything I know about this guy, and it’s a ride, and you’re along for the ride. And, again, the reason I make that distinction cassette before CD is you have to listen to it in the order in which I’ve curated it for you. You know, side A to side B is our act break. And I say all that to answer your question because I had friends who only listened to hip-hop. I had friends who only listened to musicals, and I stood proudly in the middle, and I’d say, I’m going to change your life with this song.
+Yes! There is an art behind creating mixtapes — with apps like Spotify and mass amounts of tracks available to us in a snap of a finger, this art has been forgotten. But it’s still there, maybe it’s called a playlist and maybe it’s lost some of the romantic properties a mixtape has, but the fundamental sentiments of curating a selection of music for another’s ears is — I say this from personal experience — a wonderful, wonderful feeling.
+Lin highlights the basics of creating mixtapes:
+Flow matters — there are rises and falls and tempo changes and these elements are part of the game. The playlist scene suffers because we are still treating it like a recommendation system — trying to find ‘similar’ enough things based on mood, genre, artists, etc. This is partially why it loses the romance of a mixtape. In other words, our playlists have no ‘story’ to them, they are bland, unconnected. The tracks on playlists come together because they all happened to be at the same party (figuratively speaking) and like the same things and eat the same food. This is not interesting. What happened to conflicts? To the rise and fall of empires? To the maddening tensions of fate and character until that one final melody came to resolve our grand afflictions.
+Order matters — Album orders, for that reason, matter! I’m trying less and less to ‘shuffle’ music — the artist has designed the second song for ears that have heard the first song. I, as a curator, also expect a discipline from my disciples. I expect them to follow instructions, to listen in order, to see my selection not as ‘here are a bunch of my favourite songs’ but as ‘I designed this list for you in this specific order, for you!’.
+Authenticity matters — Mixtapes can’t be created by searching ‘best mixtapes to share with friends’ on google. Mixtapes don’t come from ‘here are the best 8 songs that your friends will love’ posts. Mixtapes certainly don’t come from ‘I ran an algorithm, it decided these are the 7 songs for you to fall in love with’. Mixtapes come from hearts, from experiences, from the accumulated elements of my life speaking to the accumulation of you. If, as Lin says, I say ‘I’m going to change your life!’ when I create a mixtape, this means I know what life-changing requires! Tolstoy, defining art, put a large dependency on sincerity, “If only the spectators or auditors are infected by the feelings which the author has felt, it is art.” I have to have felt it to infect you.
+But it is hard to follow these principles post-cassette&CD days. Why? Because of choice. Too much choice. I have thousands of songs from hundreds of artists directly accessible to me, how can I select 10–15… I can’t even keep all my library in my memory. Plagued with this existential crisis upon a request from a friend to share my music with him, I got to thinking: I have thousands of songs to choose from, what’s my process? How do I go about making this mixtape? Sigh, I wish I had a better view of my music… And so, here we are.
+A Better View of My Music
+
+A Better View: Music Map
+Tracks are complex, and single descriptors like artist, album, or genre are not sufficient enough to capture their underlying ‘feel’. So I needed a way to capture more information and get an idea of my ‘inventory’ of songs before I began selecting. Iteratively, this led to a functional prototype of an interactive dashboard that would allow me to roam my library of music in map-form (as visible above) in a more informative manner than swiping down on a list.
+The dashboard served as an exploratory research tool — allowing me to see the spatial mapping of other mixtapes (albums) — as well as an organization tool to select tracks for my playlist.
+Here is a quick sample of me first finding a not-so-positive (low valence) but high energy song and then connecting it with a song from a specific artist (The Bleachers):
+musicmapclip.mov
+Edit description
+drive.google.com
+
+Sound Features
+To understand underlying properties of songs, I thought of doing my own sound analysis but then found that Spotify has done some great work in calculating Audio Features. Here are the ones that, after some filtering, proved to be useful creating a spatial mapping:
+Acousticness: “A confidence measure from 0.0 to 1.0 of whether the track is acoustic.”
+Danceability: “Danceability describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity.”
+Energy: “Energy is a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and activity. Typically, energetic tracks feel fast, loud, and noisy.”
+Loudness: “The overall loudness of a track in decibels (dB). Loudness values are averaged across the entire track and are useful for comparing relative loudness of tracks.”
+Valence: “A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry).”
+Technical Details of Mapping in 2D
+I scaled the above features (+ some others) them into normal distributions, and then used TSNE to reduce them into 2 dimensions, allowing me to create the ‘Music Map’ you see above. Now we have a birds eye-view of a song library where each song is mapped relative to another rather than a meaningless list of endless items. I also used K-means clustering in high-dimensions to get groups of songs — each colour represents a different cluster — which serve as cognitive landmarks on the map indicating separation and borders. I like maps, I think spatiality helps knowledge organization and, in turn, makes it easier to build cognitive maps. Cognitive maps facilitate capturing connections between items. I then calculated linear gradients across the X and Y axis for each of the audio features and annotated it with the arrows that indicate the direction of flow.
+How to interpret graph
+Each circle-dot is a song and its placement reflects its relativity with other songs. As an example, songs on the left differ from the songs on the right more significantly than from the songs in the center.
+The longer and further the flow arrow is from the center of the map, the stronger the flow in the respective direction. As an example, the bottom left of the map contains significantly acoustic features as the acousticness gradient arrow is long and far from centre. On the other hand, loudness gradient arrow is small and closer to center of the map indicating that though there is somewhat of a correlation of louder songs in the top right quadrant of the map, the correlation is weak.
+Colours are clusters meaning same coloured points are grouped together in higher dimensions and they help to see the boundaries where two groups overlap.
+This kind of graph-based UI is something I’ve been thinking about and experimenting with on various fronts like blog posts, tweets, etc. because I think changing User-interface structures could also change the way we think.
+Interactive Controls
+
+Control Panel for Music Map
+Of course, staring at colourful dots is not exactly informative so I made it interactive with labels and added controls to filter and focus the map. I also added interactive features to select songs to add to your mixtape and track their positions on the map.
+Interactive Features:
+The Controls tab can filter the map based on various properties of songs.
+The Artists tab also allows to filter on artists.
+The Explore tab shows details of tracks as you hover over them on the map.
+Hovering over a song will also highlight other songs in the same album on the map and their ordering.
+Clicking a song will add it to your mixtape table below the map where you can click the preview button to get a quick 30sec snippet from the middle of the song.
+Toggle buttons on the top right allow you to toggle different map views.
+Mapping out a Mixtape
+After exploring, researching, and making your selection, you can then see the final spatial journey of your Mixtape.
+
+Sample Mixtape Spatial Journey
+Coming back to our initial principles of mixtapes: we’ve used underlying sound features to emphasize and design for Flow — we can design movement from various parts of the map like taking a listener from a good-vibe acoustics, to depressing but energetic pop, to a mellow shoe-gaze dream-pop sequence. Part of designing for Flow is researching the movement of other albums by your favourite artists on the map. Order is accounted for, we hand-pick our songs one by one in a sequence. And finally, Authenticity, though one can’t guarantee sincerity, our map contains songs from our own library. Therefore, at the very least, the structure allows for authentic, sincere selection of songs that have indeed infected us as we expect them to infect another.
+Final Remarks
+The prototype I linked in this post is built from a random selection of artists in different genres from my own library — which leans more towards indie/rock/acoustic. (Strangely, it is a little exposing to share one’s music library… but fear not, I did not give all my secrets (songs) away!)
+This approach obviously emphasizes the sound part of music, and not the lyrics. Further work would incorporate topic-modelling with lyrics and lexical qualities. A project I did a while ago explored that a bit.
+Currently, I made the entire thing using Bokeh Standalone Javascript to avoid dealing with any server costs :) Therefore, I did not add automatic playlist creation through Spotify API. For now, you can create a list of songs and then add them on to a Spotify playlist yourself.
+If you find this interesting and would like your own Music Map, I can’t promise, but message me your list of artists and I’ll see what I can do!
