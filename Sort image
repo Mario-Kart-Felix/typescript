@@ -1,0 +1,9 @@
+Two solutions for easier sorting can be used, but need to think about it in advance.
+
+Add tags to the files after they are created, so you can easily get them with the search box or the selection processes:
+https://neuroimage.usc.edu/brainstorm/Tutorials/PipelineEditor#Control_the_output_file_names 1
+https://neuroimage.usc.edu/brainstorm/Tutorials/Scripting#Running_the_script_again
+As you go, move the files in other folders than the intra-subject folder.
+The group analysis tutorial uses both solutions, you have the GUI version illustrated in the page and the scripted version accessible at the bottom of the page:
+https://neuroimage.usc.edu/brainstorm/Tutorials/VisualGroup#Sources
+https://neuroimage.usc.edu/brainstorm/Tutorials/VisualGroup#Group_analysis:_Sources
