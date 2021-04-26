@@ -1,0 +1,5 @@
+Converting the .spc and .pvk files into a .pfx file with the pvk2pfx.exe tool solved it for me.
+
+The command for the conversion was as follows:
+
+osslsigncode sign -pkcs12 codesign
