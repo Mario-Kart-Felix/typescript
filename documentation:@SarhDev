@@ -1,0 +1,15 @@
+According to the online documentation:@SarhDev
+
+Refresh - Repaints the control on the screen.
+
+Call Refresh method to repaint the control immediately. Refresh calls the Repaint method. Use the Refresh and Repaint methods interchangeably.
+
+Repaint - Forces the control to repaint its image on the screen.
+
+Call Repaint to force the control to repaint its image immediately. If the ControlStyle property includes csOpaque, the control paints itself directly. Otherwise, the Repaint method calls the Invalidate method and then the Update method so that any visible portions of controls beneath the control will be repainted as well.
+
+Update - Processes any pending paint messages immediately.
+
+Call Update to force the control to be repainted before any more, possibly time-consuming, processing takes place. Use Update to provide immediate feedback to the user that cannot wait for the Windows paint message to arrive.
+
+Update does not invalidate the control, but simply forces a repaint of any regions that have already been invalidated. Call Repaint instead to invalidate the control as well.
