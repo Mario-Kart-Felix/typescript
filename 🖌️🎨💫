@@ -1,0 +1,5 @@
+Just a quick release because I broke docs.rs :)
+
+Bug Fixes
+build: remove .cargo/config.toml to make docs.rs happy (393d9807)
+💙⚔️💫
