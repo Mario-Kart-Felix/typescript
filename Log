@@ -1,0 +1,5 @@
+log can become very large
+z if your password is stored as a macro 
+variable it will be displayed in the log
+To turn off this option:
+options nosymbolgen; @Agi @AlienDeb
