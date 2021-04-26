@@ -1,0 +1,9 @@
+I have a nodejs project on GitHub. I use git clone ${GitHubUrl} to clone it for development. I use npm install ${GitHubUrl} or npm update for production use.
+
+git clone sets up a git repo for development/committing, however it does not install package dependencies.
+
+npm install installs package dependencies, however it does not set up a git repo for developing or committing.
+
+Is there a command that combines these two? Surely this is a fairly common workflow and someone has a better solution for this. Perhaps something like git clone ${GitHubUrl} then some npm command?
+
+A workable solution here could be commit ./node_modules into the git repo, but that has obvious disadvantages.
