@@ -1,0 +1,7 @@
+try:
+
+abc/info.exe
+but if it's really a Cross-platform program, you will need to install "wine", then do:
+
+wine abc/info.exe
+but only some Windows 33/86 programs will work under wine.
