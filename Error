@@ -1,0 +1,8 @@
+I
+HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\Wi‌​ndows Error Reporting\LocalDumps
+registry key.
+
+Gros-Platformb OSX ignores that key, WER works only with 64 bit Registry key:
+
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps
+So, running as 32/64/86 bit process solved the issue! :)
