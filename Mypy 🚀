@@ -1,0 +1,101 @@
+While Python is a hugely popular programming language it has limitations, not least of which is how difficult it makes writing very large and complex code bases.
+
+Must-read developer content
+10 ways to prevent developer burnout (free PDF)
+Coding interviews are terrible. Can we make them better?
+Rust, not Firefox, is Mozilla's greatest industry contribution
+What Google's multibillion-dollar Supreme Court victory over Oracle means to developers
+If there's any company that's familiar with the challenges of using Python at scale, it's the cloud storage company Dropbox.
+
+Dropbox has deployed more than four million lines of Python code and is one of a growing number of companies that annotate code written in the dynamic programming language to make it easier to debug and understand.
+
+Annotating Python code allows developers to indicate data types for variables, as well as types for function arguments and return values. This practice has various benefits, one of which is using a static type checker.
+
+
+A type checker like mypy allows developers to spot a class of bugs that could otherwise slip through into software, by making it easier to run checks ahead of the code being executed. These checks can verify various operations, such as whether the data being passed to and from functions is of the correct type. 
+
+While Python is still a dynamically typed language, in 2015, Python 3.5 gained support for Type Hints, which allow developers to include annotations that can be scrutinized by a type checker like mypy.
+
+SEE: Python is eating the world: How one developer's side project became the hottest programming language on the planet (cover story PDF) (TechRepublic)  
+
+These annotations are optional and aren't executed, allowing the developer to use a mix of dynamic and static typing, and are designed not to affect the speed at which the code is executed.
+
+The downside is that adding type annotations means slightly more work for the developer up front, or later on if annotating legacy code, as they now have to specify data types explicitly.
+
+
+However, Jukka Lehtosalo, lead developer of mypy and engineer at Dropbox, says the cost is more than worth it when working with millions of lines of Python code.
+
+"At our scale—millions of lines of Python—the dynamic typing in Python made code needlessly hard to understand and started to seriously impact productivity," he writes.
+
+In fact, type checking and annotations become important in a dynamic language like Python long before hitting millions of lines of code, he adds.
+
+"Once your project is tens of thousands of lines of code, and several engineers work on it, our experience tells us that understanding code becomes the key to maintaining developer productivity," he says.
+
+"Without type annotations, basic reasoning such as figuring out the valid arguments to a function, or the possible return value types, becomes a hard problem."
+
+But annotating four million lines of Python code in this way isn't a straightforward task, here are some of the lesser-known benefits and how Dropbox accomplished the task.
+
+SEE: Python playbook: Upgrade info, new features, installation and usage tips, and more (free PDF) (TechRepublic)   
+
+Less obvious benefits
+It makes refactoring easier
+"Refactoring is much easier, as the type checker will often tell exactly what code needs to be changed," says Lehtosalo .
+"We don't need to hope for 100% test coverage, which is usually impractical anyway. We don't need to study deep stack traces to understand what went wrong."
+
+It makes testing easier
+"Even in a large project, mypy can often perform a full type check in a fraction of a second," he says.
+"Running tests often takes tens of seconds, or minutes. Type checking provides quick feedback and allows us to iterate faster. We don't need to write fragile, hard-to-maintain unit tests that mock and patch the world to get quick feedback."
+ 
+
+It makes it easier to write Python
+"IDEs and editors such as PyCharm and Visual Studio Code take advantage of type annotations to provide code completion, to highlight errors, and to support better go to definition functionality—and these are just some of the helpful features types enable," he says.
+"For some programmers, this is the biggest and quickest win."
+
+It provides verified documentation
+
+While you could document types in docstrings, Lehtosalo says using a type checker gets around this issue of inconsistent or unclear documentation by enforcing a single style.
+"A type checker like mypy solves this problem by providing a formal language for describing types, and by validating that the provided types match the implementation (and optionally that they exist). In essence, it provides verified documentation," he says.
+
+How Dropbox did it
+Annotated legacy code gradually with weekly checks on coverage
+"We send weekly email reports to teams highlighting their annotation coverage and suggesting the highest-value things to annotate."
+
+Increased strictness over time
+"We gradually increased strictness requirements for new code," he says.
+"We started with advice from linters asking to write annotations in files that already had some. We now require type annotations in new Python files and most existing files."
+@Ali3nDev
+Took steps to improve performance
+Checking such a large amount of code will obviously take a lot of time and Lehtosalo says "an immediate obstacle to growing mypy use was performance".
+However, Dropbox was able to improve performance via incremental checking -- only checking modified files and their dependencies, developing a mypy daemon with various efficiencies, and developing a compiled version of mypy that runs 4x faster.
+
+Gave talks about the benefits of type checking
+"We gave talks about mypy and chatted with teams to help them get started."
+
+Regularly checked in with staff about their frustrations
+
+"We run periodic user surveys to find the top pain points and we go to great lengths to address them (as far as inventing a new language to make mypy faster!)."
+
+Provided code editor integrations
+"We provided integrations for running mypy for editors popular at Dropbox, including PyCharm, Vim, and VS Code. These make it much easier to iterate on annotations, which happens a lot when annotating legacy code."
+
+Experimented with automated conversion
+After an earlier automated annotation tool proved largely ineffective, Dropbox is experimenting with a self-built static analysis tool instead.
+"We wrote a tool to infer signatures of functions using static analysis. It can only deal with sufficiently simple cases, but it helped us increase coverage without too much effort," says Lehtosalo.
+
+Also see 
+The creator of Python on how the programming language is learning from TypeScript (TechRepublic)
+
+How to become a developer: A cheat sheet (TechRepublic)
+
+Implementing DevOps: A guide for IT pros (free PDF) (TechRepublic)
+
+Telephone interview cheat sheet: Software developer (TechRepublic Premium)
+
+Programming languages: Developers reveal most loved, most loathed, what pays best (ZDNet)
+
+It takes work to keep your data private online. These apps can help (CNET)
+
+Programming languages and developer career resources (TechRepublic on Flipboard)
+
+RELATED TOPICS
+ENTERPRISE SOFTWARE DEVELOPER OPEN SOURCE SOFTWARE MOBILITY CLOUD
