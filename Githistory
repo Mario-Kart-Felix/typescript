@@ -1,0 +1,86 @@
+different commits and see how they are displayed on the Github website. Even though all the commands below will be pushed using exclusively the f4k3usr Github account, some of the commits will look like they were submitted by my real pjbgf account— however, bear in mind that my real credentials were not at all used.
+To start, let’s assume that the git settings are already setup for f4k3usr user:
+git config --global user.email "f4k3usr--REDACTED--"
+git config --global user.name "f4k3usr"
+To spoof a commit you only need to force an author, setting it to the email of the target Github account to be spoofed. In order to find a target, just go through the repository’s history:
+git log
+
+Take note of the information contained on the Author field, that is the author we will impersonate.
+spoofing a commit (the wrong way)
+Simply force an author through the —-author flag. If you follow this commands with a git log , it will look like it worked just fine.
+# amend README.md
+echo $'\nPotentially malicious changes 1.' >> README.md
+# stage changes
+git add .
+# commit using details of target user
+git commit --author="Paulo Gomes <paulo--REDACTED-->" -m "Add spoof attempt 1"
+spoofing a commit properly
+Github can detect when the author details are not the same as the Github account details on the machine, in order to make it harder to spot the spoofing, temporarily change the user name and email account before committing changes:
+# amend README.md
+echo $'\nNew line by f4k3usr pretending to be someone else.' >> README.md
+# stage changes
+git add .
+# ensure all account details are linked to the account you are spoofing
+git config --global user.email "paulo--REDACTED--"
+git config --global user.name "Paulo Gomes"
+# commit using details of target user
+git commit -m "Add spoof attempt 2"
+Add a legit commit
+Here’s just an example of a legit commit, after reverting the account details:
+# reset to original settings
+git config --global user.email "f4k3usr--REDACTED--"
+git config --global user.name "f4k3usr"
+# amend README.md
+echo $'\nLegit f4k3usr changes.' >> README.md
+# stage changes
+git add .
+# commit using details of target user
+git commit -m "Add legit commit"
+Did it work?
+Executing git log shows exactly what we would expect locally:
+
+What about remotely? What happens when we push all changes up using f4k3usr credentials?
+
+Notice that on the first attempt, as the author’s details differed from the user account defined globally, Github identifies this and shows that pjbgf committed changes through the f4k3usr account. However, the one in the middle worked perfectly, so you can’t really tell that it was not committed by my real account.
+What can you do about it?
+Git and Github supports signed commits, using a private GPG key to cryptographically generate a hash of your changes, which can then be verified by the public key you have assigned to your GPG account. Once you have it all setup, any “verified commit” you push to origin will visually be marked accordingly.
+To achieve this we will need to:
+Create a GPG key.
+Add the GPG public key to your Github account.
+Start signing your commits.
+Creating a GPG key
+The example below is based on MacOS, if you have a different operational system, you will need to rely in our best friend google. :)
+Install the GPG tools from https://gpgtools.org/ then open it. The name of the app is GPG Keychain. It is quite straightforward to use it, click New and a new modal form will appear:
+
+Make sure you use the same email address as your Github account. Also, in order to protect your private key, ensure you use a strong password.
+Once created, it will ask whether you want to publish your public key. I personally chose not to, as this is not necessary for this feature to work.
+Right click on the key generated and select Copy. This will send to your clipboard your public key, which will look similar to the below:
+---BEGIN PGP PUBLIC KEY BLOCK---
+mQINBFpHkdjsuaihhiduhUDSHAIdyA&DTSAYDFYASUDUJDHSAKHDJAHDKAHSDJKAHDJKAHJKDHAkDHKL61qVi9+Mh+1bUU6xJ3IZWMYLdF9xKs3kmfFp…
+---END PGP PUBLIC KEY BLOCK---
+Add GPG Key to Github Account
+Go to the SSH and GPG keys of your Github account (https://github.com/settings/keys) and click on New GPG Key. A new page will open up, simply paste your public key and click Add GPG key.
+
+Start signing commits
+To start with, you may want to manually sign yours changes by using the -S flag in the commit command:
+git commit -S -m "My commit message."
+Once you commit, you will be asked your GPG password, so access to your private key can be gained. This should only happen once per session.
+Now if you are happy to have all your commits being signed from now on, you can define that on your global settings:
+git config --global commit.gpgsign true
+Now all your commits will be GPG signed. :)
+What if I have multiple GPG keys?
+If you have multiple GPG keys matching your Github email account, you will also have to specify which key should git use. That information is based on the Key Id that can be found on the GPG Keychain app. An easy way to get it is by right clicking on the key generated and clicking on Export…
+
+The value that appears in parenthesis is what we need to copy and paste for the next command. Please notice that the one I am copying above is the one generated by GPGTools. You certainly want to use the one you have generated instead.
+git config --global user.signingkey 00D026C4
+Spotting the difference
+Yep, from now on your commits are verified and will visually look like this on Github:
+
+You can also verify locally through your git log:
+git log --show-signature -1
+
+Final thoughts…
+You certainly can block malicious code from entering your master branch in several ways, one of which, with branch policies forcing Pull Requests. Also, by having a very limited amount number of trust-worthy users who actually have permissions on that branch.
+However, non repudiation is essential to assure integrity and the origin of data. Without signed commits it is quite hard to be sure a commit was made by whoever has their name on it, unless we are talking about a private repo which only one person have access to it.
+Depending on the access a malicious user has, it would be child’s play to create a backdoor in a new commit, mark it as authored by a prolific developer within the project and then hide it by rewriting git history.
+Given the effort required to implement GPG signed commits and what it brings in return, it feels like a no-brainer feature — you should just use it. If nothing else, this gives you the right to repudiate any commits that were not signed by yourself! ;)
