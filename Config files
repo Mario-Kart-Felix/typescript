@@ -1,0 +1,201 @@
+@Dependabot is moving natively into GitHub! 
+Dependabot config files
+These docs are for "Dependabot Preview", the legacy non-native version of Dependabot. Use these docs if you have a .dependabot/config.yml checked into your repository. If you're new to Dependabot, learn more about how to set up the GitHub-native version.
+
+You can configure multiple projects and languages from a file named config.yml. The config.yml file is located in a folder named .dependabot at the root of your repository.
+
+All available configration options are documented below.
+
+Getting started
+Add the following file to the root of your repository (on the default branch): .dependabot/config.yml (see example).
+
+If you haven't done so already, you'll first need to sign up and grant Dependabot access to your repositories.
+
+Example config.yml files
+With only required options
+With default labels and reviewers
+Config file validator
+Check your config file using our online tool:
+
+Validate your .dependabot/config.yml file
+Dependabot will create an issue on your repository if there are any problems parsing the config file (make sure you've got GitHub Issues enabled to hear about any problems).
+
+Available configuration options
+The config file must start with version: 1 followed by an array of update_configs.
+
+Option	Required	Description
+package_manager	yes	What package manager to use
+directory	yes	Where to look for package manifests
+update_schedule	yes	How often to check for updates
+target_branch	no	Branch to create pull requests against
+default_reviewers	no	Reviewers to set on pull requests
+default_assignees	no	Assignees to set on pull requests
+default_labels	no	Labels to set on pull requests
+default_milestone	no	Milestone to set on pull requests
+allowed_updates	no	Limit which updates are allowed
+ignored_updates	no	Ignore certain dependencies or versions
+automerged_updates	no	Updates that should be merged automatically
+version_requirement_updates	no	How to update manifest version requirements
+commit_message	no	Commit message preferences
+package_manager (required)
+Supported package managers:
+
+javascript
+ruby:bundler
+php:composer
+python
+go:modules
+go:dep
+java:maven
+java:gradle
+dotnet:nuget
+rust:cargo
+elixir:hex
+docker
+terraform
+submodules
+elm
+Example: package manager
+directory (required)
+Where to look for package manifests (e.g. your package.json or Gemfile). The directory is relative to the repository's root.
+
+Example: directory
+update_schedule (required)
+How often to check for non-security updates and when to create pull requests. Security updates are always created as soon as possible (i.e., "live").
+
+Available schedules
+live
+
+Only supported by the following package managers
+
+javascript
+ruby:bundler
+python
+php:composer
+dotnet:nuget
+rust:cargo
+elixir:hex
+daily
+
+Only runs on weekdays (Monday to Friday)
+weekly
+monthly
+For daily and weekly schedules you can also specify the run day and time in your dashboard account settings.
+
+Example: update schedule
+target_branch
+Branch to create pull requests against.
+
+By default your repository's default branch is used.
+
+Example: target branch
+default_reviewers
+Reviewers to set on update pull requests.
+
+Example: default reviewers
+default_assignees
+Assignees to set on update pull requests.
+
+Example: default assignees
+default_labels
+Labels to set on update pull requests.
+
+By default dependencies is used.
+
+Example: default labels
+default_milestone
+Milestone to set on dependency update pull requests.
+
+Specified using the milestone number - you can find this in the URL when looking at details of a milestone in GitHub.
+
+Example: default milestone
+allowed_updates
+Limit which updates are allowed.
+
+By default all direct/top-level dependencies are kept up to date (indirect/sub-dependencies are only updated if they include security fixes).
+
+Note: the For Java dependencies the dependency_name attribute should be prefixed with the groupId and artifactId of the dependency, joined by a : (for example: org.kohsuke:github-api).
+
+Example: only allow security updates
+Example: updates matching on dependency name or security updates
+Example: update matching direct/top-level dependencies on name
+Example: all updates including indirect/sub-dependencies
+Example: updates matching dependency type and update type
+ignored_updates
+By default no updates are ignored.
+
+Note: the For Java dependencies the dependency_name attribute should be prefixed with the groupId and artifactId of the dependency, joined by a : (for example: org.kohsuke:github-api).
+
+Example: ignored updates
+automerged_updates
+Automerged updates must be enabled at the account level (from account settings in your dashboard) before they can be configured on a project.
+
+Note: Depenadbot will automerge any pull request that has an approving review if you enable Treat PR approval as a request to merge from your account settings. This setting applies globablly to all repositories.
+
+Specify which update pull requests should be merged automatically.
+
+By default no updates are automerged.
+
+For all of the options below Dependabot will wait until all your status checks pass before merging. You can also set working hours for automerging in your dashboard account settings.
+
+Note: the For Java dependencies the dependency_name attribute should be prefixed with the groupId and artifactId of the dependency, joined by a : (for example: org.kohsuke:github-api).
+
+Example: automerge based on dependency type
+Example: automerge based on dependency name
+version_requirement_updates
+Specify how Dependabot should update your package manifest (e.g. package.json, Gemfile etc), as opposed to your lockfile.
+
+By default, version requirements are increased if it's an app and the range widened if it's a library (widen_ranges is used for javascript ,python, php:composer, go:dep and increase_versions_if_necessary is used for ruby:bundler and rust:cargo).
+
+Library detection varies dependeing on the package manager but usually means there is no lockfile or the manifest has a library type set.
+
+Available update strategies
+off (Only lockfile updates, ignoring updates that require package manifest changes)
+auto: (Increase versions if an app, widen ranges if a library)
+
+Only supported by the following package managers
+
+javascript
+ruby:bundler
+go:dep
+python
+php:composer
+rust:cargo
+elixir:hex
+widen_ranges: (Relax the version requirement to include both the new and old version when possible)
+
+Only supported by the following package managers
+
+javascript
+php:composer
+go:dep
+increase_versions (Always increase the version requirement to match the new version)
+
+Only supported by the following package managers
+
+javascript
+ruby:bundler
+php:composer
+go:dep
+increase_versions_if_necessary (Increase the version requirement only when required by the new version)
+
+Only supported by the following package managers
+
+javascript
+ruby:bundler
+php:composer
+commit_message
+Preferences for the format of Dependabot's commit messages and pull request titles.
+
+By default, Dependabot will attempt to detect your commit message preferences and use those.
+
+Example: custom commit prefix
+Example: custom commit prefix with scope
+Example: custom commit prefix for prod and development dependencies
+© Dependabot 2019
+Privacy
+Terms of service
+Documentation
+Twitter
+GitHub
+Contact us
