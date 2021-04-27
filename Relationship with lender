@@ -1,0 +1,14 @@
+. Establishing Relationships with Lenders 
+A lender invites you to become an agent to submit and/or share appraisals on their behalf by sending 
+you an electronic invitation to the email address that you provided at registration. Lender agents 
+cannot send an invitation to a lender to establish a relationship. 
+The lender invites you with full permissions, as described in Table 2.0.1. 
+Table 2.0.1 Lender Agent Permission Levels 
+Permission Level Capabilities
+Full Agent can submit appraisal data files and/or share appraisals and view 
+findings related to appraisals they submit on behalf of the lender. The Findings 
+section of Appraisal View/Edit screen includes UAD compliance results (see 
+Section 4.2.4 Findings in UCDP User Guide).
+A lender agent can update information about any appraisal data file on UCDP (identified by a Doc 
+File ID) that was created by that lender agent (see Section 4 of UCDP General User Guide for more 
+information about viewing and editing appraisal information).
