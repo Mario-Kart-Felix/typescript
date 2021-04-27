@@ -1,0 +1,445 @@
+
+☰
+Google Advanced Search Operators: 50+ Google Search Commands
+SEO
+/
+22 MARCH 2021
+Google Advanced Search Operators: 50+ Google Search Commands
+Google search operators are like secret cheat codes that help you get more relevant search results. You still type your search into the Google search bar, but with search operators, you add a bit of text that turns into shorthand for special instructions about that search.
+
+This article shares a full list of Google search operators to help you make your searches more productive and efficient.
+
+For example: When gauging the amount of content dedicated to a specific topic, you can filter out 90% of less-focused content. Here's an advanced search operator that tells Google that you are looking for content on SEO...AND that term should be in the title of anything they suggest to you.
+
+With just one advanced operator you go from 730 million results:
+
+
+To a much more specific 14.6 million results.
+
+
+And this is just scratching the surface of the power of Google’s search operators.
+
+You might also be interested in advanced keyword research. Get the same hyperfocus in a keyword search that you do with search operators.
+
+How to Accomplish More with Search Operators
+This full article will cover advanced tactics, why you'd use them, and examples of advanced search to improve your Google-fu. Look for some of those special angles listed just below the video.
+
+You can also reference this video for more common practical uses of search operators and how you'd put them into action.
+
+
+Any links mentioned during the video won't be in the description, but will instead be at the end of this article.
+You can scroll through the article or use these links to jump ahead to specific things you can do with Google Search Operators:
+
+Find internal duplicate content and other indexation errors
+Find news results from certain sources to spice up your content
+Find pages that contain certain keywords
+Find quotes and force accurate results for long-tail keywords
+Find direct competitors
+Find original research, statistics and case studies on a certain topic
+Find out how Google is categorizing your site
+Find backlink and content opportunities
+Quickly gauge the competitiveness of long-tail keywords
+Find sites that have a specific keyword in their URL
+Google Advanced Search Operators
+In this industry, we can safely assume that you probably know your way around Google already. That’s why we’ll start with the advanced operators.
+
+These operators help you navigate specific websites, or narrow your search in ways most laymen don’t need to do.
+
+Remember this tip with each search command: Don’t put spaces between the symbol or word and your search term.
+
+Site:
+This operator limits your search to a single site.
+
+You can do a general search and quickly check if your indexed pages match up with your own database.
+
+(If we use this for our own site, we see that roughly 1,490 results show up.)
+
+
+Use to:
+
+Find internal duplicate content and other SEO errors.
+Find link opportunities on a specific site. (Industry sites that have covered direct competitors, but not your product, in a comparison post)
+Source:
+The sister operator of site. Allows you to choose a specific source in Google News. (Useful if you have to cite specific news sources when you write news pieces.)
+
+
+Use to:
+
+Source news pieces to reliable sites.
+Find quotes and tidbits to spice up your content.
+Intext:
+Intext tells Google that you want results where the text appears in the body of the page. (If the text appears in the title, but not the body text, it won’t be returned as a result. Since it virtually functions the same as a normal Google result, there aren’t many advanced uses. We kept it in the list to contrast it against this next operator "Allintext."
+
+Example - intext:airpods
+
+Allintext:
+Basically the same as intext, but every word in the query has to be in the body text of a page. Otherwise, Google does not include it in results. Essentially functions as using “ ” quotes on individual words.
+
+Use to:
+
+Find quotes.
+Force accurate results for long-tail keywords.
+Example - allintext:airpods 2
+
+Intitle:
+Intitle tells Google that you only want results where pages include the search term in their meta title tag. This operator helps you understand how many pages target a particular search phrase.
+
+Use to:
+
+Check levels of competitiveness of keywords.
+Find backlink opportunities.
+Example - intitle:samsung
+
+Allintitle:
+Same as intitle, but ensures every word in the query is in the title meta tag of all results.  If you sold airpods on your ecommerce site you could use this operator to find other websites that have 'airpods' in their titles.  This is a quick and easy way to spot your direct competition.
+
+
+(Image source)
+
+Use to:
+
+Find direct competitors.
+Gauge levels of content dedicated to a long-tail keyword.
+Inurl:
+Like with Intitle & Intext, Google will only return results where the search words are included in the URL. This will often drastically reduce search volume and can be handy for finding potential direct competitors.
+
+
+(Image source)
+Use this search operator to:
+
+Find direct competitors.
+Filter out bad results.
+Find backlink opportunities.
+Allinurl:
+All words included in the search query must be in the URL to become a result. For long search phrases, this often returns only a handful or no results at all.
+
+Use this search operator to:
+
+Filter out bad results for popular topics.
+Example - allinurl:apple airpods
+
+Filetype:
+Filetype: tells Google to return only results of, you guessed it, a specific type of file. It is useful when looking for research, which is often in PDF or other document file formats, rather than HTML.
+
+
+(Image source)
+Use this search operator to:
+
+Quickly find original research, statistics and case studies on a certain topic.
+Related:
+Related: is an operator that helps you find sites related to a specified URL. Using it is an illuminating look into how Google categorizes your website and your competitors.
+
+For example, if we take a look at the results for airbnb.com, it returns the usual SEO suspects, but also some peripheral competitors for attention.
+
+
+(Image source)
+Obviously, Airbnb's two biggest competitors VRBO and Homeaway made the cut, but there’s something else. A more generalist booking website is listed as well. So from that, we learn that Google understands the categorical hierarchy of SEO inside of online travel.
+
+Use this search operator to:
+
+Find competitors.
+Understand how Google is categorizing your site.
+AROUND(X)
+Limit results to pages that contain search words within X words of each other. Useful for finding quotes and song lyrics you don’t quite remember, but not much else. Google will bold the phrases it thinks you are looking for, not just the search words. (Note: It defines a range with a max of X, not just X.)
+
+
+(Image source)
+Use this search operator to:
+
+Find quotes you only vaguely remember.
+Find official statements/case studies/research that back up a point you want to make.
+Basic Search Operators
+Google’s basic search operators help filter the results you get from your search.
+
+You should be familiar with every single one of these, so consider this a review, not a lesson. (As such the descriptions will be brief and there are no screenshots to explain.)
+
+“” (Quotes)
+Putting your search term in quotes initiates an exact match search for that phrase. The exact words in that exact order have to be on the page or. Using it on single words excludes synonyms and related words.
+
+Example - "bissell crosswave 1785"
+
+This is valuable for products that are being replaced. The example I used is for a wet vac floor cleaner that Bissell is starting to phase out. By using quotes, I avoid the more current pages from that newer model.
+
+AND operator
+Google will search for results related to both/all terms that you've typed in the search field. Typically Google's algorithm will correctly estimate whether it's a phrase search or multiple separate terms, making AND mostly redundant.
+
+Example - seo AND content
+
+-  operator
+The hyphen (like a minus sign) helps you exclude words from your search queries. For example, you can search for “SEO California” but exclude “LA” if you don’t want results from that city.
+
+Example - “SEO California -Los -Angeles -LA”
+
+*  operator
+The asterisk tells Google to “fill in the blank”. Similar to the more advanced AROUND(X) but you don’t specify the max length of a phrase. Like AROUND(X) it can be useful for finding quotes and phrases.
+
+Example - Mackenzie Scott * Donation
+
+() operator
+Brackets group together terms or search operators to help structure an advanced search.
+
+Example - allinurl: SEO (Los Angeles OR San Diego OR San Francisco).
+
+OR / |  operators
+The OR or | (pipe) operator actually combines searches. It tells Google that you are looking for either term, or that they can be interchanged. It helps to use brackets like in the example above, but it's not necessary.
+
+Example - workout yoga or pilates
+
+Another use for this is to cover different phrasing from regional terms like the lifespan of a lightning bug OR firefly.
+
+$ / €
+This operator helps you search for products by price.
+
+Example - cordless drill 200$
+
+Year..Year
+Putting two dots between two years creates a Google search command for results that fall within that year range.
+
+Example - Stacey Abrams 2019..2021
+
+Events peak over time. People see surges in popularity. If you want to pull from a span of time, this Year..Year advanced search command gets you there. It helps to pull in results from past years that have since been pushed down in rankings. (That could be relevance or freshness.)
+
+The caveat here is inconsistency. I tried "best Twilight Zone episodes 2008..2012" knowing that there had been a surge of write-ups after Jordan Peele kicked off his modern adaptation. Here's where it worked well: the top result came from 2012. The downside was that the remaining results came from 2019 or later.
+
+Google Advanced Image Search
+Using memorable, compelling images alongside your content can set the tone for your articles. They are another layer of messaging and might even earn you more clicks in your social channels.
+
+We've collected tips for finding specific images in Google's image search.
+
+Google Content / Card Operators
+Google and SEO sites classify these as search operators. But, they interact with Google’s own content/function and don’t necessarily trigger an internet search.
+
+Define:
+Cache:
+Weather:
+Stocks:
+Map:
+Movie:
+In / To
+They might not be useful for research purposes, but understanding is a piece of the puzzle having a holistic understanding of Google search.
+
+More Actionable Things You Can Do with Search Operators
+Quickly Gauge Competitiveness Of Long-Tail Keywords
+For over 10 years we’ve known that the long tail is actually the bigger piece of the pie.
+
+More than 50% of searches are 3 words or longer.
+
+
+60% of Google searches are made for queries that are not even in the top 1 BILLION most popular ones.
+
+Let that sink in.
+
+That speaks to the importance of long tail keywords. Finding and capitalizing on the long tail is key to your SEO success.
+
+When you think of long tail keywords, check the field for anyone who's there already. Google makes it simple for you to gauge competitiveness for specific terms with the operator “allintitle”.
+
+For example, let’s say you had a new content idea and you wanted to target the phrase “SEO small business San Diego”. You could quickly do an allintitle search.
+
+
+(image source)
+The results tell you that there are already 100 websites that have a dedicated page to this search term.
+
+A Google search like this can be a useful indicator to quickly qualify keywords before you write them down into your content plan.
+
+If you are looking for more complete insights into competitive metrics, though, try keyword tools like SpyFu where special commands are built in as features. For example, typing a domain into the Keyword Research search bar acts as a search operator to uncover the keywords that the domain ranks for and the keywords they buy. It's a simple but effective step that helps you find results just like a special Google search command.
+
+We recently covered competitive analysis on the blog, and how you can use the tools we provide to know everything about your competition. If you need help finding keyword ideas, we can also help with that.
+
+
+Long tail keywords are an integral part of SEO strategy, and while doing an operator qualified search is good for quick insights, it doesn’t go as in-depth as our tools.
+
+Find Statistics & Research To Enhance Your Content
+76.7 million pieces of content were published in February alone on WordPress.com blogs. That’s more than 2,7 million a day, and it’s not even the entire internet.
+
+
+This simple statistic shows you the most important thing about content; there’s too much of it.
+
+And it’s confusing the end users. Trust in online reviews decreased significantly from 2015-2018. It declined from 31% who unequivocally believed in all reviews in 2015, down to 19% in 2018.
+
+This decline was likely caused by the incredible increase in Amazon Associates and other affiliate websites.
+
+These sites often have fake or dubious reviews, and this has impacted the reputation of the web as a whole. Bounce rates for many sites are increasing as it gets harder to gain user trust and attention.
+
+But you need to get it if you want to conquer the top of Google SERPs. Results in the top 3 tend to have a lower than 45% bounce rate.
+
+There’s too much content out there, and people are suffering from information overload. And people have less trust in internet content as there is more of it and they recognize less.
+
+Why should they read yours?
+
+How do you pique interest and gain trust in one move? How can you reduce bounce rates with the content itself?
+
+Statistics from a reliable source. Borrowed trust.
+
+When you read this section of the post, the first thing you saw was a statistic sourced to the blog giant WordPress. If anyone has reliable data on the internet and content, it’s them.
+
+So I borrowed their trustworthiness to level up my content.
+
+Google makes it easy to do the same for any topic.
+
+Specify the trustworthy site you want to source research to when you search for statistics.
+
+
+(image source)
+You can even search through multiple sources at once using brackets and |.
+
+
+(image source).
+Using this Google search command lets you find the combination of research and source that you want.
+
+Statistics alone are no longer enough.
+
+A reliable, interesting statistic, however, can help take your content to the next level.
+
+Find Glaring Indexation Errors & Other SEO Issues
+In a recent SEO study, 175 million websites were checked, and they found 300 million SEO errors. Almost 10% of the sites had issues with duplicated content or canonical tags.
+
+Translation: Most websites have SEO errors, even with increased spending on SEO and content marketing.
+
+At the time of this writing, even Apple had pages on HTTP despite HTTPS being an official ranking factor. (And indexed pages for discontinued services.) They have since removed that page.
+
+
+Sometimes the big dedicated budget can be the problem.
+
+When larger companies have separate content teams in different departments, it can be hard to coordinate and make sure everything is up to snuff.
+
+Even the most profitable company on the planet makes mistakes here.
+
+One easy step you can take to find and fix insecure pages is to use the search command “site:YOURSITE.com -inurl:https.”
+
+That is exactly how I quickly found an HTTP page on apple.com.
+
+
+(image source)
+Another common issue is double indexing, but you can check for duplicate content with the Google site search command.
+
+Again, the site: operator comes to the rescue.
+
+Common offenders:
+
+Product descriptions.
+Case studies used on multiple pages.
+Long CTAs with short unique content on various pages.
+A quick search for duplicate product entries for sennheiser.com shows that they are in the clear.
+
+
+(image source).
+If you work with clients that have big content budgets, or large ecommerce sites, it’s important to do these kinds of checks regularly.
+
+You can even teach non-SEO members of the team to use Google Search operators to do these kinds of tests.
+
+That way you can effectively share the responsibility and improve the organizations SEO as a whole.
+
+Find Backlink & Content Opportunities
+High-quality backlinks are still one of the most reliable ranking factors out there.
+
+In a 2018 study, more Backlinks still had the strongest correlation with higher rankings compared to any other factor. On average, the 1st result had over 700% the number of backlinks of result 10. And over 300% the amount of referring domains.
+
+
+Translation: a diverse backlink portfolio is still incredibly important in 2021.
+
+But backlinks don’t just appear out of thin air.
+
+Buying them isn’t an option (Google more than frowns upon this), and people don’t just hand them out for free either.
+
+You have to do your research.
+
+Maybe you even use some basic search operators to help you already.
+
+But some advanced combinations can speed up your search dramatically.
+
+If you combine intitle: with inurl: you can often eliminate 100% of the fluff from search results, and find resource/link pages that you need.
+
+(Note: Allin operators tend not to play nicely together, so stick to in.)
+
+
+Screenshot of example search on Google.
+
+You can also quickly find authority sites who have done reviews or comparison posts that don’t include your service or product.
+
+This can be done using a combination of OR and removing your own brand names with the hyphen -.
+
+For example: “laptop vs (macbook OR hp OR Huawei) -dell”.
+
+Google OR search operator example
+Example search on Google.
+
+This phrase would help an SEO or content manager at dell quickly identify opportunities in the tech blogosphere.
+
+Of course, site: also comes in handy here, as you can check whether or not industry websites have covered your products yet.
+
+All in all, Google is an excellent tool for this, but it can be very time consuming to do the checking and ideation manually.
+
+SpyFu helps you identify backlink opportunities with much less sweat required.
+
+The Officially Retired Search Operators
+These inactive search operators no longer work. Some have officially been discontinued or deprecated, and others were attached to Google properties that have since been shut down.
+
+Link: operator
+Old school SEOs will fondly remember this one. In the past, you could use the "link:" operator to find pages linking to a specified URL. Google officially discontinued this operator back in 2017.
+
+Tip: One workaround for this lives inside the SpyFu backlinks feature. Type the domain into the search bar, and just like with the past Google search operator, you will see the pages that link to it.
+
+Other Deprecated Search Operators:
++
+~
+inpostauthor:
+allinpostauthor:
+inposttitle:
+info:
+daterange:
+phonebook:
+#
+blogurl:
+inanchor:
+allinanchor:
+loc:placename
+location:
+Conclusion
+Google is still the undisputed king of Search Engines. (92.16% worldwide market share as of November 2020.)
+
+Knowing how Google works and how to get a better ranking in the Google SERPs is what puts food on the table of 99% of SEO professionals. Even then, Google holds a few mysteries with SEOs, especially when it comes to using Google’s advanced search operators.
+
+Google is continually working on new things and discarding old projects. Don’t expect the list above to stay the same for very long. They typically retire their rarely-used search operators with little warning, so make be sure to check back on updated lists.
+
+If you need more than just the basics, you can try SpyFu risk-free for 30 days.
+
+Links mentioned in the video:
+
+De-indexing Instructions:
+SpyFew Backlink Builder Video (Less than 3 minutes):
+Full Outreach Tool Tutorial (10 minutes):
+THIS POST WAS A COLLABORATION BETWEEN
+
+SIDRA CONDRON, PATRICK MCGRANE, ZAC HARRIS
+
+Sidra Condron
+Zac Harris
+Subscribe to our newsletter for more search marketing news & industry trends
+Email Address
+Subscribe
+— The Official SpyFu Blog —
+SEO
+An SEO Keyword Tool with Clear Direction
+Why a Keyword Density Calculator Might Actually Hurt Your Content
+Google's Page Experience Update is Coming. Here's What You Need to Know.
+See all 67 posts →
+4 Steps to Find (and Beat) Your Organic Competitors
+COMPETITIVE RESEARCH
+4 Steps to Find (and Beat) Your Organic Competitors
+Although we often like to think of SERP rankings as a meritocracy, the sad reality is that they are not. Often, it’s not the best written or most informative pieces that reach
+
+Sidra Condron
+13 MIN READ
+Google's Page Experience Update is Coming. Here's What You Need to Know.
+SEO
+Google's Page Experience Update is Coming. Here's What You Need to Know.
+Recently, Google stated that its Search ranking algorithm will take user experience (UX) into consideration starting in May 2021. It’s rare that Google gives us advance warning about updates. In the statement,
+
+Sidra Condron
+9 MIN READ
+The Official SpyFu Blog icon
+The Official SpyFu Blog
+
+The Official SpyFu Blog © 2021
+Latest Posts
+Twitter
