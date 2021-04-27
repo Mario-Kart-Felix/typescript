@@ -1,0 +1,5 @@
+Try removing the -q (or --quiet) from the command line arguments:
+
+From composer cli docs
+
+--quiet (-q): Do not output any message.
