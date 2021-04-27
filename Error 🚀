@@ -1,0 +1,102 @@
+
+
+MENU
+Blockchain in Action (Paperback)
+Blockchain in Action Cover Image
+By Bina Ramamurthy
+$44.99
+Available at wholesaler. We can order it for you.
+Description
+There’s a lot more to the blockchain than mining Bitcoin. This secure system for registering and verifying ownership and identity is perfect for supply chain logistics, health records, and other sensitive data management tasks. Blockchain in Action unlocks the full potential of this revolutionary technology, showing you how to build your own decentralized apps for secure applications including digital democracy, private auctions, and electronic record management.
+
+Summary
+There’s a lot more to the blockchain than mining Bitcoin. This secure system for registering and verifying ownership and identity is perfect for supply chain logistics, health records, and other sensitive data management tasks. Blockchain in Action unlocks the full potential of this revolutionary technology, showing you how to build your own decentralized apps for secure applications including digital democracy, private auctions, and electronic record management.
+
+Purchase of the print book includes a free eBook in PDF, Kindle, and ePub formats from Manning Publications.
+
+About the technology
+Blockchain is more than just the tech behind Bitcoin—much more! Combining impenetrable security, decentralized transactions, and independently verifiable supply chains, blockchain applications have transformed currency, digital identity, and logistics. Platforms such as Ethereum and Hyperledger make it easy to get started by using familiar programming languages.
+
+About the book
+Blockchain in Action teaches you how to design and build blockchain-based decentralized apps, and is written in a clear, jargon-free style. First, you’ll get an overview of how blockchain works. Next, you’ll code your first smart contract using Ethereum and Solidity, adding a web interface, trust validation, and other features until your app is ready for deployment. The only thing you need to get started is standard hardware and open source software.
+
+What's inside
+
+    Blockchain compared with other distributed systems
+    Development in Solidity
+    Identity, privacy, and security
+    On-chain and off-chain data and operations
+
+About the reader
+For programmers who know JavaScript.
+
+About the author
+Bina Ramamurthy has thirty years of experience teaching distributed systems, data science, peer-to-peer networking, and blockchain.
+
+Table of Contents
+
+PART 1 - GETTING STARTED WITH BLOCKCHAIN PROGRAMMING
+
+1 Blockchain basics
+
+2 Smart contracts
+
+3 Techniques for trust and integrity
+
+4 From smart contracts to Dapps
+
+PART 2 - TECHNIQUES FOR END-TO-END DAPP DEVELOPMENT
+
+5 Security and privacy
+
+6 On-chain and off-chain data
+
+7 Web3 and a channel Dapp
+
+8 Going public with Infura
+
+PART 3 - A ROADMAP AND THE ROAD AHEAD
+
+9 Tokenization of assets
+
+10 Testing smart contracts
+
+11 A roadmap to Dapp development
+
+12 Blockchain: The Road ahead
+m facing some difficulties when trying to return multiple actions in my NGRX effect. I know how to return multiple actions, but I'm trying to set up two sets of actions to fire based on a boolean value.
+
+The code is as follows:
+
+  @Effect()
+  loadCompanyDetail = this.actions$
+    .ofType(fromActions.COMPANY_DETAIL_LOAD)
+    .pipe(
+      switchMap(() => {
+        return this.companyService
+          .getCompanyByID(
+            fromUtility.obs2Str(
+              this.routerStore.select(fromRouter.getCompanyId)
+            )
+          )
+          .pipe(
+            switchMap(res => {
+              switch (res.success) {
+                case true:
+                  const locations = res.data.locations;
+                  const detail = res.data;
+                  delete res.data.locations;
+                  return [
+                    new fromActions.CompanyDetailLoadSuccess(detail),
+                    new fromActions.CompanyLocationsLoadSuccess(locations)
+                  ];
+                case false:
+                  return [
+                    // new fromActions.CompanyDetailLoadFailure(),
+                    // new fromActions.CompanyLocationsLoadFailure()
+                  ];
+              }
+            })
+          );
+      })
+    );
