@@ -1,0 +1,55 @@
+Scandit Data Capture SDK Documentation for React Native
+Welcome to the Scandit Data Capture SDK Developer Documentation for React Native. If you are trying out the SDK or you are already integrating it into an app, you’ve come to the right place.
+
+Samples
+
+Plugins
+
+The best way to start with the Scandit Data Capture SDK, is trying out our Samples:
+
+Run our Sample Apps
+
+Sample Apps on GitHub
+
+To discover how to integrate our plugins in your app, check the following guide:
+
+Add the SDK to Your App
+
+Subscription & Dashboard
+
+Support & Contact
+
+To develop with the Scandit Data Capture SDK, you need an active subscription and a license key:
+
+Sign up for a free 30 day trial
+
+Login at scandit.com to create licenses
+
+Should you have a question which can’t be resolved by our documentation, please check out our list of frequently asked questions or reach out to us directly.
+
+Support & FAQ
+
+Other Platforms And Frameworks
+Data Capture SDK Documentation for iOS
+
+Data Capture SDK Documentation for Android
+
+Data Capture SDK Documentation for Cordova
+
+Data Capture SDK Documentation for Xamarin.iOS
+
+Data Capture SDK Documentation for Xamarin.Android
+
+Data Capture SDK Documentation for Flutter
+
+For more platforms and frameworks, please refer to the Barcode Scanner 5.x documentation:
+
+Scandit Barcode Scanner 5.x for Appcelerator Titanium
+
+Scandit Barcode Scanner 5.x for Windows
+
+Scandit Barcode Scanner 5.x C API for Linux
+
+Scandit Barcode Scanner or the Web
+
+Overview of all previous releases
