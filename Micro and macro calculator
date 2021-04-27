@@ -1,0 +1,33 @@
+What are the microtask and macrotask within an event loop in JavaScript ?
+Event Loop: An Event Loop in JavaScript is said to be a constantly running process which keeps a tab on the call stack. Its main function is to check whether the call stack is empty or not. If the call stack turns out to be empty, the event loop proceeds to execute all the callbacks waiting in the task queue. Inside the task queue, the tasks are broadly classified into two categories, namely micro-tasks and macro-tasks.
+
+Micro-tasks within an event loop: A micro-task is said to be a function which is executed after the function or program which created it exits and only if the JavaScript execution stack is empty, but before returning control to the event loop being used by the user agent to drive the script’s execution environment. A Micro-task is also capable of en-queuing other micro-tasks.
+
+Micro-tasks are often scheduled for things that are required to be completed immediately after the execution of the current script. On completion of one macro-task, the event loop moves on to the micro-task queue. The event loop does not move to the next task outside of the micro-task queue until the all the tasks inside the micro-task queue are completed. This implies that the micro-task queue has a higher priority.
+
+Once all the tasks inside the micro-task queue are finished, only then does the event loop shifts back to the macro-task queue. The primary reason for prioritizing the micro-task queue is to improve the user experience. The micro-task queue is processed after callbacks given that any other JavaScript is not under mid-execution. Micro-tasks include mutation observer callbacks as well as promise callbacks.
+
+In such a case wherein new micro-tasks are being added to the queue, these additional micro-tasks are added at the end of the micro-queue and these are also processed. This is because the event loop will keeps on calling micro-tasks until there are no more micro-tasks left in the queue, even if new tasks keep getting added. Another important reason for using micro-tasks is to ensure consistent ordering of tasks as well as simultaneously reducing the risk of delays caused by users.
+
+
+
+Syntax: Adding micro-tasks:
+
+queueMicrotask(() => {
+    // Code to be run inside the micro-task 
+});
+The micro-task function itself takes no parameters, and does not return a value.
+
+Examples: process.nextTick, Promises, queueMicrotask, MutationObserver
+
+Macro-tasks within an event loop: Macro-task represents some discrete and independent work. These are always the execution of thee JavaScript code and micro-task queue is empty. Macro-task queue is often considered the same as the task queue or the event queue. However, the macro-task queue works the same as the task queue. The only small difference between the two is that the task queue is used for synchronous statements whereas the macro-task queue is used for asynchronous statements.
+
+In JavaScript, no code is allowed to execute until an event has occurred. {It is worth mentioning that the execution of a JavaScript code execution is itself a macro-task.} The event is queued as a macro-task. When a (macro) task, present in the macro-task queue is being executed, new events may be registered and in turn created and added to the queue. 
+
+Up on initialization, the JavaScript engine first pulls off the first task in the macro-task queue and executes the callback handler. The JavaScript engine then sends these asynchronous functions to the API module, and the module pushes them to the macro-task queue at the right time. Once inside the macro-task queue, each macro-task is required to wait for next round of event loop. In this way, the code is executed.
+
+All micro-tasks logged are processed in one fell swoop in a single macro-task execution cycle. In comparison, the macro-task queue has a lower priority. Macro-tasks include parsing HTML, generating DOM, executing main thread JavaScript code and other events such as page loading, input, network events, timer events, etc. 
+
+Examples: setTimeout, setInterval, setImmediate, requestAnimationFrame, I/O, UI Rendering
+
+Article Tags : JavaScriptWeb Technologies JavaScript-Misc
