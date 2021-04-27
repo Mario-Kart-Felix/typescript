@@ -1,0 +1,9 @@
+@Dependencies
+^0.11.0 error-chain
+Yet another error boilerplate library.
+^0.8.0 itertools
+Extra iterator adaptors, iterator methods, free functions, and macros.
+^1.0.1 maplit
+Collection “literal” macros for HashMap, HashSet, BTreeMap, and BTreeSet.
+^1.0.0 serde
+A generic serialization/deserialization framework
