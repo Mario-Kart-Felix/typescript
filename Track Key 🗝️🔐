@@ -1,0 +1,47 @@
+anyDuplicated(dupes[, c("date", "category")])
+# [1] 5
+dupes[1:5, c("date", "category")]
+# # A tibble: 5 x 2
+#   date       category
+#   <date>     <chr>   
+# 1 2019-06-04 D       
+# 2 2019-06-02 B       
+# 3 2019-06-03 B       
+# 4 2019-06-01 A       
+# 5 2019-06-03 B
+If there is no duplicate, it returns 0. So let's make this into a function that checks if a combination of columns has only unique rows.
+
+only_uniques <- function(cols) {
+  first_dupe <- anyDuplicated(dupes[, cols])
+  first_dupe == 0
+}
+The combn function gives all combinations of n elements from a vector. With lapply, we can do this for all possible combination sizes, from 1 to the number of columns in dupes.
+
+combo_list <- lapply(
+  X = seq_along(dupes),
+  FUN = combn,
+  x = names(dupes),
+  simplify = FALSE
+)
+For sanity, let's organize the combinations and their validity in a tibble.
+
+combos <- tibble(columns = unlist(combo_list, recursive = FALSE)) %>%
+  mutate(valid = vapply(columns, only_uniques, logical(1)))
+  
+as.data.frame(combos) # data.frame printing shows the contents of list columns
+#                    columns valid
+# 1                       id FALSE
+# 2                     date FALSE
+# 3                 category FALSE
+# 4                      uni  TRUE
+# 5                 id, date FALSE
+# 6             id, category FALSE
+# 7                  id, uni  TRUE
+# 8           date, category FALSE
+# 9                date, uni  TRUE
+# 10           category, uni  TRUE
+# 11      id, date, category  TRUE
+# 12           id, date, uni  TRUE
+# 13       id, category, uni  TRUE
+# 14     date, category, uni  TRUE
+# 15 id, date, category, uni  TRUE
