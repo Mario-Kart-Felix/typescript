@@ -1,0 +1,54 @@
+Example config.yml files
+With only required options
+With default labels and reviewers
+Config file validator
+Check your config file using our online tool:
+
+Validate your .dependabot/config.yml file
+Dependabot will create an issue on your repository if there are any problems parsing the config file (make sure you've got GitHub Issues enabled to hear about any problems).
+
+Available configuration options
+The config file must start with version: 1 followed by an array of update_configs.
+
+Option	Required	Description
+package_manager	yes	What package manager to use
+directory	yes	Where to look for package manifests
+update_schedule	yes	How often to check for updates
+target_branch	no	Branch to create pull requests against
+default_reviewers	no	Reviewers to set on pull requests
+default_assignees	no	Assignees to set on pull requests
+default_labels	no	Labels to set on pull requests
+default_milestone	no	Milestone to set on pull requests
+allowed_updates	no	Limit which updates are allowed
+ignored_updates	no	Ignore certain dependencies or versions
+automerged_updates	no	Updates that should be merged automatically
+version_requirement_updates	no	How to update manifest version requirements
+commit_message	no	Commit message preferences
+package_manager (required)
+Supported package managers:
+
+javascript
+ruby:bundler
+php:composer
+python
+go:modules
+go:dep
+java:maven
+java:gradle
+dotnet:nuget
+rust:cargo
+elixir:hex
+docker
+terraform
+submodules
+elm
+Example: package manager
+directory (required)
+Where to look for package manifests (e.g. your package.json or Gemfile). The directory is relative to the repository's root.
+
+Example: directory
+update_schedule (required)
+How often to check for non-security updates and when to create pull requests. Security updates are always created as soon as possible (i.e., "live").
+
+
+
