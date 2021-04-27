@@ -1,0 +1,8 @@
+
+Unable to update EXT.xxxxxxxx.xxxx: an error occurred while processing your key. You can try to retrieve the key manually in Plesk (Tools & Settings > License Management) or let Plesk try to update it in the next 24 hours.
+
+The next day i receive the same error message.
+
+When i go to the admin license key, and press Retrieve, i still got the Old license key. It Expires in 6 days.
+
+Is there an problem with the plesk server, or is there a problem at my site..
