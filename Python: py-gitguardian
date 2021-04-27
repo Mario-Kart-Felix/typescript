@@ -1,0 +1,228 @@
+Whether you want to build a complete integration with your software development workflow or simply want to test GitGuardian's policy break detection on any text content, you can use our API.
+
+The base url for the latest version is api.gitguardian.com/v1 over HTTPS.
+All data is sent and received as JSON by default.
+All timestamps returned are ISO-8601 compliant, example:
+2020-03-16T04:46:00+00:00 # for date-time
+GitGuardian supported wrappers:
+
+Python: py-gitguardian
+GitGuardian provides you with GitGuardian Shield, a CLI application that uses the GitGuardian API through py-gitguardian to scan your files and detect potential secrets or issues in your code.
+
+This CLI application can be used in many CIs (such as GitHub Actions, GitLab Pipelines, CircleCI,...) or as a pre-commit or pre-receive hook.
+
+Authentication
+The GitGuardian API uses API keys to authenticate requests.
+
+You need to create an account before getting started in order to get an API key.
+
+Your API key can be created and revoked from the API section of your dashboard.
+
+Your API key must kept private and should neither be embedded directly in the code nor versioned in Git. (Please do not push GitGuardian's API keys to public GitHub repositories ^^).
+
+Beware your API keys can expire and can be revoked.
+
+Use /v1/health to check the validity of your token if needed.
+
+curl -H "Authorization: Token ${TOKEN}" \
+  https://api.gitguardian.com/v1/health
+API Key
+Usage: Token <API Key> in authorization header.
+
+Security Scheme Type	HTTP
+HTTP Authorization Scheme	bearer
+Bearer format	"Token <API Key>"
+Scanning
+Use GitGuardian's brain at your leisure.
+
+Scanning API allows you to scan any content you want using GitGuardian's secrets detection algorithms.
+
+Content Scan
+Scan provided document content for policy breaks.
+
+Request body shouldn't exceed 1MB.
+
+This endpoint is stateless and as such will not store in our servers neither the documents nor the secrets found.
+
+AUTHORIZATIONS:
+API Key
+REQUEST BODY SCHEMA: application/json
+filename
+string <= 256 characters
+document
+required
+string
+Responses
+200 Successful Scan
+RESPONSE SCHEMA: application/json
+policy_break_count
+required
+integer >= 0
+Number of policy breaks on this document.
+
+policies
+required
+Array of strings >= 0 items
+Policies checked on this document.
+
+policy_breaks
+required
+Array of objects (Policy Break) >= 0 items
+List of policy breaks.
+
+400 Invalid data
+RESPONSE SCHEMA: application/json
+detail
+required
+string
+Details on response.
+
+401 Invalid API key
+RESPONSE SCHEMA: application/json
+detail
+required
+string
+Details on response.
+
+403 Quota limit reached
+RESPONSE SCHEMA: application/json
+detail
+required
+string
+Details on response.
+
+503 API under maintenance
+RESPONSE HEADERS
+X-Maintenance
+required
+boolean
+Example: true
+RESPONSE SCHEMA: application/json
+detail
+required
+string
+Details on response.
+
+
+POST
+/v1/scan
+Request samples
+PayloadcURLPython
+Content type
+application/json
+
+Copy
+Expand all Collapse all
+{
+"filename": ".env",
+"document": "\nimport urllib.request\nurl = 'http://jen_barber:correcthorsebatterystaple@cake.gitguardian.com/isreal.json'\nresponse = urllib.request.urlopen(url)\nconsume(response.read())\n"
+}
+Response samples
+200400401403503
+Content type
+application/json
+
+Copy
+Expand all Collapse all
+{
+"policy_break_count": 2,
+"policies": [
+"Filename",
+"File extensions",
+"Secrets detection"
+],
+"policy_breaks": [
+{},
+{}
+]
+}
+Multiple Content Scan
+Scan provided document contents for policy breaks. Multiple documents are returned by the same index order.
+
+Request body shouldn't exceed 2MB and individual documents shouldn't exceed 1MB.
+
+This endpoint is stateless and as such will not store in our servers neither the documents nor the secrets found.
+
+AUTHORIZATIONS:
+API Key
+REQUEST BODY SCHEMA: application/json
+Array ()
+filename
+string <= 256 characters
+document
+required
+string
+Responses
+200 Successful Scan
+400 Invalid data
+401 Invalid API key
+403 Quota limit reached
+503 API under maintenance
+
+POST
+/v1/multiscan
+Request samples
+PayloadcURLPython
+Content type
+application/json
+
+Copy
+Expand all Collapse all
+[
+{
+"filename": ".env",
+"document": "import urllib.request\nurl = 'http://jen_barber:correcthorsebatterystaple@cake.gitguardian.com/isreal.json'\nresponse = urllib.request.urlopen(url)\nconsume(response.read())\n"
+},
+{
+"filename": "__init__.py",
+"document": "__version__=\"1.0.0\""
+}
+]
+Response samples
+200400401403503
+Content type
+application/json
+
+Copy
+Expand all Collapse all
+[
+{
+"policy_break_count": 2,
+"policies": [],
+"policy_breaks": []
+},
+{
+"policy_break_count": 0,
+"policies": [],
+"policy_breaks": [ ]
+}
+]
+Health Check
+Check the status of the API and your token without spending your quota.
+
+AUTHORIZATIONS:
+API Key
+Responses
+200 API on and key valid response
+401 Invalid API key
+503 API under maintenance
+
+GET
+/v1/health
+Request samples
+cURLPython
+
+Copy
+curl --request GET \
+    --url https://api.gitguardian.com/v1/health \
+    --header 'authorization: Token <Insert API Key>'
+Response samples
+200401503
+Content type
+application/json
+
+Copy
+Expand all Collapse all
+{
+"detail": "Valid API key."
+}
