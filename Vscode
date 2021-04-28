@@ -1,0 +1,25 @@
+Recommended content
+Devenv command line switches - Visual Studio
+Learn about devenv command-line switches and how to use them to set IDE options, and also build, debug, and deploy projects, all from the command line.
+
+Tools for detecting and managing Visual Studio instances
+Learn about the tools that you can use to detect and manage Visual Studio installations on client machines.
+
+Import or export installation configurations
+Learn how to export your installation configuration to a .vsconfig file to share with others, and how to import it to clone.
+
+-Build (devenv.exe) - Visual Studio
+Learn about the Build devenv command-line switch and how to use it to build a solution or project with a specified solution configuration file.
+
+Remove Visual Studio
+Learn how to completely remove Visual Studio from your computer, step by step.
+
+Visual Studio build numbers and release dates
+A list of released versions and build numbers for Visual Studio, sorted by date.
+
+-Rebuild (devenv.exe) - Visual Studio
+Learn how to use the Rebuild devenv command-line switch to clean and then build the specified solution configuration.
+
+Visual Studio Community workload and component IDs
+Use Visual Studio Community workload and component IDs to install Visual Studio from the command line or specify a dependency in a VSIX manifest.
+
