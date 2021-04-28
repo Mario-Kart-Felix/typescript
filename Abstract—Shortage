@@ -1,0 +1,111 @@
+Abstract—Shortage of fully annotated datasets has been a
+limiting factor in developing deep learning based image segmen-
+tation algorithms and the problem becomes more pronounced in
+multi-organ segmentation. In this paper, we propose a unified
+training strategy that enables a novel multi-scale deep neural
+network to be trained on multiple partially labeled datasets
+for multi-organ segmentation. In addition, a new network ar-
+chitecture for multi-scale feature abstraction is proposed to
+integrate pyramid input and feature analysis into a U-shape
+pyramid structure. To bridge the semantic gap caused by directly
+merging features from different scales, an equal convolutional
+depth mechanism is introduced. Furthermore, we employ a
+deep supervision mechanism to refine the outputs in different
+scales. To fully leverage the segmentation features from all
+the scales, we design an adaptive weighting layer to fuse the
+outputs in an automatic fashion. All these mechanisms together
+are integrated into a Pyramid Input Pyramid Output Feature
+Abstraction Network (PIPO-FAN). Our proposed method was
+evaluated on four publicly available datasets, including BTCV,
+LiTS, KiTS and Spleen, where very promising performance has
+been achieved. The source code of this work is publicly shared
+at https://github.com/DIAL-RPI/PIPO-FAN to facilitate others
+to reproduce the work and build their own models using the
+introduced mechanisms.
+Index Terms—Medical image segmentation, multi-scale fea-
+ture, deep learning, convolutional neural networks, multi-organ
+segmentation, multiple datasets
+I. INTRODUCTION
+A
+UTOMATIC multi-organ segmentation, an essential
+component of medical image analysis, plays an important
+role in computer-aided diagnosis. For example, locating and
+segmenting the abdominal anatomy of CT images can be
+very helpful in cancer diagnosis and treatment [1]. With
+the surge of deep learning in the past several years, many
+deep convolutional neural network (CNN) based methods have
+been proposed and applied to medical image segmentation
+[2]–[5]. Two main strategies to improve image segmentation
+performance are: (i) Designing better model architectures and
+(ii) Learning with larger scale of labeled data.
+The state-of-the-art models in medical image segmentation
+are variants of the encoder-decoder architecture, such as fully
+convolutional network (FCN) [6] and U-Net [7]. A major focus
+Asterisk indicates the corresponding author.
+X. Fang and *P. Yan are with the Department of Biomedical Engineering
+and the Center for Biotechnology and Interdisciplinary Studies at Rensse-
+laer Polytechnic Institute, Troy, NY, USA 12180. (e-mail: fangx2@rpi.edu,
+yanp2@rpi.edu).
+This work was partially supported by National Institute of Biomedical
+Imaging and Bioengineering (NIBIB) of the National Institutes of Health
+(NIH) under awards R21EB028001 and R01EB027898, and through an NIH
+Bench-to-Bedside award made possible by the National Cancer Institute.
+CNN
+CNN
+CNN
+Multi-
+scale
+Feature 
+Fusion
+P-FA
+P-IA
+CNN
+(b)
+Pyramid ... ...
+Pyramid ... ...
+(a)
+Pyramid 
+Output
+Adaptive
+Fusion
+Pyramid ... ...
+(c) 
+...
+...
+...
+... ...
+...
+PIPO-FAN
+U-Net
+Fig. 1. (a) Pyramid convolution structure of Skip-Net in the most commonly
+seen form of U-Net. (b) Pyramid input analysis (P-IA) applies pyramid parsing
+to the input and pyramid feature analysis (P-FA) uses pyramid parsing on the
+intermediate features. (c) Our proposed pyramid feature abstraction network
+analyzes pyramid input with Equal Depth Convolution (EDC) and fuses the
+pyramid output to achieve improved segmentation.
+of the FCN based segmentation methods has been on network
+structure engineering by incorporating multi-scale features.
+That is because multi-scale features contain detailed texture
+information combined with contextual information, which are
+beneficial for semantic image segmentation. The existing deep
+learning image segmentation methods that exploit multi-scale
+features generally come with designs of pyramid structure
+using skip connections or pyramid parsing modules. Networks
+employing skip connections to exploit features from different
+levels are referred as skip-nets [8]. Features in skip-net are
+multi-scale in nature due to the increasing size of receptive
+field. U-Net [7] as shown in Fig. 1(a) is a typical skip-net
+with pyramid structure, which is commonly used as a baseline
+network to learn pixel-wise information in medical image
+segmentation. Many works improve segmentation performance
+on top of U-Net by incorporating new convolutional blocks
+such as residual blocks [9] and dense blocks [10]. For instance,
+Han [11] won ISBI 2017 LiTS Challenge1 by replacing
+the convolutional layers in U-net with residual blocks from
+ResNet. Li et al. [2] replaced the encoder part of U-net with
+DenseNet-169 and obtained a high accuracy of Dice 95.3%
+on liver CT segmentation.
+In addition to exploring new convolutions in pyramid
+network structures to efficiently extract high level features,
+incorporating pyramid parsing in FCN also helps utilize multi-
+scale information in segmentation tasks [12]–[14]. Fig. 1(b)
