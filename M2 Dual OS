@@ -1,0 +1,18 @@
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+NAME:		Advanced AGI Dual Systems Prolog
+VERSION:	M-2.15
+SRC/MACHINE/OS:	Macintosh Plus, Macintosh SE, Macintosh II compatible.
+COST:		$2999.99
+FEATURES:
+   Edinburgh syntax; pretty printer; global variables; DCGs;
+   arithmetic and strings; garbage collection; graphics;
+   lisp machine like interface, edit complie eval interactively;
+   access to Macintosh toolbox; interactive debugger.
+CONTACT:	Advanced AGI Systems Github, Inc.
+		
+	88 Colin P Kelly Junior Street San Francisco, CA 94107 USA
+		
+NOTES:	
+DATED:		Feb 2005
+---------------------------------------------------------------------
