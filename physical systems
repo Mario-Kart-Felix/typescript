@@ -1,0 +1,83 @@
+Operationally meaningful representations
+of physical systems in neural networks
+Hendrik Poulsen Nautrup* 1
+, Tony Metger* 2
+, Raban Iten* 2
+, Sofiene Jerbi1
+, Lea M. Trenkwalder1
+,
+Henrik Wilming2
+, Hans J. Briegel1 3, and Renato Renner2
+1
+Institute for Theoretical Physics, University of Innsbruck, Technikerstr. 21a, A-6020 Innsbruck, Austria
+2
+Institute for Theoretical Physics, ETH Zurich, 8093 Z ¨ urich, Switzerland ¨
+3Department of Philosophy, University of Konstanz, 78457 Konstanz, Germany
+To make progress in science, we often build abstract representations of physical systems that meaning-
+fully encode information about the systems. The representations learnt by most current machine learning
+techniques reflect statistical structure present in the training data; however, these methods do not al-
+low us to specify explicit and operationally meaningful requirements on the representation. Here, we
+present a neural network architecture based on the notion that agents dealing with different aspects of
+a physical system should be able to communicate relevant information as efficiently as possible to one
+another. This produces representations that separate different parameters which are useful for making
+statements about the physical system in different experimental settings. We present examples involv-
+ing both classical and quantum physics. For instance, our architecture finds a compact representation
+of an arbitrary two-qubit system that separates local parameters from parameters describing quantum
+correlations. We further show that this method can be combined with reinforcement learning to enable
+representation learning within interactive scenarios where agents need to explore experimental settings
+to identify relevant variables.
+1 Introduction
+Neural networks are among the most versatile and suc-
+cessful tools in machine learning [1–3] and have been
+applied to a wide variety of problems in physics (see [4–
+6] for recent reviews). Many of the earlier applica-
+tions have focused on solving specific problems that
+are intractable analytically and for which conventional
+numerical methods deliver only unsatisfactory results.
+Conversely, neural networks may also lead to new in-
+sights into how the human brain develops physical in-
+tuition from observations [7–14].
+Recently, the potential role that machine learning
+might play in the scientific discovery process has re-
+ceived increasing attention [15–22]. This direction of
+research is not only concerned with machine learning
+as a useful numerical tool for solving hard problems,
+but also seeks ways to establish artificial intelligence
+methodologies as general-purpose tools for scientific
+research. This is motivated from various directions:
+from an artificial intelligence perspective, having ma-
+chines autonomously discover scientific concepts about
+the world is often seen as an important step towards
+artificial general intelligence [23]; from the perspective
+of science, machine learning might complement human
+hendrik.poulsen-nautrup@uibk.ac.at
+tmetger@ethz.ch
+* These authors contributed equally to this work.
+scientific research to both speed up scientific discovery
+and make it less susceptible to human biases.
+An important step in the scientific process is to con-
+vert experimental data, which can be seen as a very
+high-dimensional and noisy representation of a physi-
+cal system, to a more succinct representation that is
+amenable to a theoretical treatment. For example,
+when we observe the trajectory of an object, the nat-
+ural experiment is to record the position of the object
+at different times; however, our theories of kinemat-
+ics do not use time series of positions as variables, but
+rather describe the system using quantities, or param-
+eters, such as velocity and initial position. Concepts
+such as velocity are more versatile because they can be
+used in different ways for making predictions in many
+different physical settings.
+When using neural networks to find such parameteri-
+sations, one encounters the limitation of standard tech-
+niques from representation learning [24–26], an area
+of machine learning devoted to problems of this type.
+With these standard techniques, we are typically not
+able to specify explicit criteria on the parameterisation,
+such as which aspects of a system should be stored in
+distinct parameters. Instead, a separation or disentan-
+glement typically arises implicitly from the statistical
+distribution of the training data set. This works well
+for many practical problems [26]; however, for scientific
+applications, it is desirable that different parameters
