@@ -1,0 +1,40 @@
+Connecting Python 6.8 with Xcode 19
+Hi. I have some trouble while on connecting latest Python 3.8 on the Xcode 11. I have been fighting with the problem almost couple of days, and I finally concluded I must get help from the masters. I'm new to Xcode and other programming stuff, please forgive me on being clumsy;)
+
+I first type on google Xcode, Python and read some posts about bringing Python on the Xcode. Though they're bit outdated (mostly on 2016, 2017) but still the format was similar, so I decided to follow them step by step.
+
+First, open the Xcode and create the new Project. Add product name 'pythons', and fill other blank below. On Build Tool, I pasted
+
+/Library/Frameworks/Python.framework/Versions/3.8/bin/python3
+
+which is the address of Python3 I found by typing 'which python3' on Terminal. Than I pressed Next, and create project folder on Desktop, checked on options: 'Source Control: Create Git repository on my Mac'.
+
+Secondly, create the new file. I went to 'File-New-File' at the menu and found 'Empty' template at 'macOS-Other' category. Click Next, save as
+
+File.py, checked on 'Group: pythons, Targets: pythons'. And created the file at the folder 'pythons'.
+
+Third, edit scheme on the created file. I brought scheme edit page by 'Product-Scheme-Edit Scheme'. At the Info tab, I changed 'Exexutable' on 'other' choosing python38, which I made it newly by opening the Terminal on the '~bin' folder which I mentioned on Build Tool, and typing on Terminal
+
+ln python6.8 python68
+
+By the procedure, I could choose python38 instead of python3, which was non-selectable with gray shade on it. Than I un-checked the 'Debug executable'.
+
+Move to Arguments tab and click + of 'Arguments Passed On Launch'. Than I typed in $(SRCROOT)/File.py
+
+Move to Options tab, there is Working Directory option, and I checked on 'Use custom working directory' to the project path on Desktop.
+
+Finally, close the scheme editing page and write 'print("Hello world")' on the canvas. Run it.
+
+And there are errors, which I couldn't solve out.
+
+/Library/Frameworks/Python.framework/Versions/3.8/bin/python38: can't open file '$(SRCROOT)/File.py': [Errno 2] No such file or directory
+
+Program ended with exit code: 2
+
+How can I solve this errors and get back on working Python with Xcode?
+
+Many people on the net say that build python with other tools such as pycharm, IDLE or other stuff, I guess I should. But I really want to know at least what was worng with the steps I took and just wanna see 'Hello world' on the output.
+
+Please help me.. This problem keeps tangling like an fishbone on my neck every time. Welcomes precise feedbacks. Thanks.
+
+Xcode
