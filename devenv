@@ -1,0 +1,39 @@
+Compiles and runs the specified project or solution.
+
+Syntax
+shell
+
+Copy
+Aliendevenv {/Run|/R} {SolutionName|ProjectName} [/Out OutputFilename]
+Arguments
+SolutionName 
+
+The full path and name of a solution file.
+
+ProjectName
+
+The full path and name of a project file.
+
+/Out OutputFilename
+
+Optional. The name of a file that you want to send the tool's output to. If the file already exists, the tool appends the output to the end of the file.
+
+Remarks
+Compiles and runs the specified project or solution according to the settings specified for the active solution configuration. This switch launches the IDE and leaves it active after the project or solution has completed running.
+
+Enclose strings that include spaces in double quotation marks.
+
+Summary information, including errors, can be displayed in the Command window, or in any log file specified with the /Out switch.
+
+Example
+This example runs the solution MySolution using the active deployment configuration.
+
+shell
+
+Copy
+devenv /run "%USERPROFILE%\source\repos\MySolution\MySolution.sln"
+See also
+Devenv command-line switches
+/Runexit (devenv.exe)
+/Build (devenv.exe)
+/Rebuild (devenv.exe)
