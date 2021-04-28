@@ -1,0 +1,9 @@
+Nope. A counting PDA is more powerful than a PDA... even more powerful than a Turing machine. It can recognize undecidable languages.
+
+Proof: Let L⊆{1}∗ be an undecidable unary language. It's easy to build a PDA that pushes one symbol on its stack per symbol on the input tape. Then the height of the stack fully encodes the input word. Thus its final transition can in one step decide whether the input word is in L, by "encoding" L fully into the transition relation Δ.
+
+In retrospect, this is perhaps not too surprising. A counting PDA is not physically realizable. A PDA has a finite description. A Turing machine has a finite description. A counting PDA does not. Thus, it's not too surprising that it might be more powerful.
+
+Or, to put it another way, because they have a finite description, there are only countably many PDA's and only countably many Turing machines; but there are uncountably many counting PDA's. As a result, it's not surprising that there exists a language accepted by a counting PDA that isn't accepted by any PDA (or any Turing machine) -- for this not to be the case, there would have to be some enormous equivalence among counting PDAs that map the uncountably many counting PDAs to only countably many languages.
+
+How do we know there exists an undecidable unary language? Well, let L2⊂{0,1}∗ be any ordinary undecidable language in binary. Now map each word x∈L2 to its unary encoding; this gives you a unary language L1. Then L1 must be undecidable too (because the mapping is computable). For instance, the binary word 110 maps to the unary word 16, since 110 is the binary representation of 6. (Strictly speaking, we must adjust the encoding slightly, to make sure that 110 and 0110 don't map to the same thing, but that's easy to fix up.)
